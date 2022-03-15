@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('h52__mvt_pointage_bruts', function (Blueprint $table) {
-            $table->integer("MvtPointageID");
+            $table->increments("MvtPointageID");
             $table->string("Matricule",10)->nullable();
             $table->date("JourCptPnt")->nullable();
             $table->date("DateTimePnt")->nullable();
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string("TypeJour",3)->nullable();
             $table->tinyInteger("TypeOperation")->nullable();
             $table->binary("OnPntAnnule")->nullable();
-            $table->integer("AnnulePar",10)->nullable();
+            $table->integer("AnnulePar")->nullable();
             $table->string("PntCreerPar",10)->nullable();
             $table->date("DateCreation")->nullable();
             $table->tinyInteger("MotifPntManuelH511")->nullable();
