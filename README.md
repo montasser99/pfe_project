@@ -1,3 +1,31 @@
+## Installation
+
+First clone this repository, install the dependencies, and setup your .env file:
+
+<pre>
+<code>
+git clone https://github.com/montasser99/pfe_project.git blog
+composer install
+cp .env.example .env
+</code>
+</pre>
+
+Then create the necessary database.
+
+<pre>
+<code>
+php artisan db
+create database blog
+</code>
+</pre>
+
+And run the initial migrations and seeders.
+<pre>
+<code>
+php artisan migrate --seed
+</code>
+</pre>
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
