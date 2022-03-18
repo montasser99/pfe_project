@@ -17,10 +17,10 @@ return new class extends Migration
             $table->bigIncrements('CCONG_MAT_95');
             $table->integer('CCONG_NAT_9')->nullable();
             $table->integer('CCONG_CET_9')->nullable();
-            $table->integer('CCONG_DROIT_93')->nullable();
+            $table->float('CCONG_DROIT_93',4,1)->nullable();
             $table->date('CCONG_DATE_MAJ')->nullable();
             $table->date('INSERT_DATE')->nullable();
-            $table->integer('INSERT_USER')->nullable();
+            $table->string('INSERT_USER',35)->nullable();
             $table->date('UPDATE_DATE')->nullable();
             $table->string('UPDATE_USER',35)->nullable();
             $table->timestamps();

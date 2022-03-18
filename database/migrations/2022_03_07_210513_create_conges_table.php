@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('CONG_INTERIM_X20',30)->nullable();
             $table->string('CONG_ADRES_X30',65)->nullable();
             $table->string('CONG_TEL_98',8)->nullable();
-            $table->string('CONG_DEMI_PER',8)->default("0")->nullable();
+            $table->string('CONG_DEMI_PER',8)->default("0");
             $table->timestamps();
         });
     }

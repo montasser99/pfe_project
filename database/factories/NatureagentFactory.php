@@ -17,7 +17,7 @@ class NatureagentFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'NATAG_LIB_X50' => $this->faker->text($maxNbChars = 50),
         ];
     }
 }

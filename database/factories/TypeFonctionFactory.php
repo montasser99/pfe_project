@@ -17,9 +17,9 @@ class TypeFonctionFactory extends Factory
     public function definition()
     {
         return [
-            'LIB_TYPE' => $this->faker->name(),
+            'LIB_TYPE' => $this->faker->word,
             'MONTANT' => $this->faker->randomFloat(),
-            'CODF_CNRPS' => $this->faker->word()
+            'CODF_CNRPS' => $this->faker->stateAbbr,
         ];
     }
 }

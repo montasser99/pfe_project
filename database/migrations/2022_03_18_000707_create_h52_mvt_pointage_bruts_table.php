@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('h52__mvt_pointage_bruts', function (Blueprint $table) {
-            $table->increments("MvtPointageID");
+        Schema::create('h52_mvt_pointage_bruts', function (Blueprint $table) {
+
+            $table->bigIncrements("MvtPointageID");
             $table->string("Matricule",10)->nullable();
             $table->date("JourCptPnt")->nullable();
             $table->date("DateTimePnt")->nullable();
@@ -43,6 +44,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('h52__mvt_pointage_bruts');
+        Schema::dropIfExists('h52_mvt_pointage_bruts');
     }
 };

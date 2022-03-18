@@ -17,18 +17,19 @@ class PersonnelFactory extends Factory
     public function definition()
     {
         return [
-
-            'PERS_NOM_X40' =>$this->faker->word ,
-            'PERS_NOM' =>$this->faker->word ,
-            'PERS_PRENOM' =>$this->faker->word ,
+            'PERS_MAT_ACT' => $this->faker->numberBetween($min = 1, $max =3000),
+            'PERS_NOM_X40' => $this->faker->userName ,
+            'PERS_NATURAGENT_93' => $this->faker->stateAbbr,
+            'PERS_NOM' =>$this->faker->lastname ,
+            'PERS_PRENOM' =>$this->faker->firstname ,
             'PERS_NUMASS_94' => random_int(0, 9999),
             'PERS_CODFONC_92' => random_int(1000, 9999),
             'PERS_CODGROUP_92' => random_int(1000, 9999),
             'PERS_CET_9' => $this->faker->randomDigitNot(0),
-            'PERS_ENFANT_92' => $this->faker->randomDigitNot(0),
+            'PERS_ENFANT_92' => $this->faker->numberBetween($min = 1, $max = 100),
             'PERS_ENFSOC_9' => $this->faker->randomDigitNot(0),
             'PERS_ENFISC_9' => $this->faker->randomDigitNot(0),
-            'PERS_TEL_98' => $this->faker->randomDigitNot(0),
+            'PERS_TEL_98' => $this->faker->randomNumber($nbDigits = NULL, $strict = false),
             'PERS_CONDLOGE_9' => $this->faker->randomDigitNot(0),
             'PERS_MONTALLFAM_95' => $this->faker->randomDigitNot(0),
             'PERS_MONTSALUNIQ_95' => $this->faker->randomDigitNot(0),
@@ -60,7 +61,8 @@ class PersonnelFactory extends Factory
             'PERS_LNAISCONJ_X16' => $this->faker->word ,
             'PERS_PROFCONJ_X25' => $this->faker->word ,
             'PERS_EMPLCONJ_X30' => $this->faker->word ,
-
+            'PERS_CLASREC_X' => $this->faker->randomLetter ,
+            'PERS_CLASCONF_X' => $this->faker->randomLetter ,
             'PERS_QUALIF_X45' => $this->faker->word ,
             'PERS_NUMCNSS_X16' => $this->faker->word ,
             'PERS_NUMCNR_X10' => $this->faker->word ,
@@ -73,9 +75,7 @@ class PersonnelFactory extends Factory
             'PERS_DATE_REC' => $this->faker->date($format = 'Y-m-d', $max = 'now') ,
             'PERS_DATE_CONF' => $this->faker->date($format = 'Y-m-d', $max = 'now') ,
             'PERS_DATE_EFECHCONF' => $this->faker->date($format = 'Y-m-d', $max = 'now') ,
-
-            //
-            'EMAIL' => $this->faker->unique()->freeEmail()
+            'EMAIL' => $this->faker->unique()->freeEmail(),
         ];
     }
 }

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class H52_MvtPointageBrut extends Model
+class NatureConge extends Model
 {
     use HasFactory;
 }
