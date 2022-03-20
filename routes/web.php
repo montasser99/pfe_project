@@ -29,3 +29,11 @@ Route::get('/table-editable', function () {
 Route::get('/msg-inbox', function () {
     return view('msg-inbox');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

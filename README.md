@@ -6,7 +6,7 @@ First clone this repository, install the dependencies, and setup your .env file:
 <code>
 git clone https://github.com/montasser99/pfe_project.git blog
 composer install
-cp .env.example .env
+copy .env.example .env
 </code>
 </pre>
 
