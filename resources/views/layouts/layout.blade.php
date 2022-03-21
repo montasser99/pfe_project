@@ -29,19 +29,7 @@
 </head>
 
 <body>
-    <style>
-        .navbar-brand
-{
-    position:relative;
-    background: url(assets/images/ETAP.png);
-    width: 170px;
-    height: 30;
-    background-size:50%;
-    background-repeat: no-repeat;
-    background-position: 90%;
-    top:5%
-}
-        </style>
+
 
     <div class="wrapper has-footer">
 
@@ -339,4 +327,17 @@
         });
     </script>
 </body>
+<style>
+    .navbar-brand
+{
+position:relative;
+background:  url({{asset('assets/images/ETAP.png')}});
+width: 220px;
+height: 60px;
+background-size:50%;
+background-repeat: no-repeat;
+background-position: center;
+top:5%
+}
+    </style>
 </html>

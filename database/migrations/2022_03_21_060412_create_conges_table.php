@@ -14,9 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('conges', function (Blueprint $table) {
+
             $table->bigIncrements('CONG_MAT_95');
             $table->integer('CONG_NUMORD_93')->nullable();
-            $table->integer('CONG_NAT_9')->nullable();
+            $table->bigInteger('CONG_NAT_9')->unsigned()->nullable();
             $table->string('CONG_MOTIF_X40',40)->nullable();
             $table->integer('CONG_CET_9')->nullable();
             $table->integer('CONG_ANCSOLD_93')->nullable();
@@ -30,6 +31,8 @@ return new class extends Migration
             $table->string('CONG_ADRES_X30',65)->nullable();
             $table->string('CONG_TEL_98',8)->nullable();
             $table->string('CONG_DEMI_PER',8)->default("0");
+            $table->index('CONG_NAT_9');
+            $table->foreign('CONG_NAT_9')->references('CODE')->on('nature_conges')->onDelete('cascade');
             $table->timestamps();
         });
     }

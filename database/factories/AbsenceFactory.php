@@ -19,7 +19,6 @@ class AbsenceFactory extends Factory
         return [
 
             'ABS_NUMORD_93' => random_int(0, 9999),
-            'ABS_NAT_9' => random_int(0, 9999),
             'ABS_CET_9' => random_int(0, 9999),
             'ABS_DATE_DEB' => $this->faker->date($format = 'Y-m-d', $max = 'now') ,
             'ABS_PERDEB_X' => $this->faker->randomElement($array = array ('A','M')) ,
