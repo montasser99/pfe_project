@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
-
+use App\Http\Controllers\AbsenceController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +14,13 @@ use App\Http\Controllers\WelcomeController;
 |
 */
 
+/**Route de controller Welcome**/
 Route::resource('/', WelcomeController::class);
+
+/**Route de controller Absence**/
+Route::resource('/absences', AbsenceController::class);
+
+
 
 Route::get('/table-basic', function () {
     return view('table-basic');
@@ -30,6 +36,8 @@ Route::get('/msg-inbox', function () {
     return view('msg-inbox');
 });
 
+/**routes pour les controller routes**/
 Auth::routes();
 
+/**Route de controller Home de login**/
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

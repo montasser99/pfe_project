@@ -12,20 +12,22 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script type="text/javascript" src="assets/plugins/lib/modernizr.js"></script>
-    <link rel="icon" href="assets/images/favicon.png" type="image/gif">
+    <script type="text/javascript" src="{{asset('assets/plugins/lib/modernizr.js')}}"></script>
+    <link rel="icon" href="{{asset('assets/images/favicon.png')}}" type="image/gif">
 
-    <link rel="stylesheet" type="text/css" href="assets/plugins/bootstrap/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="assets/plugins/chosen/chosen.css">
-    <link rel="stylesheet" type="text/css" href="assets/plugins/chosen/ImageSelect/ImageSelect.css">
-    <link rel="stylesheet" type="text/css" href="assets/plugins/dropzone/dropzone.css">
-    <link rel="stylesheet" type="text/css" href="assets/plugins/trumbowyg/ui/trumbowyg.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/lib/page_messages.css">
-    <link rel="stylesheet" type="text/css" href="assets/plugins/monthly/css/monthly.css">
-    <link rel="stylesheet" type="text/css" href="assets/plugins/emojionearea/emojionearea.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/plugins/datatable/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style-default.css">
+
+
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/plugins/bootstrap/bootstrap.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/plugins/chosen/chosen.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/plugins/chosen/ImageSelect/ImageSelect.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/plugins/dropzone/dropzone.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/plugins/trumbowyg/ui/trumbowyg.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/lib/page_messages.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/plugins/monthly/css/monthly.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/plugins/emojionearea/emojionearea.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/plugins/datatable/dataTables.bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/main.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style-default.css')}}">
 </head>
 
 <body>
@@ -246,6 +248,12 @@
                             <span class="badge bg-danger">3</span>
                         </a>
                     </li>
+                        <li>
+                        <a href="{{url('/absences')}}">
+                            <i class="fs-user-block"></i>
+                            <span class="nav-text">Absences</span>
+                        </a>
+                    </li>
 
                     <li class="has-submenu">
                         <a href="#submenuOne" data-toggle="collapse" aria-expanded="false">
@@ -296,31 +304,30 @@
 
 
     </div>  <!-- END: wrapper -->
+    <script type="text/javascript" src="{{asset('assets/plugins/lib/jquery-2.2.4.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/plugins/lib/jquery-ui.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/plugins/bootstrap/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/plugins/lib/plugins.js')}}"></script>
 
-    <script type="text/javascript" src="assets/plugins/lib/jquery-2.2.4.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/lib/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/bootstrap/bootstrap.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/lib/plugins.js"></script>
+    <script type="text/javascript" src="{{asset('assets/plugins/flot/excanvas.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/plugins/flot/jquery.flot.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/plugins/flot/jquery.flot.tooltip.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/plugins/flot/jquery.flot.resize.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/plugins/flot/jquery.flot.crosshair.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/plugins/flot/jquery.flot.pie.min.js')}}"></script>
 
-    <script type="text/javascript" src="assets/plugins/flot/excanvas.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/flot/jquery.flot.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/flot/jquery.flot.tooltip.js"></script>
-    <script type="text/javascript" src="assets/plugins/flot/jquery.flot.resize.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/flot/jquery.flot.crosshair.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/flot/jquery.flot.pie.min.js"></script>
+    <script type="text/javascript" src="{{asset('assets/plugins/lib/sparklines.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/plugins/lib/jquery.knob.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/plugins/monthly/js/monthly.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/plugins/emojionearea/emojionearea.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/plugins/datatable/jquery.dataTables.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/plugins/datatable/dataTables.bootstrap.min.js')}}"></script>
 
-    <script type="text/javascript" src="assets/plugins/lib/sparklines.js"></script>
-    <script type="text/javascript" src="assets/plugins/lib/jquery.knob.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/monthly/js/monthly.js"></script>
-    <script type="text/javascript" src="assets/plugins/emojionearea/emojionearea.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/datatable/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/datatable/dataTables.bootstrap.min.js"></script>
-
-    <script type="text/javascript" src="assets/js/app.base.js"></script>
-    <script type="text/javascript" src="assets/js/page-table.js"></script>
-    <script type="text/javascript" src="assets/js/app.base.js"></script>
-    <script type="text/javascript" src="assets/js/cmp-todo.js"></script>
-    <script type="text/javascript" src="assets/js/page-dashboard.js"></script>
+    <script type="text/javascript" src="{{asset('assets/js/app.base.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/js/page-table.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/js/app.base.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/js/cmp-todo.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/js/page-dashboard.js')}}"></script>
     <script>
         jQuery(document).ready(function () {
             DataTableBasic.init();
