@@ -21,7 +21,7 @@
                 <li class="list-group-item"><h4>ABS_PERDEB_X : {{ $absence->ABS_PERDEB_X }}</h4></li>
                 <li class="list-group-item"><h4>ABS_DATE_FIN : {{ $absence->ABS_DATE_FIN }}</h4></li>
                 <li class="list-group-item"><h4>ABS_PERFIN_X : {{ $absence->ABS_PERFIN_X }}</h4></li>
-                <li class="list-group-item"><h4>ABS_NBRJOUR_93 : {{ $absence->ABS_NBRJOUR_93 }}</h4></li>
+                <li class="list-group-item"><h4>ABS_NBRJOUR_93 :{{ $absence->ABS_NBRJOUR_93 }}</h4></li>
                 <li class="list-group-item"><h4>ABS_CUMULE_9 : {{ $absence->ABS_CUMULE_9 }}</h4></li>
             </ul>
         </div>

@@ -517,7 +517,6 @@
 
 <script type="text/javascript" src="assets/plugins/lib/jquery-2.2.4.min.js"></script>
 <script type="text/javascript" src="assets/plugins/lib/jquery-ui.min.js"></script>
-<script type="text/javascript" src="assets/plugins/bootstrap/bootstrap.min.js"></script>
 <script type="text/javascript" src="assets/plugins/lib/plugins.js"></script>
 
 <script type="text/javascript" src="assets/plugins/datatable/jquery.dataTables.min.js"></script>

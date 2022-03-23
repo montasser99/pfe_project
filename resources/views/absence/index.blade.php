@@ -21,7 +21,7 @@
                   Create new
                 </a>
               </div>
-              
+
               @if ($message = Session::get('success'))
               <div class="alert alert-success">
                   <p>{{ $message }}</p>
@@ -94,17 +94,11 @@
 </div>  <!--END: Content Wrap-->
 <link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.min.css">
 <script type="text/javascript" src="/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="assets/plugins/lib/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="assets/plugins/lib/jquery-ui.min.js"></script>
 
-<script type="text/javascript" src="{{asset('assets/plugins/lib/jquery-2.2.4.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/plugins/lib/jquery-ui.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/plugins/bootstrap/bootstrap.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/plugins/lib/plugins.js')}}"></script>
 
-<script type="text/javascript" src="{{asset('assets/plugins/datatable/jquery.dataTables.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/plugins/datatable/dataTables.bootstrap.min.js')}}"></script>
 
-<script type="text/javascript" src="{{asset('assets/js/app.base.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/js/page-table.js')}}"></script>
 <script>
     jQuery(document).ready(function () {
         DataTableBasic.init();

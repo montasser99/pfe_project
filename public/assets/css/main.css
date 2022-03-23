@@ -2845,9 +2845,6 @@ table.dataTable thead .sorting_desc:after {
 *******************************************************************************/
 body.login2{
     height: auto;
-    background: #C04848;
-    background: -webkit-linear-gradient(to left, #C04848 , #480048);
-    background: linear-gradient(to left, #C04848 , #480048);
 }
 
 body.login2 .login{
@@ -2903,9 +2900,7 @@ body.login2 #registerDiv {
     width: 100%;
     height: 100%;
     overflow-y: hidden;
-    background: #C04848;
-    background: -webkit-linear-gradient(to left, #C04848 , #480048);
-    background: linear-gradient(to left, #C04848 , #480048);
+
 }
 
 .lock-screen .lock-wrapper {
@@ -3517,9 +3512,7 @@ body.page404 .container .input-group{
 *******************************************************************************/
 body.login2{
     height: auto;
-    background: #C04848;
-    background: -webkit-linear-gradient(to left, #C04848 , #480048);
-    background: linear-gradient(to left, #C04848 , #480048);
+
 }
 
 body.login2 .login{

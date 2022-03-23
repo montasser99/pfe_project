@@ -14,16 +14,14 @@ use App\Http\Controllers\AbsenceController;
 |
 */
 
-/**Route de controller Welcome**/
-Route::resource('/', WelcomeController::class);
 
 /**Route de controller Absence**/
 Route::resource('/absences', AbsenceController::class);
 
 
-
+/** Route without middelware without controller **/
 Route::get('/table-basic', function () {
-    return view('table-basic');
+    return view('table-basic')->middleware('auth');
 });
 Route::get('/table-dataTable', function () {
     return view('table-dataTable');
@@ -40,4 +38,4 @@ Route::get('/msg-inbox', function () {
 Auth::routes();
 
 /**Route de controller Home de login**/
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

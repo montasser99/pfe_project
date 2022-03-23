@@ -33,6 +33,7 @@
 <body>
 
 
+
     <div class="wrapper has-footer">
 
         <header class="header-top navbar fixed-top">
@@ -55,10 +56,9 @@
                 </button>
 
                 <a class="navbar-brand" href="/">
-                    <!--<img src="assets/images/" height="90" > -->
+
                 <!-- <span class="navbar-toggler-icon">ETAP</span> -->
                 </a>
-
                 <ul class="nav navbar-nav-xs">  <!-- START: Responsive Top Right tool bar -->
                     <li>
                         <a href="javascript:;" class="collapse" data-toggle="collapse" data-target="#headerNavbarCollapse">
@@ -144,7 +144,7 @@
                             <li>
                                 <a href="#">
                                     <div class="user-list-wrap">
-                                        <div class="profile-pic"><img src="demo/users/img-user-02.jpg" alt=""></div>
+                                        <div class="profile-pic"><img src="{{asset('demo/users/img-user-02.jpg')}}" alt=""></div>
                                         <div class="detail">
                                             <span class="text-normal">Cynthianawen</span>
                                             <span class="time">2 mins ago</span>
@@ -157,7 +157,7 @@
                             <li>
                                 <a href="#">
                                     <div class="user-list-wrap">
-                                        <div class="profile-pic"><img src="demo/users/img-user-03.jpg" alt=""></div>
+                                        <div class="profile-pic"><img src="{{asset('demo/users/img-user-03.jpg')}}" alt=""></div>
                                         <div class="detail">
                                             <span class="text-normal">Megan Stamper</span>
                                             <span class="time">1 hr ago</span>
@@ -170,7 +170,7 @@
                             <li>
                                 <a href="#">
                                     <div class="user-list-wrap">
-                                        <div class="profile-pic"><img src="demo/users/img-user-04.jpg" alt=""></div>
+                                        <div class="profile-pic"><img src="{{asset('demo/users/img-user-04.jpg')}}" alt=""></div>
                                         <div class="detail">
                                             <span class="text-normal">Alex Pushkin</span>
                                             <span class="time">yesterday</span>
@@ -183,7 +183,7 @@
                             <li>
                                 <a href="#">
                                     <div class="user-list-wrap">
-                                        <div class="profile-pic"><img src="demo/users/img-user-05.jpg" alt=""></div>
+                                        <div class="profile-pic"><img src="{{asset('demo/users/img-user-05.jpg')}}" alt=""></div>
                                         <div class="detail">
                                             <span class="text-normal">Bjarne Flur Kvistad</span>
                                             <span class="time">2 days ago</span>
@@ -200,7 +200,22 @@
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
+                    <!-- code ajouter -->
+                    @guest
+                    @if (Route::has('login'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                    @endif
 
+                    @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        </li>
+                    @endif
+                @else
+                <!-- -->
+                
                     <li class="main-search hidden-xs">
                         <div class="input-wrap">
                             <input class="form-control" type="text" placeholder="Search Here...">
@@ -209,20 +224,23 @@
                     </li>
 
                     <li class="user-profile dropdown">
-                        <a href="javascript:;" class="clearfix dropdown-toggle" data-toggle="dropdown">
-                            <img src="demo/users/img-user-01.jpg" alt="" class="hidden-sm">
-                            <div class="user-name">Maria Fällström <small class="fa fa-angle-down"></small></div>
+                        <a href="" class="clearfix dropdown-toggle" data-toggle="dropdown">
+                            <img src="{{asset('demo/users/img-user-01.jpg')}}" alt="" class="hidden-sm">
+                            <div class="user-name">{{ Auth::user()->name }} <small class="fa fa-angle-down"></small></div>
                         </a>
                         <ul class="dropdown-menu dropdown-animated pop-effect" role="menu">
                             <li><a href="user-profile.html"><i class="sli-user"></i> My Profile</a></li>
-                            <li><a href="app-calendar.html"><i class="sli-calendar"></i> Calendar</a></li>
-                            <li><a href="msg-inbox.html"><i class="fa fa-envelope-o"></i> Inbox</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="page-faq.html"><i class="sli-question"></i> FAQ's</a></li>
-                            <li><a href="user-login.html"><i class="sli-logout"></i> Logout</a></li>
+
+                            <li><a href="{{ route('logout') }}
+                            "onclick="event.preventDefault();
+                             document.getElementById('sli-logout').submit();" ><i class="sli-logout"></i> Logout</a></li>
+
+                            <form id="sli-logout" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </ul>
                     </li>
-
+                    @endguest
                 </ul>
 
             </div><!-- END: Navbar-collapse -->
@@ -248,13 +266,12 @@
                             <span class="badge bg-danger">3</span>
                         </a>
                     </li>
-                        <li>
+                    <li>
                         <a href="{{url('/absences')}}">
                             <i class="fs-user-block"></i>
                             <span class="nav-text">Absences</span>
                         </a>
                     </li>
-
                     <li class="has-submenu">
                         <a href="#submenuOne" data-toggle="collapse" aria-expanded="false">
                             <i class="fs-grid-6"></i>
@@ -265,26 +282,6 @@
                                 <li><a href="{{url('/table-basic')}}">Basic Tables</a></li>
                                 <li><a href="{{url('/table-dataTable')}}">Data Table</a></li>
                                 <li><a href="{{url('/table-editable')}}">Editable Table</a></li>
-                            </ul>
-                        </div>
-                    </li>
-
-
-
-                    <li class="has-submenu">
-                        <a href="#submenuThree" data-toggle="collapse" aria-expanded="false">
-                            <i class="sli-layers"></i>
-                            <span class="nav-text">Forms</span>
-                        </a>
-                        <div class="sub-menu collapse secondary" id="submenuThree">
-                            <ul>
-                                <li><a href="form-basic.html">Basic</a></li>
-                                <li><a href="form-advanced.html">Advanced Controls</a></li>
-                                <li><a href="form-css-toggle.html">CSS Toggle</a></li>
-                                <li><a href="form-validation.html">Validation</a></li>
-                                <li><a href="form-wizard.html">Wizard</a></li>
-                                <li><a href="form-upload.html">Upload</a></li>
-                                <li><a href="form-editors.html">Editors</a></li>
                             </ul>
                         </div>
                     </li>
@@ -304,6 +301,8 @@
 
 
     </div>  <!-- END: wrapper -->
+
+
     <script type="text/javascript" src="{{asset('assets/plugins/lib/jquery-2.2.4.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/plugins/lib/jquery-ui.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/plugins/bootstrap/bootstrap.min.js')}}"></script>
@@ -335,16 +334,19 @@
     </script>
 </body>
 <style>
-    .navbar-brand
+
+        .navbar-brand
 {
-position:relative;
-background:  url({{asset('assets/images/ETAP.png')}});
-width: 220px;
-height: 60px;
-background-size:50%;
-background-repeat: no-repeat;
-background-position: center;
-top:5%
+    position:relative;
+    background: url({{asset('assets/images/ETAP.png')}});
+    width: 220px;
+    height: 60px;
+    background-size:50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    top:5%
 }
-    </style>
+</style>
+
+
 </html>
