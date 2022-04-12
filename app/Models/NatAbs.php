@@ -10,8 +10,11 @@ class NatAbs extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'CODE_ABS';
+
+
     public function absences()
     {
-        return $this->hasMany(Absence::class,'ABS_NAT_9','CODE_ABS');
+        return $this->hasMany(Absence::class);
     }
 }

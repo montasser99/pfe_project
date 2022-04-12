@@ -1,3 +1,6 @@
+
+@if (Auth::user()->role == 'admin')
+
 @extends('layouts.layout')
 
 @section('content')
@@ -95,3 +98,4 @@
                     </style>
 
                 @endsection
+@endif

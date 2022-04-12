@@ -5,7 +5,6 @@
 <div class="content-wrap">  <!--START: Content Wrap-->
 
     <div class="row">
-
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -16,11 +15,15 @@
                     </div>
                 </div>
 
+            @if (Auth::user()->role == 'admin')
+
              <div class="float-center">
                 <a href="{{ route('absences.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="right">
                   Create new
                 </a>
               </div>
+
+            @endif
 
               @if ($message = Session::get('success'))
               <div class="alert alert-success">
@@ -42,12 +45,18 @@
                                 <th>Abs Perfin X </th>
                                 <th>Abs Nbrjour 93</th>
                                 <th>Abs Cumule 9 </th>
+
+                                @if (Auth::user()->role == 'admin')
                                 <th></th>
                                 <th></th>
                                 <th></th>
 
+                                @endif
                             </tr>
                         </thead>
+
+                        @if (Auth::user()->role == 'admin')
+
                             @foreach ($absences as $absence )
                             <tr>
                                 <td>{{ $absence->ABS_MAT_95    }}</td>
@@ -76,6 +85,25 @@
                                 </td>
                             </tr>
                         @endforeach
+                        @endif
+
+                        <!-- pour afficher les tables de user de la session !-->
+                        @if(Auth::user()->role == 'user')
+                        @foreach ($userABS as $absence )
+                        <tr>
+                            <td>{{ $absence->ABS_MAT_95    }}</td>
+                            <td>{{ $absence->ABS_NUMORD_93 }}</td>
+                            <td>{{ $absence->ABS_NAT_9     }}</td>
+                            <td>{{ $absence->ABS_CET_9     }}</td>
+                            <td>{{ $absence->ABS_DATE_DEB  }}</td>
+                            <td>{{ $absence->ABS_PERDEB_X  }}</td>
+                            <td>{{ $absence->ABS_DATE_FIN  }}</td>
+                            <td>{{ $absence->ABS_PERFIN_X  }}</td>
+                            <td>{{ $absence->ABS_NBRJOUR_93}}</td>
+                            <td>{{ $absence->ABS_CUMULE_9  }}</td>
+                        </tr>
+                        @endforeach
+                        @endif
                         </tbody>
                     </table>
                 </div>

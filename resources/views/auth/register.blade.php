@@ -18,7 +18,7 @@
 
 <body class="login2">
 
-    <div class="login animate__animated animate__fadeInLef" id="logindiv">
+    <div class="login animated flipInY" id="logindiv">
         <div class="text-center logo">
             <img src="assets/images/etap.png" alt="logo">
         </div>

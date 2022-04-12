@@ -21,8 +21,9 @@ Route::resource('/absences', AbsenceController::class);
 
 /** Route without middelware without controller **/
 Route::get('/table-basic', function () {
-    return view('table-basic')->middleware('auth');
-});
+    return view('table-basic');
+})->middleware('auth');
+
 Route::get('/table-dataTable', function () {
     return view('table-dataTable');
 });
