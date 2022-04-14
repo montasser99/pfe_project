@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\AbsenceController;
+use App\Http\Controllers\PersonnelController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +19,8 @@ use App\Http\Controllers\AbsenceController;
 
 /**Route de controller Absence**/
 Route::resource('/absences', AbsenceController::class);
+
+Route::resource('/personnels',PersonnelController::class);
 
 
 /** Route without middelware without controller **/

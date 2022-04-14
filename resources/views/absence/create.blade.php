@@ -65,7 +65,7 @@
 
                         <div class="form-actions fluid">
                             <div class="col-md-12 text-right">
-                                <button type="submit" class="btn btn-info">Update</button>
+                                <button type="submit" class="btn btn-info">create </button>
                             </div>
                         </div>
                     </form>

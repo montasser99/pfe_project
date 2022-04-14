@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Dashboard | Big Ben Admin</title>
+    <title>Workflow Demande Conge Etap</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="author" content="Prakasam Mathaiyan">
     <meta name="description" content="">
@@ -13,7 +13,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script type="text/javascript" src="{{asset('assets/plugins/lib/modernizr.js')}}"></script>
-    <link rel="icon" href="{{asset('assets/images/favicon.png')}}" type="image/gif">
+    <link rel="icon" href="{{asset('assets/images/favicon.png')}}"  type="image/x-icon" >
 
 
 
@@ -215,7 +215,7 @@
                     @endif
                 @else
                 <!-- -->
-                
+
                     <li class="main-search hidden-xs">
                         <div class="input-wrap">
                             <input class="form-control" type="text" placeholder="Search Here...">
@@ -266,6 +266,15 @@
                             <span class="badge bg-danger">3</span>
                         </a>
                     </li>
+
+                    @if (Auth::user()->role == 'admin')
+                    <li>
+                        <a href="{{url('/personnels')}}">
+                            <i class="fs-users"></i>
+                            <span class="nav-text">Personnels</span>
+                        </a>
+                    </li>
+                    @endif
                     <li>
                         <a href="{{url('/absences')}}">
                             <i class="fs-user-block"></i>
