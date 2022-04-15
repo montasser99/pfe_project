@@ -31,6 +31,8 @@ return new class extends Migration
             $table->string('CONG_ADRES_X30',65)->nullable();
             $table->string('CONG_TEL_98',8)->nullable();
             $table->string('CONG_DEMI_PER',8)->default("0");
+
+            /** Pour ajouter clé etrangere avec table nature congé **/
             $table->index('CONG_NAT_9');
             $table->foreign('CONG_NAT_9')->references('CODE')->on('nature_conges')->onDelete('cascade');
             $table->timestamps();

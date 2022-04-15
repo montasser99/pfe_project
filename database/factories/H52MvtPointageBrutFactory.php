@@ -17,7 +17,7 @@ class H52MvtPointageBrutFactory extends Factory
     public function definition()
     {
         return [
-            'Matricule' => $this->faker->text($maxNbChars = 9),
+            'Matricule' => $this->faker->numberBetween($min = 1, $max =10),
             'JourCptPnt' => $this->faker->dateTime($max = 'now', $timezone = null),
             'DateTimePnt' => $this->faker->dateTime($max = 'now', $timezone = null),
             'OriginePnt' => $this->faker->numberBetween($min = 1, $max = 100),
@@ -25,7 +25,7 @@ class H52MvtPointageBrutFactory extends Factory
             'ValiderPar' => $this->faker->text($maxNbChars = 9),
             'TypeJour' => $this->faker->randomElement($array = array ('cal','vré','ble')) ,
             'TypeOperation' => $this->faker->numberBetween($min = 1, $max = 100),
-            'OnPntAnnule' => $this->faker->randomElement($array = array (101101,11010,01001,001001,11110,01011)),
+            'OnPntAnnule' => $this->faker->randomElement( array (101101,11010,01001,001001,11110,01011)),
             'AnnulePar' => $this->faker->randomNumber($nbDigits = NULL, $strict = false),
             'PntCreerPar' => $this->faker->text($maxNbChars = 9),
             'DateCreation' => $this->faker->dateTime($max = 'now', $timezone = null) ,

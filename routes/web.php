@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\PersonnelController;
+use App\Http\Controllers\PointageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,8 @@ Route::resource('/absences', AbsenceController::class);
 
 Route::resource('/personnels',PersonnelController::class);
 
+Route::resource('/pointages',PointageController::class);
+
 
 /** Route without middelware without controller **/
 Route::get('/table-basic', function () {
@@ -39,8 +42,10 @@ Route::get('/msg-inbox', function () {
     return view('msg-inbox');
 });
 
-/**routes pour les controller routes**/
+/**routes pour les controller auth routes**/
 Auth::routes();
 
 /**Route de controller Home de login**/
+//**name('home'); => c'est le Rdirect::HOME in controller Auth et '/' pour return dirctement aux template
+
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

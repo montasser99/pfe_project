@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('h52_mvt_pointage_bruts', function (Blueprint $table) {
 
             $table->bigIncrements("MvtPointageID");
-            $table->string("Matricule",10)->nullable();
+            $table->BigInteger("Matricule")->unsigned()->nullable();
             $table->date("JourCptPnt")->nullable();
             $table->date("DateTimePnt")->nullable();
             $table->tinyInteger("OriginePnt")->nullable();
@@ -33,7 +33,13 @@ return new class extends Migration
             $table->integer("OnCloture")->nullable();
             $table->binary("DateCloture")->nullable();
             $table->string("CloturePar",10)->nullable();
+
+            /** Pour ajouter clé étrangere avec table personnels **/
+            $table->index('Matricule');
+            $table->foreign('Matricule')->references('PERS_MAT_95')->on('personnels')->onDelete('cascade');
+
             $table->timestamps();
+
         });
     }
 

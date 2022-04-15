@@ -55,7 +55,9 @@
                             </tr>
                         </thead>
 
-                        @if (Auth::user()->role == 'admin')
+                        <tbody>
+
+                            @if (Auth::user()->role == 'admin')
 
                             @foreach ($absences as $absence )
                             <tr>
@@ -89,23 +91,24 @@
 
                         <!-- pour afficher les tables de user de la session !-->
                         @if(Auth::user()->role == 'user')
-                        @foreach ($userABS as $absence )
-                        <tr>
-                            <td>{{ $absence->ABS_MAT_95    }}</td>
-                            <td>{{ $absence->ABS_NUMORD_93 }}</td>
-                            <td>{{ $absence->ABS_NAT_9     }}</td>
-                            <td>{{ $absence->ABS_CET_9     }}</td>
-                            <td>{{ $absence->ABS_DATE_DEB  }}</td>
-                            <td>{{ $absence->ABS_PERDEB_X  }}</td>
-                            <td>{{ $absence->ABS_DATE_FIN  }}</td>
-                            <td>{{ $absence->ABS_PERFIN_X  }}</td>
-                            <td>{{ $absence->ABS_NBRJOUR_93}}</td>
-                            <td>{{ $absence->ABS_CUMULE_9  }}</td>
-                        </tr>
-                        @endforeach
-                        @endif
-                        </tbody>
-                    </table>
+
+                          @foreach ($userABS as $absence )
+                            <tr>
+                                <td>{{ $absence->ABS_MAT_95    }}</td>
+                                <td>{{ $absence->ABS_NUMORD_93 }}</td>
+                                <td>{{ $absence->ABS_NAT_9     }}</td>
+                                <td>{{ $absence->ABS_CET_9     }}</td>
+                                <td>{{ $absence->ABS_DATE_DEB  }}</td>
+                                <td>{{ $absence->ABS_PERDEB_X  }}</td>
+                                <td>{{ $absence->ABS_DATE_FIN  }}</td>
+                                <td>{{ $absence->ABS_PERFIN_X  }}</td>
+                                <td>{{ $absence->ABS_NBRJOUR_93}}</td>
+                                <td>{{ $absence->ABS_CUMULE_9  }}</td>
+                            </tr>
+                          @endforeach
+                         @endif
+                    </tbody>
+                </table>
                 </div>
             </div>
         </div>

@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Personnel;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use DB;
+
+
 
 class PersonnelController extends Controller
 {
@@ -40,8 +45,9 @@ class PersonnelController extends Controller
         if (Auth::user()->role == 'admin'){
 
         $personnel = new Personnel();
+        $user= new User();
 
-        return view('personnel.create',compact('personnel'));
+        return view('personnel.create',compact('personnel','user'));
         }
         else
         {
@@ -58,7 +64,26 @@ class PersonnelController extends Controller
     public function store(Request $request)
     {         if (Auth::user()->role == 'admin'){
 
-        $personnels = Personnel::create($request->all());
+        $personnels = Personnel::create($request->all() );
+
+
+        /** pour connaitre le dernier id de la table **/
+        $CountIdPersonnel = DB::select("SELECT count(*) FROM personnels");
+
+        $count = Personnel::count();
+
+        /** pour ajouter nouvelle user l'ors de cration d'un personnels  **/
+        $users = new User ;
+        $users->name = $request->PERS_PRENOM;
+        $users->email=$request->EMAIL;
+        $users->password = Hash::make($request->password);
+        $users->role= $request->RoleUser;
+        $users->personnel_id = $count ;
+        $users->save();
+
+        //DB::insert("insert into users (id, name,) values ('.$CountIdPersonnel.', ?)");
+
+
 
         return redirect()->route('personnels.index')
         ->with('success','personnel created successfully.');

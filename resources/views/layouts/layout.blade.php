@@ -13,7 +13,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script type="text/javascript" src="{{asset('assets/plugins/lib/modernizr.js')}}"></script>
-    <link rel="icon" href="{{asset('assets/images/favicon.png')}}"  type="image/x-icon" >
+    <link rel="icon" href="{{asset('assets/images/favicon.png')}}"    >
 
 
 
@@ -275,12 +275,21 @@
                         </a>
                     </li>
                     @endif
+
                     <li>
                         <a href="{{url('/absences')}}">
                             <i class="fs-user-block"></i>
                             <span class="nav-text">Absences</span>
                         </a>
                     </li>
+
+                    <li>
+                        <a href="{{url('/pointages')}}">
+                            <i class="fs-clock"></i>
+                            <span class="nav-text">Pointages</span>
+                        </a>
+                    </li>
+
                     <li class="has-submenu">
                         <a href="#submenuOne" data-toggle="collapse" aria-expanded="false">
                             <i class="fs-grid-6"></i>
@@ -304,9 +313,10 @@
         <div class="main-container">    <!-- START: Main Container -->
        @yield('content')
         </div>
-       <footer class="footer"> <!-- START: Footer -->
+ <footer class="footer"> <!-- START: Footer -->
         &copy; 2016 <b>Big Ben</b> Admin
         </footer>   <!-- END: Footer -->
+
 
 
     </div>  <!-- END: wrapper -->
