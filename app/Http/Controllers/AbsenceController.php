@@ -145,7 +145,7 @@ class AbsenceController extends Controller
         $absence->ABS_NBRJOUR_93 = $request->ABS_NBRJOUR_93;
         $absence->ABS_CUMULE_9 = $request->ABS_CUMULE_9;
         $absence->update();
-        
+
         return redirect()->back()->with('success','absence Updated Successfully');
 
 }

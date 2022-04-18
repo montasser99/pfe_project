@@ -71,22 +71,11 @@
                     </form>
 
                 </div>  <!-- END: Panel Body -->
-
-                <style>
-                    .footer
-
-                    {
-                    background-color: #fff;
-                    height: 50px;
-                    position: absolute;
-                    bottom: 0;
-                    right: 0;
-                    left: 0px;
-                    padding: 15px;
-                    border-top: 1px solid #f0f3f5;
-                    }
-
-                    </style>
+            </div>
+        </div>
+    </div>
+</div> <!--END: Content Wrap-->
+            
 
                 @endsection
 

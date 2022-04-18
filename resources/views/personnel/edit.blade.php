@@ -12,14 +12,20 @@
                     <h3 class="panel-title">Update table personnel</h3>
                 </div>
                 <div class="panel-body">
-                    <form action="{{ route('personnels.update', $personnel->PERS_MAT_95) }}" role="form"  method="post">
-                        <div class="form-body">
-                            @csrf
+                    <form action="{{ route('personnels.update', $personnel->PERS_MAT_95) }}" role="form"  method="post" enctype="multipart/form-data">
+                           @csrf
                             @method('PUT')
+                            <div class="form-body">
+
 
                             <div class="form-group">
                                 <label>Matricule</label>
                                 <input type="number" class="form-control"  name="PERS_MAT_95"  value="{{ $personnel->PERS_MAT_95}}" data-prompt-position="topLeft">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Image</label>
+                                <input type = "file" class="form-control" name = "image"    data-prompt-position="topLeft">
                             </div>
 
                             <div class="form-group">
@@ -40,6 +46,14 @@
                             <div class="form-group">
                                 <label>Sexe</label>
                                 <input type = "text" class="form-control" name = "PERS_SEXE_X"   value="{{ $personnel->PERS_SEXE_X  }}" data-prompt-position="topLeft">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Role</label>
+                                <select  class="form-control" name = "RoleUser"    data-prompt-position="topLeft">
+                                    <option selected>user</option>
+                                    <option>admin</option>
+                                  </select>
                             </div>
 
                             <div class="form-group">

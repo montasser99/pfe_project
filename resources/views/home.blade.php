@@ -3,12 +3,12 @@
 
 
             <div class="page-header">
-                <h1>Dashboard <small>Welcome back <span class="text-primary">Maria Fällström</span></small></h1>
+                <h1>tableau de bord <small>Bon retour à  <span class="text-primary">{{ Auth::user()->name }}</span></small></h1>
 
 
                 <ol class="breadcrumb">
-                    <li><a href="index.php">Home</a></li>
-                    <li class="active">Dashboard</li>
+                    <li><a href="">Home</a></li>
+                    <li class="active">tableau de bord</li>
                 </ol>
             </div>
 

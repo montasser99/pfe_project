@@ -5,7 +5,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\PointageController;
-
+use App\Http\Controllers\DemandeCongeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,18 +25,21 @@ Route::resource('/personnels',PersonnelController::class);
 
 Route::resource('/pointages',PointageController::class);
 
+Route::resource('/Demandeconges',DemandeCongeController::class);
 
-/** Route without middelware without controller **/
+Route::put('{id}', [PersonnelController::class,'Update_Image'])->name('imageModifier')->middleware('auth');
+
+/** page de profil **/
+Route::get('/profil', function (){
+return view ('profil-personnel');
+})->middleware('auth');
+
+
+
+
 Route::get('/table-basic', function () {
     return view('table-basic');
 })->middleware('auth');
-
-Route::get('/table-dataTable', function () {
-    return view('table-dataTable');
-});
-Route::get('/table-editable', function () {
-    return view('table-dataTable');
-});
 
 Route::get('/msg-inbox', function () {
     return view('msg-inbox');

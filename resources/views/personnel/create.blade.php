@@ -13,10 +13,15 @@
                 </div>
                 <div class="panel-body ">
 
-                    <form action="{{ route('personnels.store') }}" role="form"  method="post">
+                    <form action="{{ route('personnels.store') }}" role="form"  method="post"
+                    enctype="multipart/form-data">
                           @csrf
                           <div class="form-row">
 
+                            <div class="form-group col-md-6">
+                                <label>Image</label>
+                                <input type = "file" class="form-control" name = "image"    data-prompt-position="topLeft">
+                            </div>
 
                             <div class="form-group col-md-6">
                                 <label>Nom</label>
@@ -65,6 +70,12 @@
                             </div>
                         </div>
 
+                        <div class="form-group col-md-6">
+                            <label>phone</label>
+                            <input type = "text" class="form-control" name = "phone"    data-prompt-position="topLeft">
+                        </div>
+                        </div>
+
                         <div class="form-actions fluid">
                             <div class="col-md-12 text-right">
                                 <button type="submit" class="btn btn-primary active" >create</button>
@@ -72,20 +83,11 @@
                         </div>
                     </form>
                 </div>  <!-- END: Panel Body -->
-                <style>
-                    .footer
+            </div>
+        </div>
+    </div>
+</div> <!--END: Content Wrap-->
 
-                    {
-                    background-color: #fff;
-                    height: 10px;
-                    position: absolute;
-                    bottom: -210px;
-                    right: 0;
-                    left: 0px;
-                    padding: 15px;
-                    border-top: 1px solid #f0f3f5;
-                    }
 
-             </style>
                 @endsection
 

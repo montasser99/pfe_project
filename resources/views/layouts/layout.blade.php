@@ -225,11 +225,11 @@
 
                     <li class="user-profile dropdown">
                         <a href="" class="clearfix dropdown-toggle" data-toggle="dropdown">
-                            <img src="{{asset('demo/users/img-user-01.jpg')}}" alt="" class="hidden-sm">
+                            <img src="{{ url('public/Image/'.Auth::user()->image) }}" alt="" class="hidden-sm">
                             <div class="user-name">{{ Auth::user()->name }} <small class="fa fa-angle-down"></small></div>
                         </a>
                         <ul class="dropdown-menu dropdown-animated pop-effect" role="menu">
-                            <li><a href="user-profile.html"><i class="sli-user"></i> My Profile</a></li>
+                            <li><a href="{{url('/profil')}}"><i class="sli-user"></i> My Profile</a></li>
 
                             <li><a href="{{ route('logout') }}
                             "onclick="event.preventDefault();
@@ -256,16 +256,15 @@
                     <li class="side-nav-header">Navigation</li>
 
                     <li>
-                        <a href="{{ url('/') }}"><i class="sli-dashboard"></i> <span class="nav-text">Dashboard</span></a>
+                        <a href="{{ url('/') }}"><i class="sli-dashboard"></i> <span class="nav-text">tableau de bord</span></a>
                     </li>
-
                     <li>
-                        <a href="{{url('/msg-inbox')}}">
-                            <i class="sli-envelope"></i>
-                            <span class="nav-text">Messages</span>
-                            <span class="badge bg-danger">3</span>
+                        <a href="{{url('/profil')}}">
+                            <i class="  fs-user-4"></i>
+                            <span class="nav-text">profil</span>
                         </a>
                     </li>
+
 
                     @if (Auth::user()->role == 'admin')
                     <li>
@@ -275,6 +274,19 @@
                         </a>
                     </li>
                     @endif
+
+                    <li class="has-submenu">
+                        <a href="#submenuOne" data-toggle="collapse" aria-expanded="false">
+                            <i class="fs-calendar"></i>
+                            <span class="nav-text">Conge</span>
+                        </a>
+                        <div class="sub-menu collapse secondary" id="submenuOne">
+                            <ul>
+                                <li><a href="{{url('/table-basic')}}"><i class="fs-list"></i>  Liste de conges</a></li>
+                                <li><a href="{{url('/Demandeconges')}}"><i class="   fs-paperplane"></i>   liste des demandes</a></li>
+                            </ul>
+                        </div>
+                    </li>
 
                     <li>
                         <a href="{{url('/absences')}}">
@@ -290,19 +302,7 @@
                         </a>
                     </li>
 
-                    <li class="has-submenu">
-                        <a href="#submenuOne" data-toggle="collapse" aria-expanded="false">
-                            <i class="fs-grid-6"></i>
-                            <span class="nav-text">Tables</span>
-                        </a>
-                        <div class="sub-menu collapse secondary" id="submenuOne">
-                            <ul>
-                                <li><a href="{{url('/table-basic')}}">Basic Tables</a></li>
-                                <li><a href="{{url('/table-dataTable')}}">Data Table</a></li>
-                                <li><a href="{{url('/table-editable')}}">Editable Table</a></li>
-                            </ul>
-                        </div>
-                    </li>
+
 
 
 
@@ -314,7 +314,7 @@
        @yield('content')
         </div>
  <footer class="footer"> <!-- START: Footer -->
-        &copy; 2016 <b>Big Ben</b> Admin
+        &copy; Copyright 2022
         </footer>   <!-- END: Footer -->
 
 

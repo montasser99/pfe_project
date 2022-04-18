@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamp('email_created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->string('password');
             $table->rememberToken();
-
+            $table->string('phone')->nullable();
             /**Pour ajouter role par defaut user **/
             $table->string('role')->default('user');
 
@@ -29,6 +29,7 @@ return new class extends Migration
             $table->BigInteger('personnel_id')->unsigned()->unique()->nullable();
             $table->index('personnel_id');
             $table->foreign('personnel_id')->references('PERS_MAT_95')->on('personnels')->onDelete('cascade');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
