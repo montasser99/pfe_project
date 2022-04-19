@@ -18,8 +18,8 @@ return new class extends Migration
             $table->bigIncrements('PERS_MAT_95');
             $table->integer('PERS_MAT_ACT')->unique()->nullable();
             $table->integer('PERS_NUMASS_94')->nullable();
-            $table->string('PERS_NATURAGENT_93',40)->nullable();
-            $table->integer('PERS_CODFONC_92')->nullable();
+            $table->bigInteger('PERS_NATURAGENT_93')->unsigned()->nullable();
+            $table->bigInteger('PERS_CODFONC_92')->unsigned()->nullable();
             $table->integer('PERS_CODGROUP_92')->nullable();
             $table->integer('PERS_CET_9')->nullable();
             $table->string('PERS_NOM_X40',250)->nullable();
@@ -76,6 +76,16 @@ return new class extends Migration
             $table->integer('PERS_CODBANK_92')->nullable();
             $table->integer('PERS_CODAGENC_93')->nullable();
             $table->integer('PERS_SALBASE_96')->nullable();
+
+            /**Pour ajouter clé etrangere avec table nature agent **/
+            $table->index('PERS_NATURAGENT_93');
+            $table->foreign('PERS_NATURAGENT_93')->references('NATAG_CODE_93')->on('natureagents')->onDelete('cascade');
+
+            /**Pour ajouter clé etrangere avec table type fonction **/
+            $table->index('PERS_CODFONC_92');
+            $table->foreign('PERS_CODFONC_92')->references('CODE_TYPE')->on('type_fonctions')->onDelete('cascade');
+
+
             $table->timestamps();
 
 

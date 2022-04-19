@@ -18,7 +18,7 @@ class CcongeFactory extends Factory
     {
         return [
 
-            'CCONG_NAT_9' => $this->faker->numberBetween($min = 1, $max =10),
+            'CCONG_NAT_9' => $this->faker->numberBetween(1,10),
             'CCONG_CET_9' => $this->faker->numberBetween($min = 10, $max =5000) ,
             'CCONG_DROIT_93' => $this->faker->randomFloat($nbMaxDecimals = 1, $min = 0, $max = 999),
             'CCONG_DATE_MAJ' =>$this->faker->date($format = 'Y-m-d', $max = 'now') ,

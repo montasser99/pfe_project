@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('cconges', function (Blueprint $table) {
             $table->bigIncrements('CCONG_MAT_95');
-            $table->integer('CCONG_NAT_9')->nullable();
+            $table->bigInteger('CCONG_NAT_9')->unsigned()->nullable();
             $table->integer('CCONG_CET_9')->nullable();
             $table->float('CCONG_DROIT_93',4,1)->nullable();
             $table->date('CCONG_DATE_MAJ')->nullable();
@@ -23,6 +23,13 @@ return new class extends Migration
             $table->string('INSERT_USER',35)->nullable();
             $table->date('UPDATE_DATE')->nullable();
             $table->string('UPDATE_USER',35)->nullable();
+
+            /**Pour ajouter clé etrangere avec table nature conge **/
+            $table->index('CCONG_NAT_9');
+            $table->foreign('CCONG_NAT_9')->references('CODE')->on('nature_conges')->onDelete('cascade');
+
+
+
             $table->timestamps();
         });
     }

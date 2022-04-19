@@ -31,13 +31,34 @@
                                 <th> Adresse </th>
                                  <th> statu </th>
                                 <th></th>
-                                <th></th>
-                                <th></th>
+                        
+
 
                             </tr>
                         </thead>
+
                     <tbody>
+                    @if(Auth::user()->role=='admin')
+
                         @foreach ($DemandeConge as $Demande )
+                        <tr>
+                            <td>{{  $Demande->id            }}</td>
+                            <td>{{  $Demande->name          }}</td>
+                            <td>{{  $Demande->date_deb      }}</td>
+                            <td>{{  $Demande->date_fin      }}</td>
+                            <td>{{  $Demande->NatureDeConge  }}</td>
+                            <td>{{  $Demande->adresse_conge }}</td>
+                            <td style="color: blue">{{  $Demande->statu         }}</td>
+                            <td><a class="btn btn-sm btn-primary " href="{{ route('Demandeconges.show',$Demande->id ) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                            </td>
+
+                        </tr>
+                        @endforeach
+
+                    <!-- partie pour test de user -->
+                        @else
+
+                            @foreach ($userDemande as $Demande )
                         <tr>
                             <td>{{  $Demande->id            }}</td>
                             <td>{{  $Demande->name          }}</td>
@@ -60,7 +81,12 @@
                             </td>
                         </tr>
                         @endforeach
+
+                        @endif
                     </tbody>
+
+
+
                 </table>
             </div>
         </div>

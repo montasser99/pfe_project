@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('fonction')->nullable();
             $table->string('direction')->nullable();
             $table->BigInteger('personnel_id')->unsigned()->nullable();
+
+            /** Pour ajouter clé etrangere avec table personels **/
             $table->index('personnel_id');
             $table->foreign('personnel_id')->references('PERS_MAT_95')->on('personnels')->onDelete('cascade');
             $table->timestamps();

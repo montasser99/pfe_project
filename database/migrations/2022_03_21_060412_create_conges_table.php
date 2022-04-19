@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('conges', function (Blueprint $table) {
 
             $table->bigIncrements('CONG_MAT_95');
-            $table->integer('CONG_NUMORD_93')->nullable();
+            $table->bigInteger('CONG_NUMORD_93')->unsigned()->nullable();
             $table->bigInteger('CONG_NAT_9')->unsigned()->nullable();
             $table->string('CONG_MOTIF_X40',40)->nullable();
             $table->integer('CONG_CET_9')->nullable();
@@ -31,6 +31,11 @@ return new class extends Migration
             $table->string('CONG_ADRES_X30',65)->nullable();
             $table->string('CONG_TEL_98',8)->nullable();
             $table->string('CONG_DEMI_PER',8)->default("0");
+
+            /*Pour ajouter clé etrangere avec table nature congé **/
+            $table->index('CONG_NUMORD_93');
+            $table->foreign('CONG_NUMORD_93')->references('PERS_MAT_95')->on('personnels')->onDelete('cascade');
+
 
             /** Pour ajouter clé etrangere avec table nature congé **/
             $table->index('CONG_NAT_9');

@@ -17,7 +17,8 @@ class CongeFactory extends Factory
     public function definition()
     {
         return [
-                     'CONG_NUMORD_93' => $this->faker->randomDigitNot(0),
+                     'CONG_NUMORD_93' => $this->faker->numberBetween(1,10),
+                     'CONG_NAT_9'  => $this->faker->numberBetween(1,10),
                      'CONG_CET_9' => $this->faker->randomDigitNot(0),
                      'CONG_ANCSOLD_93' => $this->faker->randomDigitNot(0),
                      'CONG_NBRJOUR_93' => $this->faker->randomDigitNot(0),

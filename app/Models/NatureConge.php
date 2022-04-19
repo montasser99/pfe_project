@@ -8,6 +8,8 @@ use App\Models\Conge;
 
 class NatureConge extends Model
 {
+    protected $primaryKey = 'CODE';
+
     use HasFactory;
     public function conges()
     {

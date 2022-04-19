@@ -23,9 +23,19 @@ class DemandeCongeController extends Controller
 
     public function index()
     {
+        if(Auth::user()->role=='admin'){
+
      $DemandeConge = DemandeConge::get();
 
      return view('DemandeConge.index', compact('DemandeConge'));
+    }
+    else {
+        $idUser=Auth::id() ;
+        $userDemande = DB::select("select * from demande_conges where personnel_id = '.$idUser.'");
+
+        return view('DemandeConge.index', compact('userDemande'));
+
+    }
     }
 
     /**
@@ -35,10 +45,17 @@ class DemandeCongeController extends Controller
      */
     public function create()
     {
-        $DemandeConge = new DemandeConge();
+        if(Auth::user()->role=='user'){
+            $DemandeConge = new DemandeConge();
         $natureCongee = DB::select("SELECT DISTINCT(NOM) FROM `nature_conges`");
 
         return view('DemandeConge.create',compact('DemandeConge','natureCongee'));
+
+    }
+    else
+    {
+        abort(404);
+    }
 
     }
 
@@ -50,6 +67,8 @@ class DemandeCongeController extends Controller
      */
     public function store(Request $request)
     {
+        if(Auth::user()->role=='user'){
+
         $name=Auth::user()->name;
 
         $phone=Auth::user()->phone;
@@ -74,8 +93,11 @@ class DemandeCongeController extends Controller
         return redirect()->route('Demandeconges.index')
         ->with('success','demande created successfully.');
 
-
-
+        }
+        else
+        {
+            abort(404);
+        }
 
     }
 
@@ -87,7 +109,7 @@ class DemandeCongeController extends Controller
      */
     public function show($id)
     {
-        $DemandeConge = DemandeConge::find($id)->first();
+        $DemandeConge = DemandeConge::where('id',$id)->first();
         return view('DemandeConge.show',compact('DemandeConge'));
     }
 
@@ -99,8 +121,19 @@ class DemandeCongeController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(Auth::user()->role=='user'){
+
+        $DemandeConge = DemandeConge::where('id',$id)->first();
+        $natureCongee = DB::select("SELECT DISTINCT(NOM) FROM `nature_conges`");
+
+        return view('DemandeConge.edit',compact('DemandeConge','natureCongee'));
+
+        }
+    else
+    {
+        abort(404);
     }
+ }
 
     /**
      * Update the specified resource in storage.
@@ -111,7 +144,38 @@ class DemandeCongeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        if(Auth::user()->role=='user'){
+
+        $name=Auth::user()->name;
+        $phone=Auth::user()->phone;
+        $idUser=Auth::id() ;
+
+        $DemandeConge = DemandeConge::where('id',$id)->first();
+
+        $DemandeConge->name = $name ;
+        $DemandeConge->date_deb = $request->date_deb ;
+        $DemandeConge->date_fin = $request->date_fin ;
+        $DemandeConge->adresse_conge = $request->adresse_conge ;
+
+        //add phone of user here --
+        $DemandeConge->phone = $phone ;
+        $DemandeConge->NatureDeConge = $request->NatureDeConge ;
+        $DemandeConge->interim = $request->interim ;
+        $DemandeConge->fonction = $request->fonction ;
+        $DemandeConge->direction = $request->direction ;
+        $DemandeConge->personnel_id = $idUser ;
+
+        $DemandeConge->update();
+
+        return redirect()->back()->with('success','votre demande Updated Successfully');
+        }
+
+        else
+        {
+            abort(404);
+        }
+
     }
 
     /**
@@ -122,10 +186,20 @@ class DemandeCongeController extends Controller
      */
     public function destroy($id)
     {
+        if(Auth::user()->role=='user'){
 
-        $DemandeConge = DemandeConge::find($id)->delete();
+
+        $DemandeConge = DemandeConge::where('id',$id)->delete();
 
         return redirect()->route('Demandeconges.index')
         ->with('success','personnel deleted successfully.');
     }
+
+    else
+    {
+        abort(404);
+    }
+
+}
+
 }

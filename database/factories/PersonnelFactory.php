@@ -19,11 +19,11 @@ class PersonnelFactory extends Factory
         return [
             'PERS_MAT_ACT' => $this->faker->numberBetween($min = 1, $max =3000),
             'PERS_NOM_X40' => $this->faker->userName ,
-            'PERS_NATURAGENT_93' => $this->faker->stateAbbr,
+            'PERS_NATURAGENT_93' => $this->faker->numberBetween(5,10),
             'PERS_NOM' =>$this->faker->lastname ,
             'PERS_PRENOM' =>$this->faker->firstname ,
             'PERS_NUMASS_94' => random_int(0, 9999),
-            'PERS_CODFONC_92' => random_int(1000, 9999),
+            'PERS_CODFONC_92' => $this->faker->numberBetween($min = 1, $max =10),
             'PERS_CODGROUP_92' => random_int(1000, 9999),
             'PERS_CET_9' => $this->faker->randomDigitNot(0),
             'PERS_ENFANT_92' => $this->faker->numberBetween($min = 1, $max = 100),
