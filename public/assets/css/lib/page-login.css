@@ -54,10 +54,19 @@
 .slide4 {
     background: url(../../../demo/screens/img-screen-04.jpg)no-repeat center;
     background-size: cover;
-    animation:fade3 8s infinite;
-    -webkit-animation:fade3 8s infinite;
+    animation:fade4 8s infinite;
+    -webkit-animation:fade4 8s infinite;
     border: 2px solid #333;
 }
+
+.slide5 {
+    background: url(../../../demo/screens/ayoubIMAGE.jpg)no-repeat center;
+    background-size: cover;
+    animation:fade5 8s infinite;
+    -webkit-animation:fade5 8s infinite;
+    border: 2px solid #333;
+}
+
 
 
 @keyframes fade2 {
@@ -89,6 +98,35 @@
         opacity: 0
     }
 }
+@keyframes fade4 {
+    0% {
+        opacity:0
+    }
+    33.333% {
+        opacity: 0
+    }
+    66.666% {
+        opacity: 1
+    }
+    100% {
+        opacity: 0
+    }
+}
+@keyframes fade5 {
+    0% {
+        opacity:0
+    }
+    33.333% {
+        opacity: 0
+    }
+    66.666% {
+        opacity: 1
+    }
+    100% {
+        opacity: 0
+    }
+}
+
 
 
 

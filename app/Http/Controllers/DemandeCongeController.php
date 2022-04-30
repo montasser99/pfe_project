@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\DemandeConge;
 use App\Models\NatureConge;
-use DB;
+use Illuminate\Support\Facades\DB as FacadesDB;
 
 class DemandeCongeController extends Controller
 {
@@ -30,8 +30,9 @@ class DemandeCongeController extends Controller
      return view('DemandeConge.index', compact('DemandeConge'));
     }
     else {
-        $idUser=Auth::id() ;
-        $userDemande = DB::select("select * from demande_conges where personnel_id = '.$idUser.'");
+        $idUser=Auth::user()->personnel_id ;
+       // dd($idUser);
+        $userDemande = FacadesDB::select("select * from demande_conges where personnel_id = '$idUser'");
 
         return view('DemandeConge.index', compact('userDemande'));
 
@@ -47,7 +48,7 @@ class DemandeCongeController extends Controller
     {
         if(Auth::user()->role=='user'){
             $DemandeConge = new DemandeConge();
-        $natureCongee = DB::select("SELECT DISTINCT(NOM) FROM `nature_conges`");
+        $natureCongee = FacadesDB::select("SELECT DISTINCT(NOM) FROM `nature_conges`");
 
         return view('DemandeConge.create',compact('DemandeConge','natureCongee'));
 
@@ -67,13 +68,37 @@ class DemandeCongeController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+
+            'date_deb'=>'required',
+            'date_fin'=>'required',
+            'NatureDeConge' => 'required',
+            'interim'=>'required',
+            'fonction' =>'required',
+            'direction' =>'required',
+            'adresse_conge'=>'required',
+
+
+        ],
+        [
+           'date_deb.required'=>'Le champ date debut est obligatoire.',
+           'date_fin.required'=>'Le champ date fin est obligatoire.',
+           'NatureDeConge.required'=>'Le champ nature de conge est obligatoire.',
+           'interim.required'=>'Le champ interim est obligatoire.',
+           'fonction.required'=>'Le champ fonction est obligatoire.',
+           'direction.required'=>'Le champ direction est obligatoire.',
+           'adresse_conge.required'=>'Le champ adresse de conge est obligatoire.',
+        ]
+    );
         if(Auth::user()->role=='user'){
 
         $name=Auth::user()->name;
 
         $phone=Auth::user()->phone;
 
-        $idUser=Auth::id() ;
+        $idUser=Auth::user()->personnel_id ;
+
         $DemandeConge = new DemandeConge();
         $DemandeConge->name = $name ;
         $DemandeConge->date_deb = $request->date_deb ;
@@ -91,7 +116,7 @@ class DemandeCongeController extends Controller
         $DemandeConge->save();
 
         return redirect()->route('Demandeconges.index')
-        ->with('success','demande created successfully.');
+        ->with('successCA','Demande créée avec succès');
 
         }
         else
@@ -109,8 +134,28 @@ class DemandeCongeController extends Controller
      */
     public function show($id)
     {
+        if (Auth::user()->role=='admin'){
         $DemandeConge = DemandeConge::where('id',$id)->first();
         return view('DemandeConge.show',compact('DemandeConge'));
+        }
+        else
+        {
+            $idUser=Auth::user()->personnel_id;
+            $DemandeConge = DemandeConge::where('id',$id)->first();
+            if($DemandeConge != Null){
+            if($idUser==$DemandeConge->personnel_id ){
+                return view('DemandeConge.show',compact('DemandeConge'));
+            }
+            else
+            {
+            abort(404);
+            }
+        }
+        else
+        {
+            abort(404);
+        }
+        }
     }
 
     /**
@@ -124,7 +169,7 @@ class DemandeCongeController extends Controller
         if(Auth::user()->role=='user'){
 
         $DemandeConge = DemandeConge::where('id',$id)->first();
-        $natureCongee = DB::select("SELECT DISTINCT(NOM) FROM `nature_conges`");
+        $natureCongee = FacadesDB::select("SELECT DISTINCT(NOM) FROM `nature_conges`");
 
         return view('DemandeConge.edit',compact('DemandeConge','natureCongee'));
 
@@ -144,12 +189,35 @@ class DemandeCongeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+
+            'date_deb'=>'required',
+            'date_fin'=>'required',
+            'NatureDeConge' => 'required',
+            'interim'=>'required',
+            'fonction' =>'required',
+            'direction' =>'required',
+            'adresse_conge'=>'required',
+
+
+        ],
+        [
+           'date_deb.required'=>'Le champ date debut est obligatoire.',
+           'date_fin.required'=>'Le champ date fin est obligatoire.',
+           'NatureDeConge.required'=>'Le champ nature de conge est obligatoire.',
+           'interim.required'=>'Le champ interim est obligatoire.',
+           'fonction.required'=>'Le champ fonction est obligatoire.',
+           'direction.required'=>'Le champ direction est obligatoire.',
+           'adresse_conge.required'=>'Le champ adresse de conge est obligatoire.',
+        ]
+    );
+
 
         if(Auth::user()->role=='user'){
 
         $name=Auth::user()->name;
         $phone=Auth::user()->phone;
-        $idUser=Auth::id() ;
+        $idUser=Auth::user()->personnel_id ;
 
         $DemandeConge = DemandeConge::where('id',$id)->first();
 
@@ -168,7 +236,7 @@ class DemandeCongeController extends Controller
 
         $DemandeConge->update();
 
-        return redirect()->back()->with('success','votre demande Updated Successfully');
+        return redirect()->back()->with('successCA','votre demande a été modifiée avec succès.');
         }
 
         else
@@ -192,7 +260,7 @@ class DemandeCongeController extends Controller
         $DemandeConge = DemandeConge::where('id',$id)->delete();
 
         return redirect()->route('Demandeconges.index')
-        ->with('success','personnel deleted successfully.');
+        ->with('success','votre demande a été supprimer avec succès.');
     }
 
     else
@@ -200,6 +268,20 @@ class DemandeCongeController extends Controller
         abort(404);
     }
 
+    }
+
+public function annulerDemande($annule)
+{
+    if(Auth::user()->role=='admin')
+    {
+        $DemandeConge = DemandeConge::where('id',$annule)->first();
+        //dd($DemandeConge);
+        $DemandeConge->statu='Refuser' ;
+        $DemandeConge->save();
+
+        return redirect()->route('Demandeconges.index')
+        ->with('success','la demande a été refuser avec succès.');
+    }
 }
 
 }

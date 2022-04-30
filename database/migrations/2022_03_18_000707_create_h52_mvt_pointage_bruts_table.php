@@ -36,7 +36,7 @@ return new class extends Migration
 
             /** Pour ajouter clé étrangere avec table personnels **/
             $table->index('Matricule');
-            $table->foreign('Matricule')->references('PERS_MAT_95')->on('personnels')->onDelete('cascade');
+            $table->foreign('Matricule')->references('PERS_MAT_95')->on('personnels')->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();
 

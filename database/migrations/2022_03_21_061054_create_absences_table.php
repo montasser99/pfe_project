@@ -27,11 +27,11 @@ return new class extends Migration
 
             //** clé etrangeur avec table personnels **/
             $table->index('ABS_NUMORD_93');
-            $table->foreign('ABS_NUMORD_93')->references('PERS_MAT_95')->on('personnels')->onDelete('cascade');
+            $table->foreign('ABS_NUMORD_93')->references('PERS_MAT_95')->on('personnels')->onUpdate('cascade')->onDelete('cascade');
 
             //** clé etrangeur avec table Nat_abs **/
             $table->index('ABS_NAT_9');
-            $table->foreign('ABS_NAT_9')->references('CODE_ABS')->on('nat_abs')->onDelete('cascade');
+            $table->foreign('ABS_NAT_9')->references('CODE_ABS')->on('nat_abs')->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();
 

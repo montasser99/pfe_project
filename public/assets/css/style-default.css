@@ -1,6 +1,6 @@
 
 
-/* 
+/*
     Created on  : Nov 29, 2016, 1:17:15 AM
     Author      : Prakasam Mathaiyan
     URL         : http://www.prakasam.co
@@ -9,7 +9,7 @@
 
 
 /*
-    
+
     Primary     : #5F69E0
     Secondary   : #363A5C
     Success     : #7EC857
@@ -73,12 +73,12 @@ p {
 
 
 @media (max-width: 767px) {
-    
+
     .header-top .navbar-header {
         background-color:#5F69E0;
         color: #fff
     }
-    
+
 }
 
 
@@ -133,8 +133,8 @@ p {
 }
 
 .pagination.rounded > .active > a,
-.pagination>.active>a, .pagination>.active>a:focus, 
-.pagination>.active>a:hover, .pagination>.active>span, 
+.pagination>.active>a, .pagination>.active>a:focus,
+.pagination>.active>a:hover, .pagination>.active>span,
 .pagination>.active>span:focus, .pagination>.active>span:hover {
     background-color: #5f69e0;
     border-color: #5f69e0;
@@ -306,7 +306,7 @@ p {
 .bg-danger{ background-color: #FF4859 }
 
 
-.label{ 
+.label{
     border-radius: 1.5px;
     vertical-align: middle;
     padding: .3em .6em .3em;
@@ -443,8 +443,8 @@ p {
 .modal-success .modal-header .modal-title,
 .modal-warning .modal-header .modal-title,
 .modal-secondary .modal-header .modal-title,
-.modal-danger .modal-header .modal-title{ 
-    color: #FFFFFF; 
+.modal-danger .modal-header .modal-title{
+    color: #FFFFFF;
 }
 
 .modal-header .close {

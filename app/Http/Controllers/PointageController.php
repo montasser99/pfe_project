@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\H52MvtPointageBrut;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\DB as FacadesDB;
+
 class PointageController extends Controller
 {
     /**
@@ -15,23 +17,20 @@ class PointageController extends Controller
      */
     public function index()
     {
-     /**Pour afficher tout les pointages (User) **/
-     if (Auth::user()->role == 'user'){
-        $idUser=Auth::id() ;
+        /**Pour afficher tout les pointages (User) **/
+        if (Auth::user()->role == 'user') {
+            $idUser = Auth::user()->personnel_id;
 
 
-    $userPOINT = DB::select("select * from h52_mvt_pointage_bruts where MATRICULE = '.$idUser.'");
+            $userPOINT = FacadesDB::select("select * from h52_mvt_pointage_bruts where MATRICULE = '.$idUser.'");
+            return view('pointage.index', compact('userPOINT'));
+        } else {
+            /**Pour afficher tout les absences (Admin) **/
 
-    return view('pointage.index', compact('userPOINT'));
-    }
-    else
-    {
-        /**Pour afficher tout les absences (Admin) **/
+            $pointages = H52MvtPointageBrut::get();
 
-        $pointages = H52MvtPointageBrut::get();
-
-        return view('pointage.index', compact('pointages'));
-    }
+            return view('pointage.index', compact('pointages'));
+        }
     }
 
     /**
@@ -99,4 +98,5 @@ class PointageController extends Controller
     {
         //
     }
+    
 }

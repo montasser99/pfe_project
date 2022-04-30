@@ -15,6 +15,6 @@ class NatAbs extends Model
 
     public function absences()
     {
-        return $this->hasMany(Absence::class);
+        return $this->hasMany(Absence::class,'ABS_NAT_9','CODE_ABS');
     }
 }

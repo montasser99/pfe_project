@@ -34,12 +34,12 @@ return new class extends Migration
 
             /*Pour ajouter clé etrangere avec table nature congé **/
             $table->index('CONG_NUMORD_93');
-            $table->foreign('CONG_NUMORD_93')->references('PERS_MAT_95')->on('personnels')->onDelete('cascade');
+            $table->foreign('CONG_NUMORD_93')->references('PERS_MAT_95')->on('personnels')->onUpdate('cascade')->onDelete('cascade');
 
 
             /** Pour ajouter clé etrangere avec table nature congé **/
             $table->index('CONG_NAT_9');
-            $table->foreign('CONG_NAT_9')->references('CODE')->on('nature_conges')->onDelete('cascade');
+            $table->foreign('CONG_NAT_9')->references('CODE')->on('nature_conges')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

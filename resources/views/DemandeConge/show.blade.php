@@ -1,29 +1,88 @@
 @extends('layouts.layout')
 @section('content')
 
-<div class="col-md-15">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h2 class="panel-title"><h4 style="color:rgb(24, 0, 88)">Demande n° {{ $DemandeConge->id }}</h4> </h2>
+<div class="col-md-10"  style="padding-right: -83px;
+    padding-left: 270px; margin-top: 36px;
+    margin-bottom: 75px;">
+
+        <div class="panel panel-default">
+
+            <div class="panel-body" style=" box-shadow: 0 0 15px black; margin-bottom: 30px;">
+                <div class="panel panel-primary" style="margin-left: -15px;
+                margin-right: -15px;
+                margin-bottom: 30px;  ">
+                    <div class="panel-heading" style="background-color: #363b5b; padding: 13px 310px; margin-bottom: 23px; ">
+                    Demande conge de {{ $DemandeConge->personnels->PERS_NOM . ' ' . $DemandeConge->personnels->PERS_PRENOM }}
+                    </div>
+                <fieldset disabled style="padding: 3px;
+                margin: 10px;">
+                    <div class="form-group">
+                        <label for="disabledTextInput">Matricule</label>
+                        <input type="text"  id="disabledTextInput" class="form-control"
+                            placeholder="{{ $DemandeConge->personnel_id }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="disabledTextInput">nom</label>
+                        <input type="text" id="disabledTextInput" class="form-control"
+                            placeholder="{{ $DemandeConge->personnels->PERS_NOM }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="disabledTextInput">prenom</label>
+                        <input type="text" id="disabledTextInput" class="form-control"
+                            placeholder="{{ $DemandeConge->personnels->PERS_NOM }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="disabledTextInput">date debut</label>
+                        <input type="text" id="disabledTextInput" class="form-control"
+                            placeholder="{{$DemandeConge->date_deb }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="disabledTextInput">Date fin</label>
+                        <input type="text" id="disabledTextInput" class="form-control"
+                            placeholder="{{ $DemandeConge->date_fin }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="disabledTextInput">phone</label>
+                        <input type="text" id="disabledTextInput" class="form-control"
+                            placeholder="{{ $DemandeConge->phone }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="disabledTextInput">nature de conge</label>
+                        <input type="text" id="disabledTextInput" class="form-control"
+                            placeholder="{{ $DemandeConge->NatureDeConge }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="disabledTextInput">Intérim durant le congé</label>
+                        <input type="text" id="disabledTextInput" class="form-control"
+                            placeholder="{{ $DemandeConge->interim }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="disabledTextInput">fonction</label>
+                        <input type="text" id="disabledTextInput" class="form-control"
+                            placeholder="{{ $DemandeConge->fonction }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="disabledTextInput">adresse de conge</label>
+                        <input type="text" id="disabledTextInput" class="form-control"
+                            placeholder="{{ $DemandeConge->adresse_conge }}">
+                    </div>
+
+                </div>
+                <a  class="btn btn-sm btn-danger" style="    margin-top: -2%;
+                margin-left: 663px;
+                padding: 5.6px 30px;
+                font-size: 14px; " href="{{ route('Demandeconges.index')}}">retour</a>
+            </div>
         </div>
-       <div class="panel-body">
-        <ul class="list-group"  style="color: rgba(0, 76, 99, 0.685)   ">
-            <li class="list-group-item" ><h4>Matricule : {{ $DemandeConge->personnel_id }}</h4></li>
-            <li class="list-group-item" ><h4>nom : {{ $DemandeConge->name }}</h4></li>
-            <li class="list-group-item"><h4>date debut : {{ $DemandeConge->date_deb }}</h4></li>
-            <li class="list-group-item"><h4>date fin :    {{ $DemandeConge->date_fin }}</h4></h4></li>
-            <li class="list-group-item"><h4>phone : {{ $DemandeConge->phone }}</h4></li>
-            <li class="list-group-item"><h4>nature de conge : {{ $DemandeConge->NatureDeConge }}</h4></li>
-            <li class="list-group-item"><h4>Intérim durant le congé : {{ $DemandeConge->interim }}</h4></li>
-            <li class="list-group-item"><h4>fonction : {{ $DemandeConge->fonction }}</h4></li>
-            <li class="list-group-item"><h4>adresse de conge : {{ $DemandeConge->adresse_conge }}</h4></li>
-
-            <li class="list-group-item"><h4>direction : {{ $DemandeConge->direction }}</h4></li>
-
-
-
-        </ul>
     </div>
-</div>
-</div>
+
+
+
+
+
+
+
+
+
+
 @endsection

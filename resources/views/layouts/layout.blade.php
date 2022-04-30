@@ -282,7 +282,7 @@
                         </a>
                         <div class="sub-menu collapse secondary" id="submenuOne">
                             <ul>
-                                <li><a href="{{url('/table-basic')}}"><i class="fs-list"></i>  Liste de conges</a></li>
+                                <li><a href="{{url('/conges')}}"><i class="fs-list"></i>  Liste de conges</a></li>
                                 <li><a href="{{url('/Demandeconges')}}"><i class="   fs-paperplane"></i>   liste des demandes</a></li>
                             </ul>
                         </div>

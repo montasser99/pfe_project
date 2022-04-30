@@ -17,7 +17,10 @@ class TypeFonctionFactory extends Factory
     public function definition()
     {
         return [
-            'LIB_TYPE' => $this->faker->word,
+            'LIB_TYPE' => $this->faker->randomElement($array = array ('Ressources humaines'
+            ,'Production','Recherche et Développement','Comptabilité et Finances',
+            'Marketing et Vente','Achats','Direction et Administration générale','Logistique',
+   )),
             'MONTANT' => $this->faker->randomFloat(),
             'CODF_CNRPS' => $this->faker->stateAbbr,
         ];

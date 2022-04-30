@@ -6,6 +6,9 @@ use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\PointageController;
 use App\Http\Controllers\DemandeCongeController;
+use App\Http\Controllers\CongeController;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,7 +30,11 @@ Route::resource('/pointages',PointageController::class);
 
 Route::resource('/Demandeconges',DemandeCongeController::class);
 
-Route::put('{id}', [PersonnelController::class,'Update_Image'])->name('imageModifier')->middleware('auth');
+Route::resource('/conges',CongeController::class);
+
+Route::get('/statu/{annule}',['as'=>'annulerDemande','uses'=>'App\Http\Controllers\DemandeCongeController@annulerDemande']);
+
+Route::post('personnelimage/{id}', [PersonnelController::class,'Update_Image'])->name('imageModifier')->middleware('auth');
 
 /** page de profil **/
 Route::get('/profil', function (){

@@ -47,6 +47,6 @@ class User extends Authenticatable
 
     public function personnels()
     {
-        return $this->hasOne(Personnel::class,'personnel_id');
+        return $this->belongsTo(Personnel::class,'personnel_id','PERS_MAT_95');
     }
 }

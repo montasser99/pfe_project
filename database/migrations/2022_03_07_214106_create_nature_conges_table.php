@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('nature_conges', function (Blueprint $table) {
             $table->bigIncrements('CODE');
-            $table->string('NOM',30)->nullable();
-            $table->string('DESCRIPTION',150)->nullable();
+            $table->string('NOM', 30)->nullable();
+            $table->string('DESCRIPTION', 150)->nullable();
             $table->timestamps();
         });
-    } 
+    }
 
     /**
      * Reverse the migrations.

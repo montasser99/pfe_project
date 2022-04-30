@@ -29,7 +29,7 @@ return new class extends Migration
 
             /** Pour ajouter clé etrangere avec table personels **/
             $table->index('personnel_id');
-            $table->foreign('personnel_id')->references('PERS_MAT_95')->on('personnels')->onDelete('cascade');
+            $table->foreign('personnel_id')->references('PERS_MAT_95')->on('personnels')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

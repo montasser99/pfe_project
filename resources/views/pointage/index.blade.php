@@ -19,7 +19,6 @@
                         <table class="table table-striped table-dataTable ">
                         <thead>
                             <tr>
-                                <th>Mvtpointageid</th>
                                 <th>Matricule</th>
                                 <th>Jourcptpnt</th>
                                 <th>Datetimepnt</th>
@@ -44,7 +43,6 @@
 
                     @foreach ($pointages as $pointage)
                     <tr>
-                        <td>{{ $pointage->MvtPointageID     }}</td>
                         <td>{{ $pointage->Matricule         }}</td>
                         <td>{{ $pointage->JourCptPnt        }}</td>
                         <td>{{ $pointage->DateTimePnt       }}</td>

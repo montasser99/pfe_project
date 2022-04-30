@@ -79,11 +79,11 @@ return new class extends Migration
 
             /**Pour ajouter clé etrangere avec table nature agent **/
             $table->index('PERS_NATURAGENT_93');
-            $table->foreign('PERS_NATURAGENT_93')->references('NATAG_CODE_93')->on('natureagents')->onDelete('cascade');
+            $table->foreign('PERS_NATURAGENT_93')->references('NATAG_CODE_93')->on('natureagents')->onUpdate('cascade')->onDelete('cascade');
 
             /**Pour ajouter clé etrangere avec table type fonction **/
             $table->index('PERS_CODFONC_92');
-            $table->foreign('PERS_CODFONC_92')->references('CODE_TYPE')->on('type_fonctions')->onDelete('cascade');
+            $table->foreign('PERS_CODFONC_92')->references('CODE_TYPE')->on('type_fonctions')->onUpdate('cascade')->onDelete('cascade');
 
 
             $table->timestamps();
