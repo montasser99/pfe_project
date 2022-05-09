@@ -51,14 +51,14 @@ class AbsenceController extends Controller
         if (Auth::user()->role == 'admin') {
 
             $absence = new Absence();
-            $absenceFirstName=DB::select('SELECT DISTINCT personnels.PERS_NOM from personnels');
-            $absenceLastName=DB::select('SELECT DISTINCT personnels.PERS_PRENOM from personnels');
-            $ABSemail=DB::select('SELECT DISTINCT personnels.EMAIL from personnels');
-            $absenceNature=DB::select('SELECT DISTINCT nat_abs.LIBELLE_ABS from nat_abs');
+            $absenceFirstName = DB::select('SELECT DISTINCT personnels.PERS_NOM from personnels');
+            $absenceLastName = DB::select('SELECT DISTINCT personnels.PERS_PRENOM from personnels');
+            $ABSemail = DB::select('SELECT DISTINCT personnels.EMAIL from personnels');
+            $absenceNature = DB::select('SELECT DISTINCT nat_abs.LIBELLE_ABS from nat_abs');
 
-           //dd( $ABSemail);
+            //dd( $ABSemail);
 
-            return view('absence.create', compact('absence','absenceFirstName','absenceLastName','absenceNature','ABSemail'));
+            return view('absence.create', compact('absence', 'absenceFirstName', 'absenceLastName', 'absenceNature', 'ABSemail'));
         } else {
             abort(404);
         }
@@ -73,108 +73,104 @@ class AbsenceController extends Controller
     {
         if (Auth::user()->role == 'admin') {
 
-     /**pour afficher le cle etrangere dans absence de personnel  **/
-        $Nom=$request->PERS_NOM ;
-        $Prenom=$request->PERS_PRENOM ;
-        $Email=$request->EMAIL;
-        $Personnel_cle = DB::select("SELECT personnels.PERS_MAT_95 FROM personnels WHERE personnels.PERS_NOM='$Nom'
+            /**pour afficher le cle etrangere dans absence de personnel  **/
+            $Nom = $request->PERS_NOM;
+            $Prenom = $request->PERS_PRENOM;
+            $Email = $request->EMAIL;
+            $Personnel_cle = DB::select("SELECT personnels.PERS_MAT_95 FROM personnels WHERE personnels.PERS_NOM='$Nom'
         AND personnels.PERS_PRENOM='$Prenom' AND personnels.EMAIL='$Email' ");
-       // dd($Personnel_cle);
-          if($Personnel_cle == false){
-          $erreur = false;
+            // dd($Personnel_cle);
+            if ($Personnel_cle == false) {
+                $erreur = false;
 
-            $request->validate(
-            [
-            'PERS_NOM' => 'required|boolean:'.$erreur ,
-            'PERS_PRENOM' => 'required|boolean:'.$erreur ,
-            'EMAIL' => 'required|boolean:'.$erreur ,
-            'LIBELLE_ABS' => 'required',
-            'ABS_DATE_DEB' => 'required',
-            'ABS_DATE_FIN' => 'required|after:ABS_DATE_DEB',
-          //  'ABS_CUMULE_9' => 'required',
-        ],
-        [
-            /** Prenom message **/
-            'PERS_PRENOM.required' => 'Le champ prenom est obligatoire.',
-            'PERS_PRENOM.boolean' => 'verifier le champ prenom.',
-            /**Nom message **/
-            'PERS_NOM.required' => 'Le champ nom est obligatoire.',
-            'PERS_NOM.boolean' => 'verifier le champ nom.',
+                $request->validate(
+                    [
+                        'PERS_NOM' => 'required|boolean:' . $erreur,
+                        'PERS_PRENOM' => 'required|boolean:' . $erreur,
+                        'EMAIL' => 'required|boolean:' . $erreur,
+                        'LIBELLE_ABS' => 'required',
+                        'ABS_DATE_DEB' => 'required',
+                        'ABS_DATE_FIN' => 'required|after:ABS_DATE_DEB',
+                        //  'ABS_CUMULE_9' => 'required',
+                    ],
+                    [
+                        /** Prenom message **/
+                        'PERS_PRENOM.required' => 'Le champ prenom est obligatoire.',
+                        'PERS_PRENOM.boolean' => 'verifier le champ prenom.',
+                        /**Nom message **/
+                        'PERS_NOM.required' => 'Le champ nom est obligatoire.',
+                        'PERS_NOM.boolean' => 'verifier le champ nom.',
 
-            /**Email message **/
-            'EMAIL.required' => 'Le champ email est obligatoire.',
-            'EMAIL.boolean' => 'email erreur',
+                        /**Email message **/
+                        'EMAIL.required' => 'Le champ email est obligatoire.',
+                        'EMAIL.boolean' => 'verifier le champ email',
 
-            /**nature absence message **/
-            'LIBELLE_ABS.required'=> 'Le champ email est obligatoire.',
-            /**date debut d'absence message **/
-            'ABS_DATE_DEB.required' => 'Le champ date debut est obligatoire.',
-            /**date fin d'absence message **/
-            'ABS_DATE_FIN.required' => 'Le champ date fin est obligatoire.',
-            'ABS_DATE_FIN.after'=>'Le champ date fin doit être une date postérieure au date debut ',
-            /**absence  d'accumulation message **/
-           // 'ABS_CUMULE_9.required' => 'Le champ absence cumulé est obligatoire.',
-        ]
-);
-          }else
-          {
-            $request->validate(
-                [
-                'PERS_NOM' => 'required' ,
-                'PERS_PRENOM' => 'required' ,
-                'EMAIL' => 'required' ,
-                'LIBELLE_ABS' => 'required',
-                'ABS_DATE_DEB' => 'required',
-                'ABS_DATE_FIN' => 'required|after:ABS_DATE_DEB',
-               // 'ABS_CUMULE_9' => 'required',
-            ],
-            [
-                /** Prenom message **/
-                'PERS_PRENOM.required' => 'Le champ prenom est obligatoire.',
-                /**Nom message **/
-                'PERS_NOM.required' => 'Le champ nom est obligatoire.',
+                        /**nature absence message **/
+                        'LIBELLE_ABS.required' => 'Le champ email est obligatoire.',
+                        /**date debut d'absence message **/
+                        'ABS_DATE_DEB.required' => 'Le champ date debut est obligatoire.',
+                        /**date fin d'absence message **/
+                        'ABS_DATE_FIN.required' => 'Le champ date fin est obligatoire.',
+                        'ABS_DATE_FIN.after' => 'Le champ date fin doit être une date postérieure au date debut ',
+                        /**absence  d'accumulation message **/
+                        // 'ABS_CUMULE_9.required' => 'Le champ absence cumulé est obligatoire.',
+                    ]
+                );
+            } else {
+                $request->validate(
+                    [
+                        'PERS_NOM' => 'required',
+                        'PERS_PRENOM' => 'required',
+                        'EMAIL' => 'required',
+                        'LIBELLE_ABS' => 'required',
+                        'ABS_DATE_DEB' => 'required',
+                        'ABS_DATE_FIN' => 'required|after:ABS_DATE_DEB',
+                        // 'ABS_CUMULE_9' => 'required',
+                    ],
+                    [
+                        /** Prenom message **/
+                        'PERS_PRENOM.required' => 'Le champ prenom est obligatoire.',
+                        /**Nom message **/
+                        'PERS_NOM.required' => 'Le champ nom est obligatoire.',
 
-                /**Email message **/
-                'EMAIL.required' => 'Le champ email est obligatoire.',
+                        /**Email message **/
+                        'EMAIL.required' => 'Le champ email est obligatoire.',
 
-                /**nature absence message **/
-                'LIBELLE_ABS.required'=> 'Le champ email est obligatoire.',
-                /**date debut d'absence message **/
-                'ABS_DATE_DEB.required' => 'Le champ date debut est obligatoire.',
-                /**date fin d'absence message **/
-                'ABS_DATE_FIN.required' => 'Le champ date fin est obligatoire.',
-                'ABS_DATE_FIN.after'=>'Le champ date fin doit être une date postérieure au date debut ',
-                /**absence  d'accumulation message **/
-              //  'ABS_CUMULE_9.required' => 'Le champ absence cumulé est obligatoire.',
-            ]
-    );
+                        /**nature absence message **/
+                        'LIBELLE_ABS.required' => 'Le champ email est obligatoire.',
+                        /**date debut d'absence message **/
+                        'ABS_DATE_DEB.required' => 'Le champ date debut est obligatoire.',
+                        /**date fin d'absence message **/
+                        'ABS_DATE_FIN.required' => 'Le champ date fin est obligatoire.',
+                        'ABS_DATE_FIN.after' => 'Le champ date fin doit être une date postérieure au date debut ',
+                        /**absence  d'accumulation message **/
+                        //  'ABS_CUMULE_9.required' => 'Le champ absence cumulé est obligatoire.',
+                    ]
+                );
+            }
 
+            $personnel_absence = $Personnel_cle[0]->PERS_MAT_95;
+            //dd($personnel_absence);
 
-          }
-
-        $personnel_absence=$Personnel_cle[0]->PERS_MAT_95;
-        //dd($personnel_absence);
-
-        //solution pour absence cumulé
-     $OLD_absence_cumule = DB::select("SELECT absences.ABS_CUMULE_9 FROM `absences` WHERE ABS_NUMORD_93='$personnel_absence' ORDER BY ABS_CUMULE_9 DESC");
-     $old=$OLD_absence_cumule[0]->ABS_CUMULE_9 + 1 ;
-    // dd($old);
+            //solution pour absence cumulé
+            $OLD_absence_cumule = DB::select("SELECT absences.ABS_CUMULE_9 FROM `absences` WHERE ABS_NUMORD_93='$personnel_absence' ORDER BY ABS_CUMULE_9 DESC");
+            $old = $OLD_absence_cumule[0]->ABS_CUMULE_9 + 1;
+            // dd($old);
 
 
 
-        /**pour afficher le cle etrangere dans absence de nature absence  **/
-        $Nature=$request->LIBELLE_ABS ;
-        $natureABS_cle = DB::select("SELECT nat_abs.CODE_ABS FROM nat_abs WHERE nat_abs.LIBELLE_ABS='$Nature'");
-        $nature_absence=$natureABS_cle[0]->CODE_ABS;
-        //dd($nature_absence);
+            /**pour afficher le cle etrangere dans absence de nature absence  **/
+            $Nature = $request->LIBELLE_ABS;
+            $natureABS_cle = DB::select("SELECT nat_abs.CODE_ABS FROM nat_abs WHERE nat_abs.LIBELLE_ABS='$Nature'");
+            $nature_absence = $natureABS_cle[0]->CODE_ABS;
+            //dd($nature_absence);
 
-        if (isset($request->ABS_DATE_DEB, $request->ABS_DATE_FIN)) {
-            $start_time = \Carbon\Carbon::parse($request->ABS_DATE_DEB);
-            $finish_time = \Carbon\Carbon::parse($request->ABS_DATE_FIN);
+            if (isset($request->ABS_DATE_DEB, $request->ABS_DATE_FIN)) {
+                $start_time = \Carbon\Carbon::parse($request->ABS_DATE_DEB);
+                $finish_time = \Carbon\Carbon::parse($request->ABS_DATE_FIN);
 
-            $nbrjours = $start_time->diffInDays($finish_time, false);
-
-        }
+                $nbrjours = $start_time->diffInDays($finish_time, false);
+            }
             $absences = new Absence;
 
             $absences->ABS_NUMORD_93 =  $personnel_absence;
@@ -184,7 +180,7 @@ class AbsenceController extends Controller
             $absences->ABS_DATE_FIN  =  $request->ABS_DATE_FIN;
             $absences->ABS_PERFIN_X  =  $request->ABS_PERFIN_X;
             $absences->ABS_CUMULE_9  =  $old;
-            $absences->ABS_NBRJOUR_93 = $nbrjours ;
+            $absences->ABS_NBRJOUR_93 = $nbrjours;
             $absences->save();
 
             return redirect()->route('absences.index')
@@ -206,8 +202,10 @@ class AbsenceController extends Controller
         if (Auth::user()->role == 'admin') {
 
             $absence = Absence::where('ABS_MAT_95', $id)->first();
-
-            return view('absence.show', compact('absence'));
+            if (isset($absence)) {
+                return view('absence.show', compact('absence'));
+            }
+            abort(404);
         } else {
             $absence = Absence::where('ABS_MAT_95', $id)->first();
             if ($absence != null) {
@@ -232,10 +230,13 @@ class AbsenceController extends Controller
         if (Auth::user()->role == 'admin') {
 
             $absence = Absence::where('ABS_MAT_95', $id)->first();
-            $absenceNature=DB::select('SELECT DISTINCT nat_abs.LIBELLE_ABS from nat_abs');
+            if (isset($absence)) {
+                $absenceNature = DB::select('SELECT DISTINCT nat_abs.LIBELLE_ABS from nat_abs');
 
 
-            return view('absence.edit', compact('absence','absenceNature'));
+                return view('absence.edit', compact('absence', 'absenceNature'));
+            }
+            abort(404);
         } else {
             abort(404);
         }
@@ -250,63 +251,60 @@ class AbsenceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(Auth::user()->role == 'admin'){
+        if (Auth::user()->role == 'admin') {
 
             $request->validate(
                 [
-                'ABS_DATE_DEB' => 'required',
-                'ABS_DATE_FIN' => 'required|after:ABS_DATE_DEB',
-                'ABS_CUMULE_9' => 'required',
-            ],
-            [
-                /**date debut d'absence message **/
-                'ABS_DATE_DEB.required' => 'Le champ date debut est obligatoire.',
-                /**date fin d'absence message **/
-                'ABS_DATE_FIN.required' => 'Le champ date fin est obligatoire.',
-                'ABS_DATE_FIN.after'=>'Le champ date fin doit être une date postérieure au date debut ',
-                /**absence  d'accumulation message **/
-                'ABS_CUMULE_9.required' => 'Le champ absence cumulé est obligatoire.',
-            ]
-    );
+                    'ABS_DATE_DEB' => 'required',
+                    'ABS_DATE_FIN' => 'required|after:ABS_DATE_DEB',
+                    'ABS_CUMULE_9' => 'required',
+                ],
+                [
+                    /**date debut d'absence message **/
+                    'ABS_DATE_DEB.required' => 'Le champ date debut est obligatoire.',
+                    /**date fin d'absence message **/
+                    'ABS_DATE_FIN.required' => 'Le champ date fin est obligatoire.',
+                    'ABS_DATE_FIN.after' => 'Le champ date fin doit être une date postérieure au date debut ',
+                    /**absence  d'accumulation message **/
+                    'ABS_CUMULE_9.required' => 'Le champ absence cumulé est obligatoire.',
+                ]
+            );
 
-        /**pour afficher le cle etrangere dans absence de nature absence  **/
-        $Nature=$request->LIBELLE_ABS ;
-        $natureABS_cle = DB::select("SELECT nat_abs.CODE_ABS FROM nat_abs WHERE nat_abs.LIBELLE_ABS='$Nature'");
-        $nature_absence=$natureABS_cle[0]->CODE_ABS;
-        //dd($nature_absence);
+            /**pour afficher le cle etrangere dans absence de nature absence  **/
+            $Nature = $request->LIBELLE_ABS;
+            $natureABS_cle = DB::select("SELECT nat_abs.CODE_ABS FROM nat_abs WHERE nat_abs.LIBELLE_ABS='$Nature'");
+            $nature_absence = $natureABS_cle[0]->CODE_ABS;
+            //dd($nature_absence);
 
-        /** pour trouver le nombre de jours **/
-        if (isset($request->ABS_DATE_DEB, $request->ABS_DATE_FIN)) {
-            $start_time = \Carbon\Carbon::parse($request->ABS_DATE_DEB);
-            $finish_time = \Carbon\Carbon::parse($request->ABS_DATE_FIN);
+            /** pour trouver le nombre de jours **/
+            if (isset($request->ABS_DATE_DEB, $request->ABS_DATE_FIN)) {
+                $start_time = \Carbon\Carbon::parse($request->ABS_DATE_DEB);
+                $finish_time = \Carbon\Carbon::parse($request->ABS_DATE_FIN);
 
-            $nbrjours = $start_time->diffInDays($finish_time, false);
+                $nbrjours = $start_time->diffInDays($finish_time, false);
+            }
 
-        }
 
+            $absence = Absence::where('ABS_MAT_95', $id)->first();
 
-        $absence = Absence::where('ABS_MAT_95', $id)->first();
+            if (($absence->ABS_NAT_9 == $nature_absence) &&  ($absence->ABS_DATE_DEB == $request->ABS_DATE_DEB) && ($absence->ABS_PERDEB_X == $request->ABS_PERDEB_X)
+                && ($absence->ABS_DATE_FIN == $request->ABS_DATE_FIN) &&  ($absence->ABS_PERFIN_X == $request->ABS_PERFIN_X) &&
+                ($absence->ABS_CUMULE_9 == $request->ABS_CUMULE_9)
+            ) {
+                return redirect()->back()->with('NotModify', 'tu dois modifier au moins un champ !');
+            }
 
-        if(($absence->ABS_NAT_9 == $nature_absence ) &&  ($absence->ABS_DATE_DEB == $request->ABS_DATE_DEB) && ($absence->ABS_PERDEB_X==$request->ABS_PERDEB_X)
-        && ($absence->ABS_DATE_FIN == $request->ABS_DATE_FIN) &&  ($absence->ABS_PERFIN_X == $request->ABS_PERFIN_X) &&
-        ($absence->ABS_CUMULE_9 == $request->ABS_CUMULE_9) )
-        {
-            return redirect()->back()->with('NotModify', 'tu dois modifier au moins un champ !');
-        }
+            $absence->ABS_NAT_9 = $nature_absence;
+            $absence->ABS_DATE_DEB = $request->ABS_DATE_DEB;
+            $absence->ABS_PERDEB_X = $request->ABS_PERDEB_X;
+            $absence->ABS_DATE_FIN = $request->ABS_DATE_FIN;
+            $absence->ABS_PERFIN_X = $request->ABS_PERFIN_X;
+            $absence->ABS_CUMULE_9 = $request->ABS_CUMULE_9;
+            $absence->ABS_NBRJOUR_93 = $nbrjours;
+            $absence->update();
 
-        $absence->ABS_NAT_9 = $nature_absence;
-        $absence->ABS_DATE_DEB = $request->ABS_DATE_DEB;
-        $absence->ABS_PERDEB_X = $request->ABS_PERDEB_X;
-        $absence->ABS_DATE_FIN = $request->ABS_DATE_FIN;
-        $absence->ABS_PERFIN_X = $request->ABS_PERFIN_X;
-        $absence->ABS_CUMULE_9 = $request->ABS_CUMULE_9;
-        $absence->ABS_NBRJOUR_93 = $nbrjours ;
-        $absence->update();
-
-        return redirect()->back()->with('success', 'absence mis à jour avec succès');
-        }
-        else
-        {
+            return redirect()->back()->with('success', 'absence mis à jour avec succès');
+        } else {
             abort(404);
         }
     }

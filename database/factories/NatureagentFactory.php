@@ -17,7 +17,9 @@ class NatureagentFactory extends Factory
     public function definition()
     {
         return [
-            'NATAG_LIB_X50' => $this->faker->text($maxNbChars = 50),
+            'NATAG_LIB_X50' => $this->faker->randomElement($array = array ('commerciale'
+            ,'industrielle','libérale','libérale','gestion des déclarations','forage','Réseau et Développement',
+   )),
         ];
     }
 }

@@ -1,51 +1,51 @@
 
 
-/* 
+/*
     Created on  : Tuesday, 28 June 2016 at 1:06 PM
     Author      : Prakasam Mathaiyan
     URL         : http://www.prakasam.co
     E-Mail      : hello@prakasam.co
-    Description : This file handles complete list of functions, which is used 
+    Description : This file handles complete list of functions, which is used
                   for base layout. Kindly Dont delete or make any changes
 */
 
 
 jQuery(document).ready(function () {
-    
+
     handle_MainMenu();
     handle_ResponsiveMenu();
     handle_ActiveMenu();
-    
+
     handle_PanelTools();
     handle_FlotModals();
     handle_CharacterCounter();
     handle_DatePicker();
-    
+
     handle_Select2();
     handle_CustomSelect();
     handle_DateTimePicker();
     handle_LightGallery();
-    
+
     handle_Trumbowyg();
     handle_EmojiOneArea();
     handle_IonRangeSlider();
     handle_BootstrapElements();
-    
+
     handle_SummerNote();
     handle_SlimScroll();
     handle_DataBgImage();
     handle_Knob();
-    
+
     handle_SparklineCharts();
     handle_Timepicker();
     handle_Colorpicker();
-    
+
 });
 
 
 
 function handle_MainMenu(){
-    
+
     $('.sidenav-size-toggle').click(function () {
         $('.wrapper').toggleClass('side-nav-sm');
         handle_ResponsiveMenu();
@@ -83,7 +83,7 @@ function handle_MainMenu(){
         color: '#62657A',
         touchScrollStep: 20
     });
-    
+
     $('.search-toggle').click(function () {
         $('.top-bar').toggleClass('active');
         return false;
@@ -91,7 +91,7 @@ function handle_MainMenu(){
 }
 
 function handle_ResponsiveMenu(){
-    
+
     if ($('.wrapper').hasClass('nav-top')) {
             var $el, leftPos, newWidth,
             $mainNav = $(".magic-nav");
@@ -167,11 +167,11 @@ function handle_ResponsiveMenu(){
                 });
             }
         }
-    
+
 }
 
 function handle_ActiveMenu(){
-    
+
     $(".side-nav li.has-submenu .sub-menu ul li a").each(function () {
         if (this.href == window.location.href) {
             $(this).closest('li').addClass("active");
@@ -179,11 +179,11 @@ function handle_ActiveMenu(){
             $(this).closest('li.has-submenu').find('> a').attr('aria-expanded','true');
         }
     });
-    
+
 }
 
 function handle_PanelTools(){
-    
+
     $panel_collapse = $('.panel .tools>.panel-collapse');
     $panel_reload = $('.panel .tools>.reload');
     $panel_expand = $('.panel .tools>.expand');
@@ -247,11 +247,11 @@ function handle_PanelTools(){
     $($panel_close).bind('click', function () {
         $(this).parents(".panel").remove();
     });
-    
+
 }   // function to activate the panel tools
 
 function handle_FlotModals(){
-    
+
     $(document).on('click', '[data-toggle="modal-float"]', function () {
         var target = $(this).data('target');
         $(target).toggleClass('open');
@@ -265,7 +265,7 @@ function handle_FlotModals(){
     $(document).on('click', '[data-dismiss="modal-flot"]', function () {
         $(this).closest('.modal-flot').removeClass('open');
     });
-    
+
 }   //  Function to handle Float Modals
 
 function handle_CharacterCounter(){
@@ -297,20 +297,20 @@ function handle_DatePicker(){
 
 function handle_Select2(){
     if(jQuery().select2) {
-        
+
         $(".select2").each(function() {
             $(this).select2({
                 placeholder: 'Select an option',
                 minimumResultsForSearch: Infinity
             });
         });
-        
+
         $(".select2Search").each(function() {
             $(this).select2({
-                
+
             });
         });
-        
+
         $(".select2Tags").each(function() {
             $(this).select2({
                 tags: "true",
@@ -318,14 +318,14 @@ function handle_Select2(){
                 allowClear: true
             });
         });
-        
+
     }
 }   // function to handle Select 2
 
 function handle_CustomSelect(){
-    
+
     if(jQuery().customSelect) {
-        
+
         $(".custom-Select").each(function() {
             $(this).customSelect({
                 placeholder: $(this).attr("data-placeholder"),
@@ -335,15 +335,15 @@ function handle_CustomSelect(){
                 forceCustomRendering: ($(this).attr("data-fCR") == "1" ? true : false),
             });
         });
-        
+
     }
-    
+
 }   // function to handle Custom Select
 
 function handle_DateTimePicker(){
-    
+
     if(jQuery().datetimepicker) {
-        
+
         $(".dateTime-picker").each(function() {
             $(this).datetimepicker({
                 locale: $(this).attr("data-locale"),
@@ -353,39 +353,39 @@ function handle_DateTimePicker(){
                 sideBySide: ($(this).attr("data-sideBySide") == "1" ? true : false),
             });
         });
-        
+
     }
-    
+
 }   // function to handle Bootstrap3 Date and Time Picker
 
 function handle_LightGallery(){
-    
+
     if(jQuery().lightGallery) {
-        
+
         $(".lightgallery").each(function() {
             $(this).lightGallery({
-                
+
             });
         });
-        
+
     }
-    
+
 }   // function to handle Bootstrap3 Date and Time Picker
 
 function handle_Trumbowyg(){
-    
+
     if(jQuery().trumbowyg) {
-        
+
         $(".editorTrumbowyg").each(function() {
             $(this).trumbowyg();
         });
-        
+
     }
-    
-}   // function to handle 
+
+}   // function to handle
 
 function handle_EmojiOneArea(){
-    
+
     if(jQuery().emojioneArea) {
         $(".txt-emoji").each(function() {
             $(this).emojioneArea({
@@ -395,11 +395,11 @@ function handle_EmojiOneArea(){
             });
         });
     }
-    
-}   // function to handle 
+
+}   // function to handle
 
 function handle_IonRangeSlider(){
-    
+
     if(jQuery().ionRangeSlider) {
         $(".ion-slider").each(function() {
             $(this).ionRangeSlider({
@@ -414,32 +414,32 @@ function handle_IonRangeSlider(){
             });
         });
     }
-    
-}   // function to handle 
+
+}   // function to handle
 
 function handle_BootstrapElements(){
-    
+
     $('[data-toggle="tooltip"]').tooltip();
-    
+
     $('[data-toggle="popover"]').popover();
-    
-}   // function to handle 
+
+}   // function to handle
 
 function handle_SummerNote(){
-    
+
     var height = $('.summernote').data('height');
-        
+
     if ($().summernote) {
         $('.summernote').summernote({
             height: height, // set editor height
-            focus: true 
+            focus: true
         });
     }
-    
-}   // function to handle 
+
+}   // function to handle
 
 function handle_SlimScroll(){
-    
+
     if ($().slimScroll) {
         $(".scroller").each(function () {
             $(this).slimScroll({
@@ -453,32 +453,32 @@ function handle_SlimScroll(){
             });
         });
     }
-    
-}   // function to handle 
 
-function handle_DataBgImage() {                
-        
-    $(".dataBgImage").each(function () {            
-        var bg_image = $(this).attr('data-bg-image');            
+}   // function to handle
+
+function handle_DataBgImage() {
+
+    $(".dataBgImage").each(function () {
+        var bg_image = $(this).attr('data-bg-image');
         $(this).css('background-image', 'url(' + bg_image + ')');
     });
-    
+
 };      //  Function to handle data-bg-image
 
 function handle_Knob() {
-    
+
     if ($().knob) {
         $(".chart-knob").each(function () {
             $(this).knob({
-               
+
             });
         });
     }
-    
+
 };      //  Function to Knob Chart
 
 function handle_SparklineCharts() {
-    
+
     if ($().sparkline) {
         $(".sparkline-bar").each(function () {
             $(this).sparkline("html",{
@@ -490,7 +490,7 @@ function handle_SparklineCharts() {
             });
         });
     }
-    
+
 
     if ($().sparkline) {
         $(".sparkline-pie").each(function () {
@@ -501,32 +501,32 @@ function handle_SparklineCharts() {
             });
         });
     }
-    
-    
+
+
 };      //  Function to Sparkline Chart
 
 function handle_Timepicker() {
-            
+
     if ($().timepicker) {
         $(".time-picker").each(function () {
             $(this).timepicker({
-               
+
             });
         });
     }
-    
+
 };      //  Function to handle Time picker
 
 function handle_Colorpicker() {
-            
+
     if ($().colorpicker) {
         $(".color-picker").each(function () {
             $(this).colorpicker({
-               
+
             });
         });
     }
-    
+
 };      //  Function to handle Time picker
-    
+
 

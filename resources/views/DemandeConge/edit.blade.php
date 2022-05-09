@@ -8,7 +8,7 @@
     <div class="row">
 
         <div class="col-md-12" >
-            <div class="panel panel-default" style="margin-bottom: 12px;
+        <div class="panel panel-default" style="margin-bottom: 12px;
             margin-left: 60px;
             margin-right: 60px;
             margin-top: 23px;box-shadow: 0 0 30px black; margin-bottom: 30px; ">
@@ -20,7 +20,7 @@
                  Modifer le demande conge de
                  {{ $DemandeConge->personnels->PERS_NOM . ' ' . $DemandeConge->personnels->PERS_PRENOM }}
                 </div>
-                
+
                 <div class="panel-body">
                     <form action="{{ route('Demandeconges.update', $DemandeConge->id) }}" role="form"  method="post" >
                            @csrf
@@ -118,4 +118,27 @@
             </div>
         </div>
     </div> <!--END: Content Wrap-->
+    @if ($message = Session::get('success'))
+    <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: "{{ session()->get('success') }}",
+            showConfirmButton: false,
+            timer: 2500
+        })
+    </script>
+    @endif
+
+    @if ($message = Session::get('NotModify'))
+    <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'warning',
+            title: "{{ session()->get('NotModify') }}",
+            showConfirmButton: false,
+            timer: 2500
+        })
+    </script>
+@endif
 @endsection

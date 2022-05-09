@@ -206,7 +206,10 @@ class PersonnelController extends Controller
         if (Auth::user()->role == 'admin') {
 
             $personnel = Personnel::where('PERS_MAT_95', $id)->first();
+            if(isset($personnel)){
             return view('personnel.show', compact('personnel'));
+            }
+            abort(404);
         } else {
             abort(404);
         }
@@ -222,10 +225,14 @@ class PersonnelController extends Controller
     {
         if (Auth::user()->role == 'admin') {
 
+
             $personnel = Personnel::where('PERS_MAT_95', $id)->first();
+        if(isset($personnel)){
             $Nature = FacadesDB::select("SELECT DISTINCT NATAG_LIB_X50 FROM `natureagents`");
             $TypeF = FacadesDB::select("SELECT DISTINCT LIB_TYPE FROM `type_fonctions`");
             return view('personnel.edit', compact('personnel', 'Nature', 'TypeF'));
+        }
+        else{ abort(404); }
         } else {
             abort(404);
         }
@@ -268,8 +275,8 @@ class PersonnelController extends Controller
 
                     //'PERS_MAT_95' => 'required|numeric|max:5000|unique:personnels',
                     //'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
-                    'PERS_NOM' => 'required|alpha|max:15',
-                    'PERS_PRENOM' => 'required|alpha|max:15',
+                    'PERS_NOM' => 'required|alpha|max:15|min:3',
+                    'PERS_PRENOM' => 'required|alpha|max:15|min:3',
                     'EMAIL' => 'required|email',
                     'PERS_SEXE_X' => 'required',
                     'RoleUser' => 'required',
@@ -294,11 +301,13 @@ class PersonnelController extends Controller
                     'PERS_PRENOM.required' => 'Le champ prenom est obligatoire.',
                     'PERS_PRENOM.alpha' => 'Le champ prenom doit seulement contenir des lettres.',
                     'PERS_PRENOM.max' => 'Le texte de prenom ne peut contenir plus de 15 caractères.',
+                    'PERS_PRENOM.min' => 'Le texte de prenom ne peut contenir moin de 3 caractères.',
 
                     /**Nom message **/
                     'PERS_NOM.required' => 'Le champ nom est obligatoire.',
                     'PERS_NOM.alpha' => 'Le champ nom doit seulement contenir des lettres.',
                     'PERS_NOM.max' => 'Le texte de nom ne peut contenir plus de 15 caractères.',
+                    'PERS_NOM.min' => 'Le texte de nom ne peut contenir moin de 3 caractères.',
 
                     /**Email message **/
                     'EMAIL.required' => 'Le champ email est obligatoire.',
@@ -389,7 +398,7 @@ class PersonnelController extends Controller
 
 
 
-            return redirect()->route('personnels.index')->with('success', 'Personnel mis à jour avec succès');
+            return redirect()->back()->with('success', 'Personnel mis à jour avec succès');
         } else {
             abort(404);
         }
@@ -405,8 +414,8 @@ class PersonnelController extends Controller
     {
         if (Auth::user()->role == 'admin') {
 
-            $personnel = Personnel::where('PERS_MAT_95', $id)->first();
-            $personnel->delete();
+            $personnel = Personnel::where('PERS_MAT_95', $id)->delete();
+
 
 
             return redirect()->route('personnels.index')

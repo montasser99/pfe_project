@@ -108,7 +108,6 @@
 <script type="text/javascript" src="assets/plugins/lib/jquery-ui.min.js"></script>
 
 
-
 <script>
    jQuery(document).ready(function () {
        DataTableBasic.init();
@@ -125,6 +124,7 @@
   showConfirmButton: false,
   timer: 2500
 })
+
     </script>
 @endif
 @endsection

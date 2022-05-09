@@ -21,7 +21,7 @@
 
                     <div class="float-center">
                         <a href="{{ route('conges.create') }}" class="btn btn-primary btn-sm" data-placement="right" style="
-                        border-radius: 18px;
+                      
                         margin-top: 5px;
                         margin-left: 13px;">
                             <i class=" fs-plus-circle"> </i> créer un nouveau congé

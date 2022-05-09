@@ -35,7 +35,7 @@
                                 </div>
 
                                 <div class="form-group col-md-6">
-                                    <label>Nom</label>
+                                    <label>Nom </label>
                                     <input type="text" class="form-control" name="PERS_NOM" placeholder="Nom"
                                         data-prompt-position="topLeft">
                                     <span style="color: red">
@@ -178,5 +178,6 @@
             </div>
         </div>
     </div>
-    <!--END: Content Wrap-->
+
+
 @endsection

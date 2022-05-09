@@ -175,4 +175,17 @@ Swal.fire({
 </script>
     @endif
 
+    @if ($message = Session::get('success'))
+<script>
+    Swal.fire({
+  position: 'center',
+  icon: 'success',
+  title: "{{ session()->get('success') }}",
+  showConfirmButton: false,
+  timer: 2500
+})
+
+    </script>
+@endif
+
 @endsection

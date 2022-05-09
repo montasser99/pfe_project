@@ -32,7 +32,11 @@ Route::resource('/Demandeconges',DemandeCongeController::class);
 
 Route::resource('/conges',CongeController::class);
 
-Route::get('/statu/{annule}',['as'=>'annulerDemande','uses'=>'App\Http\Controllers\DemandeCongeController@annulerDemande']);
+Route::get('/statu/{annule}',['as'=>'annulerDemande','uses'=>'App\Http\Controllers\DemandeCongeController@annulerDemande'])->middleware('auth');
+
+Route::get('/ajouterSigs/{id}',['as'=>'ajouterSignataire','uses'=>'App\Http\Controllers\DemandeCongeController@ajouterSignataire'])->middleware('auth');
+
+Route::post('/ajouterSignataire/{id}', 'App\Http\Controllers\DemandeCongeController@storeSignataire')->name('storeSig')->middleware('auth');
 
 Route::post('personnelimage/{id}', [PersonnelController::class,'Update_Image'])->name('imageModifier')->middleware('auth');
 
@@ -41,16 +45,10 @@ Route::get('/profil', function (){
 return view ('profil-personnel');
 })->middleware('auth');
 
-
-
-
-Route::get('/table-basic', function () {
-    return view('table-basic');
-})->middleware('auth');
-
-Route::get('/msg-inbox', function () {
-    return view('msg-inbox');
-});
+/** page de profil **/
+Route::get('/demande', function (){
+    return view ('demandecongepdf');
+    })->middleware('auth');
 
 /**routes pour les controller auth routes**/
 Auth::routes();

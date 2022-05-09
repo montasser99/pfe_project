@@ -142,4 +142,15 @@
             })
         </script>
     @endif
+    @if ($message = Session::get('NotModify'))
+    <script>
+        Swal.fire({
+            position: 'center',
+            icon: 'warning',
+            title: "{{ session()->get('NotModify') }}",
+            showConfirmButton: false,
+            timer: 2500
+        })
+    </script>
+@endif
 @endsection

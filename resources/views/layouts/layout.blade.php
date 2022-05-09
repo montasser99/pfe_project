@@ -85,118 +85,6 @@
                         </a>
                     </li>
 
-                    <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="sli-bell"></i>
-                            <div class="new-alert active"></div>
-                        </a>
-                        <ul class="dropdown-menu dropdown-lg list-group-dropdown">
-                            <li class="no-link">4 New Notifications</li>
-                            <li>
-                                <a href="#">
-                                    <div class="user-list-wrap">
-                                        <div class="profile-pic profile-icon"><i class="ti-file"></i></div>
-                                        <div class="detail">
-                                            <span class="text-normal">Ricky Palmer</span>
-                                            <span class="time">3 hrs ago</span>
-                                            <p class="font-11 no-m-b text-overflow">Sent you a file</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="user-list-wrap">
-                                        <div class="profile-pic profile-icon"><i class="ti-email"></i></div>
-                                        <div class="detail">
-                                            <span class="text-normal">Charles Dockery</span>
-                                            <span class="time">Jun 03, 2015</span>
-                                            <p class="font-11 no-m-b text-overflow">Sent you a message</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div class="user-list-wrap">
-                                        <div class="profile-pic profile-icon"><i class="ti-shopping-cart-full"></i></div>
-                                        <div class="detail">
-                                            <span class="text-normal">Kimberly Crouch</span>
-                                            <span class="time">May 17, 2015</span>
-                                            <p class="font-11 no-m-b text-overflow">Purchased your item</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li><a href="#" class="text-center">See all</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="dropdown">
-                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="sli-envelope"></i>
-                            <span class="badge bg-danger">4</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-lg list-group-dropdown">
-
-                            <li class="no-link font-12">You have 4 new notifications</li>
-
-                            <li>
-                                <a href="#">
-                                    <div class="user-list-wrap">
-                                        <div class="profile-pic"><img src="{{asset('demo/users/img-user-02.jpg')}}" alt=""></div>
-                                        <div class="detail">
-                                            <span class="text-normal">Cynthianawen</span>
-                                            <span class="time">2 mins ago</span>
-                                            <p class="font-11 no-m-b text-overflow">Start following you</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="#">
-                                    <div class="user-list-wrap">
-                                        <div class="profile-pic"><img src="{{asset('demo/users/img-user-03.jpg')}}" alt=""></div>
-                                        <div class="detail">
-                                            <span class="text-normal">Megan Stamper</span>
-                                            <span class="time">1 hr ago</span>
-                                            <p class="font-11 no-m-b text-overflow">Accepted your friend request</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="#">
-                                    <div class="user-list-wrap">
-                                        <div class="profile-pic"><img src="{{asset('demo/users/img-user-04.jpg')}}" alt=""></div>
-                                        <div class="detail">
-                                            <span class="text-normal">Alex Pushkin</span>
-                                            <span class="time">yesterday</span>
-                                            <p class="font-11 no-m-b text-overflow">Sent you a friend request</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="#">
-                                    <div class="user-list-wrap">
-                                        <div class="profile-pic"><img src="{{asset('demo/users/img-user-05.jpg')}}" alt=""></div>
-                                        <div class="detail">
-                                            <span class="text-normal">Bjarne Flur Kvistad</span>
-                                            <span class="time">2 days ago</span>
-                                            <p class="font-11 no-m-b text-overflow">Start following you</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <li><a href="#" class="text-center">See all</a></li>
-                        </ul>
-                    </li>
-
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
@@ -216,12 +104,6 @@
                 @else
                 <!-- -->
 
-                    <li class="main-search hidden-xs">
-                        <div class="input-wrap">
-                            <input class="form-control" type="text" placeholder="Search Here...">
-                            <a href="page-search.html"><i class="sli-magnifier"></i></a>
-                        </div>
-                    </li>
 
                     <li class="user-profile dropdown">
                         <a href="" class="clearfix dropdown-toggle" data-toggle="dropdown">
@@ -252,9 +134,11 @@
             <div class="sidenav-inner">
 
                 <ul class="side-nav magic-nav">
-
-                    <li class="side-nav-header">Navigation</li>
-
+                @if (Auth::user()->role=='admin')
+                    <li class="side-nav-header" style="margin-top: 20px;">Admin</li>
+                    @else
+                    <li class="side-nav-header" style="margin-top: 20px;">Employer</li>
+                    @endif
                     <li>
                         <a href="{{ url('/') }}"><i class="sli-dashboard"></i> <span class="nav-text">tableau de bord</span></a>
                     </li>

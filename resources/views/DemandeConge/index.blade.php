@@ -37,7 +37,9 @@
                                     @if (Auth::user()->role == 'admin')
                                         <th></th>
                                         <th></th>
+                                        <th></th>
                                     @else
+                                        <th></th>
                                         <th></th>
                                         <th></th>
                                         <th></th>
@@ -63,12 +65,16 @@
                                                 <td style="color: red ;  ">{{ $Demande->statu }}</td>
                                             @endif
 
-                                            <td><a class="btn btn-sm btn-primary "
-                                                    href="{{ route('Demandeconges.show', $Demande->id) }}"><i
-                                                        class="fa fa-fw fa-eye"></i> Afficher</a>
-                                            </td>
+                                            <td><a class="btn btn-sm btn-primary"
+                                                href="{{  asset("storage/demandes/".$Demande->file)  }}" target="_blank"><i
+                                                    class="fa fa-fw fa-eye" ></i> Ouvrir PDF</a>
+                                        </td>
                                             <td><a class="btn btn-sm btn-danger " href="{!! route('annulerDemande', ['annule' => $Demande->id]) !!}"><i
                                                         class="fa fa-fw fa-eye"></i> Annuler</a>
+                                            </td>
+
+                                            <td><a class="btn btn-sm btn-info " href="{!! route('ajouterSignataire', ['id' => $Demande->id]) !!}"><i
+                                                class="fa fa-fw fa-eye"></i> Ajouter signataires</a>
                                             </td>
 
                                         </tr>
@@ -89,6 +95,10 @@
                                             @else
                                                 <td style="color: red ;  ">{{ $Demande->statu }}</td>
                                             @endif
+                                            <td><a class="btn btn-sm btn-info"
+                                                href="{{  asset("storage/demandes/".$Demande->file)  }}" target="_blank"><i
+                                                    class="fa fa-fw fa-eye" ></i> Ouvrir PDF</a>
+                                        </td>
                                             <td><a class="btn btn-sm btn-primary "
                                                     href="{{ route('Demandeconges.show', $Demande->id) }}"><i
                                                         class="fa fa-fw fa-eye"></i> Afficher</a>
@@ -101,12 +111,12 @@
                                                             class="fa fa-fw fa-edit"></i> Editer</a>
                                             </td>
                                             <td>
-                                                <form id="{{ $Demande->id }}"
+                                                <form
                                                     action="{{ route('Demandeconges.destroy', $Demande->id) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" onclick="deleteDem({{ $Demande->id }})"
+                                                    <button type="submit"
                                                         class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i>
                                                         supprimer</button>
                                                 </form>
@@ -138,26 +148,6 @@
             DataTableBasic.init();
         });
 
-        function deleteDem(id) {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById(id).submit();
-                    Swal.fire(
-                        'Supprimé!',
-                        'personnel supprimer avec success',
-                        'success'
-                    )
-                }
-            })
-        }
     </script>
 
     @if ($message = Session::get('success'))
