@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Personnel;
+use App\Models\User;
 
 class DemandeConge extends Model
 {
@@ -18,4 +19,8 @@ class DemandeConge extends Model
     {
         return $this->belongsTo(Personnel::class, 'personnel_id','PERS_MAT_95');
     }
+    public function users(){
+        return $this->belongsTo(User::class,'personnel_id','personnel_id');
+    }
+
 }

@@ -11,6 +11,13 @@
                 <div class="panel-heading">
                     <h3 class="panel-title" >créer une demande de conge</h3>
                 </div>
+                @if (Auth::user()->solde>=10)
+                <h5 style="color:rgb(16, 134, 51); text-align:center;">
+                @else
+                <h5 style="color:red; text-align:center;">
+                @endif
+                   <strong> Il vous reste {{ Auth::user()->solde }} jours de congé avant les fins de l'année </strong>
+                </h5>
                 <div class="panel-body ">
 
                     <form action="{{ route('Demandeconges.store') }}" role="form"  method="post">

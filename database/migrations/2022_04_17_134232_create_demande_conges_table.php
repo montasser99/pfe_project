@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('fonction')->nullable();
             $table->string('direction')->nullable();
             $table->BigInteger('personnel_id')->unsigned()->nullable();
+            $table->string('file')->nullable();
 
             /** Pour ajouter clé etrangere avec table personels **/
             $table->index('personnel_id');

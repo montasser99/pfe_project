@@ -26,7 +26,7 @@ return new class extends Migration
             $table->index('signataire_id');
             $table->foreign('signataire_id')->references('PERS_MAT_95')->on('personnels')->onUpdate('cascade')->onDelete('cascade');
 
-            $table->integer('order')->nullable();
+            $table->integer('orderr')->nullable();
             $table->timestamps();
         });
     }

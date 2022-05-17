@@ -17,8 +17,8 @@
                     @if (Auth::user()->role == 'user')
                         <div class="float-center" style="margin-top: 16px;">
                             <a href="{{ route('Demandeconges.create') }}" class="btn btn-primary btn-sm" style="    border-radius: 15px;
-                                    margin-top: -25px;
-                                    margin-left: 13px;  " data-placement="right">
+                                        margin-top: -25px;
+                                        margin-left: 13px;  " data-placement="right">
                                 <i class=" fs-plus-circle"> </i> ajouter une demande
                             </a>
                         </div>
@@ -32,6 +32,7 @@
                                     <th> Date fin </th>
                                     <th> Nature De Conge</th>
                                     <th> Adresse </th>
+                                    <th> solde </th>
                                     <th> statu </th>
 
                                     @if (Auth::user()->role == 'admin')
@@ -58,6 +59,7 @@
                                             <td>{{ $Demande->date_fin }}</td>
                                             <td>{{ $Demande->NatureDeConge }}</td>
                                             <td>{{ $Demande->adresse_conge }}</td>
+                                            <td>{{$Demande->users->solde}}</td>
 
                                             @if ($Demande->statu == 'en cours..')
                                                 <td style="color: blue ;  ">{{ $Demande->statu }}</td>
@@ -66,15 +68,15 @@
                                             @endif
 
                                             <td><a class="btn btn-sm btn-primary"
-                                                href="{{  asset("storage/demandes/".$Demande->file)  }}" target="_blank"><i
-                                                    class="fa fa-fw fa-eye" ></i> Ouvrir PDF</a>
-                                        </td>
+                                                    href="{{ asset('storage/demandes/' . $Demande->file) }}"
+                                                    target="_blank"><i class="fa fa-fw fa-eye"></i> Ouvrir PDF</a>
+                                            </td>
                                             <td><a class="btn btn-sm btn-danger " href="{!! route('annulerDemande', ['annule' => $Demande->id]) !!}"><i
                                                         class="fa fa-fw fa-eye"></i> Annuler</a>
                                             </td>
 
-                                            <td><a class="btn btn-sm btn-info " href="{!! route('ajouterSignataire', ['id' => $Demande->id]) !!}"><i
-                                                class="fa fa-fw fa-eye"></i> Ajouter signataires</a>
+                                            <td><a class="btn btn-sm btn-info " href="{{  route('ajouterSignataire', ['id' => $Demande->id])  }}"><i
+                                                        class="fa fa-fw fa-eye"></i> Ajouter signataires</a>
                                             </td>
 
                                         </tr>
@@ -89,16 +91,16 @@
                                             <td>{{ $Demande->date_fin }}</td>
                                             <td>{{ $Demande->NatureDeConge }}</td>
                                             <td>{{ $Demande->adresse_conge }}</td>
-
+                                            <td>{{ Auth::user()->solde }}</td>
                                             @if ($Demande->statu == 'en cours..')
                                                 <td style="color: blue ;  ">{{ $Demande->statu }}</td>
                                             @else
                                                 <td style="color: red ;  ">{{ $Demande->statu }}</td>
                                             @endif
                                             <td><a class="btn btn-sm btn-info"
-                                                href="{{  asset("storage/demandes/".$Demande->file)  }}" target="_blank"><i
-                                                    class="fa fa-fw fa-eye" ></i> Ouvrir PDF</a>
-                                        </td>
+                                                    href="{{ asset('storage/demandes/' . $Demande->file) }}"
+                                                    target="_blank"><i class="fa fa-fw fa-eye"></i> Ouvrir PDF</a>
+                                            </td>
                                             <td><a class="btn btn-sm btn-primary "
                                                     href="{{ route('Demandeconges.show', $Demande->id) }}"><i
                                                         class="fa fa-fw fa-eye"></i> Afficher</a>
@@ -111,13 +113,12 @@
                                                             class="fa fa-fw fa-edit"></i> Editer</a>
                                             </td>
                                             <td>
-                                                <form
-                                                    action="{{ route('Demandeconges.destroy', $Demande->id) }}"
+                                                <form action="{{ route('Demandeconges.destroy', $Demande->id) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit"
-                                                        class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i
+                                                            class="fa fa-fw fa-trash"></i>
                                                         supprimer</button>
                                                 </form>
                                             </td>
@@ -147,7 +148,6 @@
         jQuery(document).ready(function() {
             DataTableBasic.init();
         });
-
     </script>
 
     @if ($message = Session::get('success'))

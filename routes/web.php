@@ -32,13 +32,17 @@ Route::resource('/Demandeconges',DemandeCongeController::class);
 
 Route::resource('/conges',CongeController::class);
 
+/**signataire work **/
 Route::get('/statu/{annule}',['as'=>'annulerDemande','uses'=>'App\Http\Controllers\DemandeCongeController@annulerDemande'])->middleware('auth');
-
 Route::get('/ajouterSigs/{id}',['as'=>'ajouterSignataire','uses'=>'App\Http\Controllers\DemandeCongeController@ajouterSignataire'])->middleware('auth');
-
 Route::post('/ajouterSignataire/{id}', 'App\Http\Controllers\DemandeCongeController@storeSignataire')->name('storeSig')->middleware('auth');
+Route::get('/editsignataire/{id}/{idIndex}','App\Http\Controllers\DemandeCongeController@editSignataire')->name('editSign');
+Route::delete('/deleteSignataire/{id}','App\Http\Controllers\DemandeCongeController@destroySignataire')->name('destroySign');
+Route::put('/updateSignataire/{id}','App\Http\Controllers\DemandeCongeController@updateSignataire')->name('updateSig');
+
 
 Route::post('personnelimage/{id}', [PersonnelController::class,'Update_Image'])->name('imageModifier')->middleware('auth');
+
 
 /** page de profil **/
 Route::get('/profil', function (){

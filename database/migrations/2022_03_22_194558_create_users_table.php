@@ -29,8 +29,9 @@ return new class extends Migration
             /** Pour ajouter clé etrangere avec table personnels **/
             $table->BigInteger('personnel_id')->unsigned()->unique()->nullable();
             $table->index('personnel_id');
-            $table->foreign('personnel_id')->references('PERS_MAT_95')->on('personnels')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('personnel_id')-> references('PERS_MAT_95')->on('personnels')->onUpdate('cascade')->onDelete('cascade');
             $table->string('image')->default('user-default.png');
+            $table->integer('solde')->nullable();
             $table->timestamps();
         });
     }

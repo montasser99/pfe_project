@@ -8,12 +8,15 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\DemandeConge;
 use App\Models\NatureConge;
 use App\Models\Personnel;
+use App\Models\Signataire;
+
+use Illuminate\Support\Facades\Route;
 
 
 
 use Barryvdh\DomPDF\Facade\PDF as PDF;
 use DateTime;
-use Illuminate\Support\Facades\Storage ;
+use Illuminate\Support\Facades\Storage;
 
 class DemandeCongeController extends Controller
 {
@@ -121,24 +124,24 @@ class DemandeCongeController extends Controller
 
                 $result = $start_time->diffInDays($finish_time, false);
             }
-            $i=0;
+            $i = 0;
             $pdf = PDF::loadView('demandecongepdf', [
                 'Nature_conge' => $request->NatureDeConge,
                 'Matricule' => $idUser,
-                'Nom_prenom'=>$name,
+                'Nom_prenom' => $name,
                 'Qualification' => $i++,
-                'Fonction' => $request->fonction ,
-                'Direction'=>$request->direction,
-                'date_debut'=>$request->date_deb,
-                'date_fin'=>$request->date_fin,
-                'adresse_conge'=>$request->adresse_conge,
-                'phone'=> $phone,
-                'interim'=>$request->interim,
-                'nombre_jour'=>$result,
+                'Fonction' => $request->fonction,
+                'Direction' => $request->direction,
+                'date_debut' => $request->date_deb,
+                'date_fin' => $request->date_fin,
+                'adresse_conge' => $request->adresse_conge,
+                'phone' => $phone,
+                'interim' => $request->interim,
+                'nombre_jour' => $result,
             ]);
-            $fileName =auth()->id() . '_' . time().'.'.'pdf';
-            Storage::put('public/demandes/'.$fileName,$pdf->output());
-            $DemandeConge->file=$fileName;
+            $fileName = auth()->id() . '_' . time() . '.' . 'pdf';
+            Storage::put('public/demandes/' . $fileName, $pdf->output());
+            $DemandeConge->file = $fileName;
             $DemandeConge->save();
             /** pour afficher les nombres des jours (date fin - date debut) la difference **/
 
@@ -320,59 +323,114 @@ class DemandeCongeController extends Controller
     }
     public function ajouterSignataire($id)
     {
-        if ( Auth::user()->role=='admin'){
-            $demandeur = DemandeConge::where('id',$id)->first();
+            if (Auth::user()->role == 'admin') {
+            $demandeur = DemandeConge::where('id', $id)->first();
+            //dd($demandeur->id);
+            $EMAIL_DEMANDEUR = Personnel::select('email')->where('PERS_MAT_95', $demandeur->personnel_id)->get();
+            //dd($EMAIL_DEMANDEUR[0]->email);
             //dd($demandeur);
-            $Emails=Personnel::select('email')->get();
+            $Emails = Personnel::select('email')->whereNotNull('PERS_CODFONC_92')->get();
+            //dd($Emails);
             //dd($Emails[2]->email);
-
-            return view('DemandeConge.Ajoutersignataire', compact('demandeur','Emails'));
-
+            $ListeSignataire = Signataire::where('personnel_id', $demandeur->personnel_id)->get();
+            //dd($ListeSignataire);
+            //dd($ListeSignataire[6]->id);
+            //$ListeTypefonction=
+            return view('DemandeConge.Ajoutersignataire', compact('demandeur', 'Emails', 'ListeSignataire'));
         }
+        abort(404);
     }
 
-        public function storeSignataire(Request $request , $id){
+    public function storeSignataire(Request $request, $id)
+    {
+
+        if (Auth::user()->role == "admin") {
+
+
+            $request->validate(
+                [
+                    'emails' => 'required|array|min:1|exists:personnels,EMAIL',
+                ],
+                [
+                    //'date_deb.required' => 'Le champ date debut est obligatoire.',
+                ]
+            );
+            //dd($request->emails);
+            $tab = $request->emails;
+            //dd($tab);
+
+            //dd($id_personnel);
+
+
+            for ($i = 1; $i <= count($tab); $i++) {
+                //echo(gettype($id_personnel));
+
+
+                $x = $tab[$i - 1];
+                //echo($x);
+                // echo("<br>");
+                $signataire = FacadesDB::select("select personnels.PERS_MAT_95 from personnels where personnels.EMAIL='$x' ");
+                //dd($signataire[]->PERS_MAT_95 ?? null);
+                $signataire_id = $signataire[0]->PERS_MAT_95;
+                //dd($tab);
+                // echo($signataire[0]->PERS_MAT_95);
+                //var_dump($signataire[$var]->PERS_MAT_95);
+                //$signataire_id=$signataire[$var]->PERS_MAT_95
+                FacadesDB::insert("insert into signataires ( personnel_id , signataire_id , orderr ) values ( '$id','$signataire_id','$i')");
+            }
+
+            //dd(((int)($request->Id_personnel)));
+
+            return redirect()->back()
+                ->with('success', 'vous avez effectué une liste de signataires avec succès.');
+        }
+        abort(404);
+    }
+
+    public function editSignataire($id , $index)
+    {
 
         if(Auth::user()->role=="admin"){
+        $Signataire = Signataire::where('id', $id)->first();
 
+        $Emails = Personnel::select('email')->whereNotNull('PERS_CODFONC_92')->get();
+        $indexPage=$index;
+        //dd($Signataire);
 
-    $request->validate(
-        [
-            'emails' => 'required|array|min:1|exists:personnels,EMAIL',
-        ],
-        [
-            //'date_deb.required' => 'Le champ date debut est obligatoire.',
-        ]
-    );
-        //dd($request->emails);
-        $tab=$request->emails;
-        //dd($tab);
-
-        //dd($id_personnel);
-
-
-        for($i=1 ; $i <= count($tab) ; $i++){
-            //echo(gettype($id_personnel));
-
-
-            $x=$tab[$i-1];
-            //echo($x);
-            // echo("<br>");
-            $signataire=FacadesDB::select("select personnels.PERS_MAT_95 from personnels where personnels.EMAIL='$x' " );
-            //dd($signataire[]->PERS_MAT_95 ?? null);
-            $signataire_id=$signataire[0]->PERS_MAT_95;
-            //dd($tab);
-            // echo($signataire[0]->PERS_MAT_95);
-            //var_dump($signataire[$var]->PERS_MAT_95);
-            //$signataire_id=$signataire[$var]->PERS_MAT_95
-            FacadesDB::insert("insert into signataires ( personnel_id , signataire_id , orderr ) values ( '$id','$signataire_id','$i')");
-
+        return view('DemandeConge.editSign', compact('Signataire','Emails','indexPage'));
         }
-
-        //dd(((int)($request->Id_personnel)));
-
-        return redirect()->back()
-        ->with('success', 'vous avez effectué une liste de signataires avec succès.');
+        abort(404);
     }
+
+    public function updateSignataire(Request $request, $id)
+    {
+        if(Auth::user()->role=="admin"){
+    $idEmail= $request->email;
+    //dd($idEmail);
+    $idSignataire=FacadesDB::select("SELECT PERS_MAT_95 FROM personnels WHERE  EMAIL= '$idEmail'");
+    //dd($idSignataire[0]->PERS_MAT_95);
+    $signataire=Signataire::where('id',$id)->first();
+    //dd($signataire);
+    $signataire->signataire_id = $idSignataire[0]->PERS_MAT_95 ;
+    $signataire->update();
+    $ID=$request->Index;
+
+    return redirect()->route("ajouterSignataire",[$ID])
+    ->with("success", "vous avez modifier l'email avec succès.");
+        }
+        abort(404);
+    }
+
+    public function destroySignataire($id)
+    {
+        if (Auth::user()->role == 'admin')
+        {
+
+            $Signataire = Signataire::where('id', $id)->delete();
+
+            return redirect()->back()
+            ->with('success', 'signataire a été supprimer avec succès.');
+        }
+        abort(404);
     }
 }

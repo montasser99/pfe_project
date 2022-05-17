@@ -14,6 +14,31 @@
                         </div>
                     </div>
 
+                        @if(Auth::user()->role=="user")
+                        <table  border="1px solid;">
+                            <tr>
+                        </td>
+                    <button class="button" style="position: absolute;
+                    right: 340px;
+                    top: 30px;  border: none;  background-color: #7a2048; box-shadow: 5px 2px 20px black;  color: white;">Annuel <br>
+                    20 jours</button>
+                    </td>
+                    <td>
+                    <button class="button" style="position: absolute;
+                    right:415px;
+                    top: 30px;  border: none; box-shadow: 5px 2px 20px black; background-color: #408ec6;color: white; ">Exceptionnel<br>
+                    10 jours</button>
+                    </td>
+                    <td>
+                    <button class="button" style="position: absolute;
+                      right: 520px;
+                      top: 30px;   border: none; box-shadow: 5px 2px 20px black; background-color: #1e2761;color: white;">Recupiration <br>
+                      0 jours</button>
+                    </td>
+                    </tr>
+
+                    </table>
+                    @endif
 
 
                     @if(Auth::user()->role=='admin')
@@ -21,7 +46,7 @@
 
                     <div class="float-center">
                         <a href="{{ route('conges.create') }}" class="btn btn-primary btn-sm" data-placement="right" style="
-                      
+
                         margin-top: 5px;
                         margin-left: 13px;">
                             <i class=" fs-plus-circle"> </i> créer un nouveau congé
