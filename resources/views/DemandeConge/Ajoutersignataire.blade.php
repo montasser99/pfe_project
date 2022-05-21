@@ -34,7 +34,7 @@
                             @method('POST')
                             <div class="form-body">
 
-                                <div class="form-group col-">
+                                <div class="form-group ">
                                     <select class="select2-multiple  form-control" name="emails[]" multiple="multiple"
                                         id="select2Multiple">
 
@@ -51,11 +51,22 @@
                                     </span>
                                 </div>
 
+                                @if ($message = Session::get('failedSignataire'))
+                                <span style="color: red">
+                                    {{ session()->get('failedSignataire') }}
+                                </span>
+                                @endif
 
-                                <div class="text-center" style="margin-top: 10px;">
+                                <div class="text-center" style="margin-top: 0px;">
                                     <button type="submit" class="btn btn-success"
-                                        style="background-color: #092154; border-color: #000000; margin-right: 6px">Ajouter</button>
+                                        style="background-color: #092154; border-color: #000000; margin-right: 6px;margin-right: -100px;">Ajouter</button>
                                 </div>
+                                <a class="btn btn-sm btn-danger" style="            margin-top: -54px;
+                                margin-left: 250px;
+                                padding: 5px 18px;
+                                font-size: 14px;"
+                                 href="{{ route('Demandeconges.index') }}">Retour</a>
+
                         </form>
                     </div>
                 </div>
@@ -107,6 +118,7 @@
                                         method="POST">
                                         @csrf
                                         @method('DELETE')
+                                        <input type="hidden" name="Index" value="{{ $ListeSignataire->personnel_id }}">
                                         <button type="submit" class="btn btn-danger btn-sm"><i
                                                 class="fa fa-fw fa-trash"></i>
                                             supprimer</button>
@@ -121,6 +133,7 @@
 
         </div>  <!-- FIN ROW TABLE -->
         @endif
+
 
 
     </div>
@@ -140,7 +153,7 @@
             // Select2 Multiple
             $('.select2-multiple').select2({
                 tags: true,
-                placeholder: "Select a state",
+                placeholder: "Sélectionnez Email list.",
                 allowClear: false,
             });
             $("select").on("select2:select", function(evt) {

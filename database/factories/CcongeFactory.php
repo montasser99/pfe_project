@@ -16,7 +16,7 @@ class CcongeFactory extends Factory
      */
     public function definition()
     {
-        return [
+       /* return [
 
             'CCONG_NAT_9' => $this->faker->numberBetween(1,10),
             'CCONG_CET_9' => $this->faker->numberBetween($min = 10, $max =5000) ,
@@ -28,5 +28,6 @@ class CcongeFactory extends Factory
             'UPDATE_USER' => $this->faker->userName,
 
         ];
+        */
     }
 }

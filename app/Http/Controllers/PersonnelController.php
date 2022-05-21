@@ -10,6 +10,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Console\DbCommand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB as FacadesDB;
 
@@ -28,7 +29,6 @@ class PersonnelController extends Controller
     public function index()
     {
         if (Auth::user()->role == 'admin') {
-
             //$personnels = Personnel::get();
             $personnels = FacadesDB::table('personnels')
                 ->join('users', 'personnels.PERS_MAT_95', '=', 'users.personnel_id')

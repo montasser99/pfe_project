@@ -16,9 +16,10 @@
                     </div>
                     @if (Auth::user()->role == 'user')
                         <div class="float-center" style="margin-top: 16px;">
-                            <a href="{{ route('Demandeconges.create') }}" class="btn btn-primary btn-sm" style="    border-radius: 15px;
-                                        margin-top: -25px;
-                                        margin-left: 13px;  " data-placement="right">
+                            <a href="{{ route('Demandeconges.create')}}" class="btn btn-primary btn-sm" style="        border-radius: -9px;
+                            margin-top: -41px;
+                            margin-left: 13px;
+                          " data-placement="right">
                                 <i class=" fs-plus-circle"> </i> ajouter une demande
                             </a>
                         </div>
@@ -123,7 +124,6 @@
                                                 </form>
                                             </td>
                                     @endif
-
                                     </tr>
                                 @endforeach
                                 @endif

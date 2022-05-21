@@ -19,9 +19,9 @@ class DatabaseSeeder extends Seeder
         \App\Models\Personnel::factory(10)->create();
 
         \App\Models\User::factory(10)->create();
-        \App\Models\NatureConge::factory(10)->create();
+        //\App\Models\NatureConge::factory(10)->create();
         \App\Models\Conge::factory(10)->create();
-        \App\Models\Cconge::factory(10)->create();
+        //\App\Models\Cconge::factory(10)->create();
         \App\Models\NatAbs::factory(10)->create();
         \App\Models\Absence::factory(10)->create();
         \App\Models\H52MvtPointageBrut::factory(10)->create();

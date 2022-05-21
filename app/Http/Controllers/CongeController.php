@@ -10,6 +10,8 @@ use App\Models\Personnel;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Cconge;
+
 
 class CongeController extends Controller
 {
@@ -41,10 +43,18 @@ class CongeController extends Controller
             $idUser = Auth::user()->personnel_id;
             $userConge = Conge::where('CONG_NUMORD_93', $idUser)->get();
             //dd($userConge);
-
-
-
-            return view('conge.index', compact('userConge', 'date'));
+            $Exceptionnel=Cconge::select('CCONG_SOLDE_9')->where('CCONG_MAT_95',$idUser)->where('CCONG_NAT_9',1)->get();
+            //dd($Exceptionnel[0]->CCONG_SOLDE_9);
+            $Recuperation=Cconge::select('CCONG_SOLDE_9')->where('CCONG_MAT_95',$idUser)->where('CCONG_NAT_9',2)->get();
+            //dd($Recuperation[0]->CCONG_SOLDE_9);
+            $Annuel=Cconge::select('CCONG_SOLDE_9')->where('CCONG_MAT_95',$idUser)->where('CCONG_NAT_9',3)->get();
+            //$jj = round($Annuel[0]->CCONG_SOLDE_9, 0);
+            //dd(number_format($Annuel[0]->CCONG_SOLDE_9));
+            //dd(( $Annuel[0]->CCONG_SOLDE_9 ) && floor( $Annuel[0]->CCONG_SOLDE_9 ) != $Annuel[0]->CCONG_SOLDE_9);
+            //$test=new Cconge();
+            //$aa=25.50;
+            //dd($test->is_decimal(($aa)));
+            return view('conge.index', compact('userConge', 'date', 'Exceptionnel', 'Recuperation', 'Annuel'));
         }
     }
 

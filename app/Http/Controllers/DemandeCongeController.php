@@ -9,6 +9,7 @@ use App\Models\DemandeConge;
 use App\Models\NatureConge;
 use App\Models\Personnel;
 use App\Models\Signataire;
+use App\Models\Cconge;
 
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 use Barryvdh\DomPDF\Facade\PDF as PDF;
 use DateTime;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use SebastianBergmann\Environment\Console;
 
 class DemandeCongeController extends Controller
 {
@@ -57,8 +60,14 @@ class DemandeCongeController extends Controller
         if (Auth::user()->role == 'user') {
             $DemandeConge = new DemandeConge();
             $natureCongee = FacadesDB::select("SELECT DISTINCT(NOM) FROM `nature_conges`");
+            $idUser = Auth::user()->personnel_id;
+            $Exceptionnel=Cconge::select('CCONG_SOLDE_9')->where('CCONG_MAT_95',$idUser)->where('CCONG_NAT_9',1)->get();
+            $Recuperation=Cconge::select('CCONG_SOLDE_9')->where('CCONG_MAT_95',$idUser)->where('CCONG_NAT_9',2)->get();
+            $Annuel=Cconge::select('CCONG_SOLDE_9')->where('CCONG_MAT_95',$idUser)->where('CCONG_NAT_9',3)->get();
 
-            return view('DemandeConge.create', compact('DemandeConge', 'natureCongee'));
+
+
+            return view('DemandeConge.create', compact('DemandeConge', 'natureCongee','Exceptionnel','Recuperation','Annuel'));
         } else {
             abort(404);
         }
@@ -323,7 +332,7 @@ class DemandeCongeController extends Controller
     }
     public function ajouterSignataire($id)
     {
-            if (Auth::user()->role == 'admin') {
+        if (Auth::user()->role == 'admin') {
             $demandeur = DemandeConge::where('id', $id)->first();
             //dd($demandeur->id);
             $EMAIL_DEMANDEUR = Personnel::select('email')->where('PERS_MAT_95', $demandeur->personnel_id)->get();
@@ -343,93 +352,119 @@ class DemandeCongeController extends Controller
 
     public function storeSignataire(Request $request, $id)
     {
-
         if (Auth::user()->role == "admin") {
+            $TestSignataire = Signataire::where('personnel_id', $id)->get();
+
+            // dd($TestSignataire);
+            if ($TestSignataire->isEmpty()) {
 
 
-            $request->validate(
-                [
-                    'emails' => 'required|array|min:1|exists:personnels,EMAIL',
-                ],
-                [
-                    //'date_deb.required' => 'Le champ date debut est obligatoire.',
-                ]
-            );
-            //dd($request->emails);
-            $tab = $request->emails;
-            //dd($tab);
 
-            //dd($id_personnel);
-
-
-            for ($i = 1; $i <= count($tab); $i++) {
-                //echo(gettype($id_personnel));
-
-
-                $x = $tab[$i - 1];
-                //echo($x);
-                // echo("<br>");
-                $signataire = FacadesDB::select("select personnels.PERS_MAT_95 from personnels where personnels.EMAIL='$x' ");
-                //dd($signataire[]->PERS_MAT_95 ?? null);
-                $signataire_id = $signataire[0]->PERS_MAT_95;
+                $request->validate(
+                    [
+                        'emails' => 'required|array|min:1|exists:personnels,EMAIL',
+                    ],
+                    [
+                        //'date_deb.required' => 'Le champ date debut est obligatoire.',
+                    ]
+                );
+                //dd($request->emails);
+                $tab = $request->emails;
                 //dd($tab);
-                // echo($signataire[0]->PERS_MAT_95);
-                //var_dump($signataire[$var]->PERS_MAT_95);
-                //$signataire_id=$signataire[$var]->PERS_MAT_95
-                FacadesDB::insert("insert into signataires ( personnel_id , signataire_id , orderr ) values ( '$id','$signataire_id','$i')");
+
+                //dd($id_personnel);
+
+
+                for ($i = 1; $i <= count($tab); $i++) {
+                    //echo(gettype($id_personnel));
+
+
+                    $x = $tab[$i - 1];
+                    //echo($x);
+                    // echo("<br>");
+                    $signataire = FacadesDB::select("select personnels.PERS_MAT_95 from personnels where personnels.EMAIL='$x' ");
+                    //dd($signataire[]->PERS_MAT_95 ?? null);
+                    $signataire_id = $signataire[0]->PERS_MAT_95;
+                    //dd($tab);
+                    // echo($signataire[0]->PERS_MAT_95);
+                    //var_dump($signataire[$var]->PERS_MAT_95);
+                    //$signataire_id=$signataire[$var]->PERS_MAT_95
+                    FacadesDB::insert("insert into signataires ( personnel_id , signataire_id , orderr ) values ( '$id','$signataire_id','$i')");
+                }
+
+                //dd(((int)($request->Id_personnel)));
+
+                return redirect()->back()
+                    ->with('success', 'vous avez effectué une liste de signataires avec succès.');
+            } else {
+                return redirect()->back()->with('failedSignataire', 'liste de signataire est existe déja');
             }
-
-            //dd(((int)($request->Id_personnel)));
-
-            return redirect()->back()
-                ->with('success', 'vous avez effectué une liste de signataires avec succès.');
         }
         abort(404);
     }
 
-    public function editSignataire($id , $index)
+    public function editSignataire($id, $index)
     {
 
-        if(Auth::user()->role=="admin"){
-        $Signataire = Signataire::where('id', $id)->first();
+        if (Auth::user()->role == "admin") {
+            $Signataire = Signataire::where('id', $id)->first();
+            $email_personnel = $Signataire->personnel_id;
 
-        $Emails = Personnel::select('email')->whereNotNull('PERS_CODFONC_92')->get();
-        $indexPage=$index;
-        //dd($Signataire);
+            $Emails = FacadesDB::select("SELECT EMAIL from personnels where personnels.EMAIL NOT IN(SELECT EMAIL from personnels p , signataires S where P.PERS_MAT_95=S.signataire_id and personnel_id = '$email_personnel')");
+            //dd($Emails);
+            $indexPage = $index;
+            //dd($Signataire);
 
-        return view('DemandeConge.editSign', compact('Signataire','Emails','indexPage'));
+            return view('DemandeConge.editSign', compact('Signataire', 'Emails', 'indexPage'));
         }
         abort(404);
     }
 
     public function updateSignataire(Request $request, $id)
     {
-        if(Auth::user()->role=="admin"){
-    $idEmail= $request->email;
-    //dd($idEmail);
-    $idSignataire=FacadesDB::select("SELECT PERS_MAT_95 FROM personnels WHERE  EMAIL= '$idEmail'");
-    //dd($idSignataire[0]->PERS_MAT_95);
-    $signataire=Signataire::where('id',$id)->first();
-    //dd($signataire);
-    $signataire->signataire_id = $idSignataire[0]->PERS_MAT_95 ;
-    $signataire->update();
-    $ID=$request->Index;
+        if (Auth::user()->role == "admin") {
+            $idEmail = $request->email;
+            //dd($idEmail);
+            $idSignataire = FacadesDB::select("SELECT PERS_MAT_95 FROM personnels WHERE  EMAIL= '$idEmail'");
+            //dd($idSignataire[0]->PERS_MAT_95);
+            $signataire = Signataire::where('id', $id)->first();
+            //dd($signataire);
+            $signataire->signataire_id = $idSignataire[0]->PERS_MAT_95;
+            $signataire->update();
+            $ID = $request->Index;
 
-    return redirect()->route("ajouterSignataire",[$ID])
-    ->with("success", "vous avez modifier l'email avec succès.");
+            return redirect()->route("ajouterSignataire", [$ID])
+                ->with("success", "vous avez modifier l'email avec succès.");
         }
         abort(404);
     }
 
-    public function destroySignataire($id)
+    public function destroySignataire(Request $request, $id)
     {
-        if (Auth::user()->role == 'admin')
-        {
+        if (Auth::user()->role == 'admin') {
+        //dd($request->Index);
+            /**pour trier l'ordre where supprimer ligne a partir de 1 **/
+            //$signataire=Signataire::select('personnel_id')->where('id',$id)->get();
+            //$personnel_id=$signataire[0]->personnel_id;
+            //dd($SignataireCount=count($signataireRow));
+            //$tab=[];
 
             $Signataire = Signataire::where('id', $id)->delete();
+           // dd($id);
+            $signataireRow=Signataire::where('personnel_id',$request->Index)->get();
+            //dd($signataireRow);
+            foreach($signataireRow as $key =>$sig){
+                $k=$key+1;
+                //array_push($tab,$k);
+                $sig->orderr=$k;
+                //Log::info($sig->orderr);
+                $sig->save();
+            }
+            //dd($tab);
+            //dd($SignataireCount);
 
             return redirect()->back()
-            ->with('success', 'signataire a été supprimer avec succès.');
+                ->with('success', 'signataire a été supprimer avec succès.');
         }
         abort(404);
     }

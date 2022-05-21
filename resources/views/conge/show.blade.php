@@ -11,7 +11,7 @@
                 margin-right: -15px;
                 margin-bottom: 30px;  ">
                     <div class="panel-heading" style="background-color: #363b5b; padding: 13px 310px; margin-bottom: 23px; ">
-                    Conge de {{ $conge->personnels->PERS_NOM . ' ' . $conge->personnels->PERS_PRENOM }}
+                    Conge de {{ $conge->personnels->PERS_NOM . ' ' . $conge->personnels->PERS_PRENOM  }}
                     </div>
                 <fieldset disabled style="padding: 3px;
                 margin: 10px;">
@@ -28,7 +28,7 @@
                     <div class="form-group">
                         <label for="disabledTextInput">Nature de conge</label>
                         <input type="text" id="disabledTextInput" class="form-control"
-                            placeholder="{{ $conge->nature_conges->NOM }}">
+                            placeholder="{{ $conge->nature_conges->NOM  ?? 'None'}}">
                     </div>
                     <div class="form-group">
                         <label for="disabledTextInput">date debut</label>

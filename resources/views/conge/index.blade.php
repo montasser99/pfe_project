@@ -12,33 +12,41 @@
                             <a class="btn-link collapses panel-collapse" href="javascript:;"></a>
                             <a class="btn-link reload" href="javascript:;"><i class="ti-reload"></i></a>
                         </div>
+                        @if (Auth::user()->role == 'user')
+                        <div class="float-center" style="margin-top: 16px;">
+                            <a href="{{ route('Demandeconges.create') }}" class="btn btn-primary btn-sm" style="       border-radius: 2px;
+                            margin-top: -6px;
+                            margin-left: 0px;
+                          " data-placement="right">
+                                <i class=" fs-plus-circle"> </i> ajouter une demande
+                            </a>
+                        </div>
+                    @endif
                     </div>
 
                         @if(Auth::user()->role=="user")
-                        <table  border="1px solid;">
-                            <tr>
-                        </td>
+
+            @if(isset($Annuel))
                     <button class="button" style="position: absolute;
                     right: 340px;
-                    top: 30px;  border: none;  background-color: #7a2048; box-shadow: 5px 2px 20px black;  color: white;">Annuel <br>
-                    20 jours</button>
-                    </td>
-                    <td>
+                    top: 17px;  border: none;  background-color: #7a2048; box-shadow: 5px 2px 20px black;  color: white;">Annuel <br>
+                    {{$Annuel[0]->CCONG_SOLDE_9}} jours</button>
+            @endif
+
+            @if(isset($Exceptionnel))
                     <button class="button" style="position: absolute;
                     right:415px;
-                    top: 30px;  border: none; box-shadow: 5px 2px 20px black; background-color: #408ec6;color: white; ">Exceptionnel<br>
+                    top: 17px;  border: none; box-shadow: 5px 2px 20px black; background-color: #408ec6;color: white; ">Exceptionnel<br>
                     10 jours</button>
-                    </td>
-                    <td>
+            @endif
+
+            @if(isset($Recuperation))
                     <button class="button" style="position: absolute;
                       right: 520px;
-                      top: 30px;   border: none; box-shadow: 5px 2px 20px black; background-color: #1e2761;color: white;">Recupiration <br>
-                      0 jours</button>
-                    </td>
-                    </tr>
-
-                    </table>
-                    @endif
+                      top: 17px;   border: none; box-shadow: 5px 2px 20px black; background-color: #1e2761;color: white;">Recupiration <br>
+                       {{$Recuperation[0]->CCONG_SOLDE_9}} jours</button>
+            @endif
+            @endif
 
 
                     @if(Auth::user()->role=='admin')

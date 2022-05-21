@@ -16,11 +16,11 @@ class NatureCongeFactory extends Factory
      */
     public function definition()
 
-    {   $x=$this->faker->randomElement($array = array ('Annuel','Exceptionnel','Recuperation')) ;
+    {   /*$x=$this->faker->randomElement($array = array ('Annuel','Exceptionnel','Recuperation')) ;
         return [
             'NOM' => $x,
             'DESCRIPTION' => 'Conge '.$x ,
         ];
-
+*/
     }
 }

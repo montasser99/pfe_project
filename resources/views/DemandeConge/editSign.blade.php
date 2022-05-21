@@ -29,7 +29,7 @@
                                     <select class=" form-control" name="email">
 
                                         @foreach ($Emails as $key => $email)
-                                            <option> {{ $email->email }}</option>
+                                            <option> {{ $email->EMAIL ?? null }}</option>
                                         @endforeach
 
                                     </select>

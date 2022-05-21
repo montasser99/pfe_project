@@ -120,7 +120,7 @@
                                 </div>
 
                                 <div class="form-group col-md-4">
-                                    <label>Nature de conge</label>
+                                    <label>Nature de d'agent</label>
                                     <select class="form-control" name="PERS_NATURAGENT_93" data-prompt-position="topLeft">
                                         <option disabled selected>Sélectionner la nature d'agent</option>
                                         @foreach ($NatureAgent as $nature)
