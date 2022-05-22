@@ -20,7 +20,7 @@
 
     <div class="login animated flipInY" id="logindiv">
         <div class="text-center logo">
-            <img src="assets/images/etap.png" alt="logo">
+            <img src="assets/images/etap.png" alt="etap">
         </div>
 
 
