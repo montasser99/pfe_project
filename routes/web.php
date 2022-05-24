@@ -9,6 +9,12 @@ use App\Http\Controllers\DemandeCongeController;
 use App\Http\Controllers\CongeController;
 use Illuminate\Support\Facades\Auth;
 
+/**Admin uses controllers**/
+use App\Http\Controllers\AdminControllers\AbsenceAdminController;
+use App\Http\Controllers\AdminControllers\PointageAdminController;
+use App\Http\Controllers\AdminControllers\CongeAdminController;
+use App\Http\Controllers\AdminControllers\DemandeCongeAdminController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,7 +27,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 
-/**Route de controller Absence**/
+
 Route::resource('/absences', AbsenceController::class);
 
 Route::resource('/personnels',PersonnelController::class);
@@ -40,16 +46,22 @@ Route::get('/editsignataire/{id}/{idIndex}','App\Http\Controllers\DemandeCongeCo
 Route::delete('/deleteSignataire/{id}','App\Http\Controllers\DemandeCongeController@destroySignataire')->name('destroySign');
 Route::put('/updateSignataire/{id}','App\Http\Controllers\DemandeCongeController@updateSignataire')->name('updateSig');
 
+/**Admin Routes **/
+Route::resource('/absenceAdmin', AbsenceAdminController::class);
+Route::resource('/pointageAdmin', PointageAdminController::class);
+Route::resource('/congeAdmin',CongeAdminController::class);
+Route::resource('/DemandeAdmin',DemandeCongeAdminController::class);
 
 Route::post('personnelimage/{id}', [PersonnelController::class,'Update_Image'])->name('imageModifier')->middleware('auth');
 
+//Route::resource('/pointages/admin',PointageController::class);
 
 /** page de profil **/
 Route::get('/profil', function (){
 return view ('profil-personnel');
 })->middleware('auth');
 
-/** page de profil **/
+/** page de PDFDemande **/
 Route::get('/demande', function (){
     return view ('demandecongepdf');
     })->middleware('auth');

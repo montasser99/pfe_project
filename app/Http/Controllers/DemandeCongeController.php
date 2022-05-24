@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use SebastianBergmann\Environment\Console;
 
+use function PHPUnit\Framework\isNull;
+
 class DemandeCongeController extends Controller
 {
     /**
@@ -37,8 +39,8 @@ class DemandeCongeController extends Controller
     public function index()
     {
         if (Auth::user()->role == 'admin') {
-
-            $DemandeConge = DemandeConge::get();
+            $idAdmin = Auth::user()->personnel_id;
+            $DemandeConge = DemandeConge::get()->whereNotIn('personnel_id', $idAdmin);
 
             return view('DemandeConge.index', compact('DemandeConge'));
         } else {
@@ -57,20 +59,21 @@ class DemandeCongeController extends Controller
      */
     public function create()
     {
-        if (Auth::user()->role == 'user') {
+       // if (Auth::user()->role == 'user') {
             $DemandeConge = new DemandeConge();
             $natureCongee = FacadesDB::select("SELECT DISTINCT(NOM) FROM `nature_conges`");
             $idUser = Auth::user()->personnel_id;
-            $Exceptionnel=Cconge::select('CCONG_SOLDE_9')->where('CCONG_MAT_95',$idUser)->where('CCONG_NAT_9',1)->get();
-            $Recuperation=Cconge::select('CCONG_SOLDE_9')->where('CCONG_MAT_95',$idUser)->where('CCONG_NAT_9',2)->get();
-            $Annuel=Cconge::select('CCONG_SOLDE_9')->where('CCONG_MAT_95',$idUser)->where('CCONG_NAT_9',3)->get();
+            $Exceptionnel = Cconge::select('CCONG_SOLDE_9')->where('CCONG_MAT_95', $idUser)->where('CCONG_NAT_9', 1)->get();
+            //dd((   $Exceptionnel->isEmpty() ));
+            $Recuperation = Cconge::select('CCONG_SOLDE_9')->where('CCONG_MAT_95', $idUser)->where('CCONG_NAT_9', 2)->get();
+            $Annuel = Cconge::select('CCONG_SOLDE_9')->where('CCONG_MAT_95', $idUser)->where('CCONG_NAT_9', 3)->get();
 
 
 
-            return view('DemandeConge.create', compact('DemandeConge', 'natureCongee','Exceptionnel','Recuperation','Annuel'));
-        } else {
-            abort(404);
-        }
+            return view('DemandeConge.create', compact('DemandeConge', 'natureCongee', 'Exceptionnel', 'Recuperation', 'Annuel'));
+        //} else {
+        //    abort(404);
+        //}
     }
 
     /**
@@ -106,7 +109,7 @@ class DemandeCongeController extends Controller
                 'adresse_conge.required' => 'Le champ adresse de conge est obligatoire.',
             ]
         );
-        if (Auth::user()->role == 'user') {
+       // if (Auth::user()->role == 'user') {
 
             $name = Auth::user()->name;
 
@@ -154,12 +157,17 @@ class DemandeCongeController extends Controller
             $DemandeConge->save();
             /** pour afficher les nombres des jours (date fin - date debut) la difference **/
 
-
+if(Auth::user()->role=='user'){
             return redirect()->route('Demandeconges.index')
                 ->with('success', 'Demande créée avec succès');
-        } else {
-            abort(404);
-        }
+}else
+{
+    return redirect()->route('DemandeAdmin.index')
+                ->with('success', 'Demande créée avec succès');
+}
+       // } else {
+       //     abort(404);
+       // }
     }
 
     /**
@@ -199,7 +207,7 @@ class DemandeCongeController extends Controller
      */
     public function edit($id)
     {
-        if (Auth::user()->role == 'user') {
+        //if (Auth::user()->role == 'user') {
 
             $DemandeConge = DemandeConge::where('id', $id)->first();
             if (isset($DemandeConge)) {
@@ -211,9 +219,9 @@ class DemandeCongeController extends Controller
                 abort(404);
             }
             abort(404);
-        } else {
-            abort(404);
-        }
+        //} else {
+          //  abort(404);
+        //}
     }
 
     /**
@@ -226,7 +234,7 @@ class DemandeCongeController extends Controller
     public function update(Request $request, $id)
     {
 
-        if (Auth::user()->role == 'user') {
+       // if (Auth::user()->role == 'user') {
 
             $request->validate(
                 [
@@ -289,9 +297,9 @@ class DemandeCongeController extends Controller
             $DemandeConge->update();
 
             return redirect()->back()->with('success', 'votre demande a été modifiée avec succès.');
-        } else {
-            abort(404);
-        }
+       // } else {
+         //   abort(404);
+       // }
     }
 
     /**
@@ -302,16 +310,22 @@ class DemandeCongeController extends Controller
      */
     public function destroy($id)
     {
-        if (Auth::user()->role == 'user') {
+       // if (Auth::user()->role == 'user') {
 
 
             $DemandeConge = DemandeConge::where('id', $id)->delete();
-
+            if(Auth::user()->role=="auser"){
             return redirect()->route('Demandeconges.index')
                 ->with('success', 'votre demande a été supprimer avec succès.');
-        } else {
-            abort(404);
-        }
+            }
+            else
+            {
+                return redirect()->route('DemandeAdmin.index')
+                ->with('success', 'votre demande a été supprimer avec succès.');
+            }
+     //   } else {
+        //    abort(404);
+        //}
     }
 
     public function annulerDemande($annule)
@@ -442,7 +456,7 @@ class DemandeCongeController extends Controller
     public function destroySignataire(Request $request, $id)
     {
         if (Auth::user()->role == 'admin') {
-        //dd($request->Index);
+            //dd($request->Index);
             /**pour trier l'ordre where supprimer ligne a partir de 1 **/
             //$signataire=Signataire::select('personnel_id')->where('id',$id)->get();
             //$personnel_id=$signataire[0]->personnel_id;
@@ -450,13 +464,13 @@ class DemandeCongeController extends Controller
             //$tab=[];
 
             $Signataire = Signataire::where('id', $id)->delete();
-           // dd($id);
-            $signataireRow=Signataire::where('personnel_id',$request->Index)->get();
+            // dd($id);
+            $signataireRow = Signataire::where('personnel_id', $request->Index)->get();
             //dd($signataireRow);
-            foreach($signataireRow as $key =>$sig){
-                $k=$key+1;
+            foreach ($signataireRow as $key => $sig) {
+                $k = $key + 1;
                 //array_push($tab,$k);
-                $sig->orderr=$k;
+                $sig->orderr = $k;
                 //Log::info($sig->orderr);
                 $sig->save();
             }

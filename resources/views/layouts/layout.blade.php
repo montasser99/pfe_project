@@ -115,11 +115,11 @@
                                         class="fa fa-angle-down"></small></div>
                             </a>
                             <ul class="dropdown-menu dropdown-animated pop-effect" role="menu">
-                                <li><a href="{{ url('/profil') }}"><i class="sli-user"></i> My Profile</a></li>
+                                <li><a href="{{ url('/profil') }}"><i class="sli-user"></i> mon profil</a></li>
 
                                 <li><a href="{{ route('logout') }}
                                 " onclick="event.preventDefault();
-                                 document.getElementById('sli-logout').submit();"><i class="sli-logout"></i> Logout</a>
+                                 document.getElementById('sli-logout').submit();"><i class="sli-logout"></i> déconnexion</a>
                                 </li>
 
                                 <form id="sli-logout" action="{{ route('logout') }}" method="POST"
@@ -142,7 +142,7 @@
 
                 <ul class="side-nav magic-nav">
                     @if (Auth::user()->role == 'admin')
-                        <li class="side-nav-header" style="margin-top: 20px;">Admin</li>
+                        <li class="side-nav-header" style="margin-top: 20px;">tous les utilisateurs</li>
                     @else
                         <li class="side-nav-header" style="margin-top: 20px;">Employer</li>
                     @endif
@@ -195,9 +195,38 @@
                         </a>
                     </li>
 
+                    @if (Auth::user()->role == 'admin')
+                    <li class="side-nav-header" style="margin-top: 0%;">administrateur</li>
 
+                    <li class="{{ Request::segment(1) === 'absenceAdmin' ? 'active' : null }}">
+                        <a href="{{ url('absenceAdmin') }}">
+                            <i class="fs-user-block"></i>
+                            <span class="nav-text">Mes absences</span>
+                        </a>
+                    </li>
 
+                    <li class="{{ Request::segment(1) === 'pointageAdmin' ? 'active' : null }}">
+                        <a href="{{ url('pointageAdmin') }}">
+                            <i class="fs-clock"></i>
+                            <span class="nav-text">Mes pointages</span>
+                        </a>
+                    </li>
 
+                    <li class="has-submenu">
+                        <a href="#submenuTwo" data-toggle="collapse" aria-expanded="false">
+                            <i class="fs-calendar"></i>
+                            <span class="nav-text">Conge admin</span>
+                        </a>
+                        <div class="sub-menu collapse secondary" id="submenuTwo">
+                            <ul>
+                                <li><a href="{{ url('/congeAdmin') }}"><i class="fs-list"></i> Liste de conges</a>
+                                </li>
+                                <li><a href="{{ url('/DemandeAdmin') }}"><i class="   fs-paperplane"></i> liste des  demandes</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    @endif
 
             </div><!-- END: sidebar-inner -->
 

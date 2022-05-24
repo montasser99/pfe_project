@@ -71,7 +71,10 @@
                 <a  class="btn btn-sm btn-danger" style="    margin-top: -2%;
                 margin-left: 663px;
                 padding: 5.6px 30px;
-                font-size: 14px; " href="{{ route('Demandeconges.index')}}">retour</a>
+                font-size: 14px; " @if(Auth::user()->role=="user") href="{{ route('Demandeconges.index')}}"  @else href="{{ route('DemandeAdmin.index')}}" @endif>
+
+
+               retour</a>
             </div>
         </div>
     </div>

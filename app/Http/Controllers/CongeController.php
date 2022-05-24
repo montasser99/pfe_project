@@ -32,7 +32,8 @@ class CongeController extends Controller
         $date = Carbon::now()->format('Y-m-d');
 
         if (Auth::user()->role == 'admin') {
-            $Conge = Conge::get();
+            $idAdmin = Auth::user()->personnel_id;
+            $Conge = Conge::get()->whereNotIn('CONG_NUMORD_93',$idAdmin);
 
             /*$NameConge = FacadesDB::select(" SELECT (personnels.PERS_NOM) FROM  personnels , conges
         where personnels.PERS_MAT_95 = conges.CONG_NUMORD_93
@@ -66,12 +67,13 @@ class CongeController extends Controller
     public function create()
     {
         if (Auth::user()->role == 'admin') {
+            $idAdmin = Auth::user()->personnel_id;
             $Conge = new Conge();
 
-            $NomPers = DB::select("select distinct personnels.PERS_NOM from personnels");
-            $PrenomPers = DB::select("select distinct personnels.PERS_PRENOM from personnels");
+            $NomPers = DB::select("select distinct personnels.PERS_NOM from personnels WHERE PERS_MAT_95 != '$idAdmin'");
+            $PrenomPers = DB::select("select distinct personnels.PERS_PRENOM from personnels WHERE PERS_MAT_95 != '$idAdmin'");
             $NatureConge = DB::select("SELECT DISTINCT NOM FROM `nature_conges`");
-            $Email = DB::select("SELECT personnels.EMAIL FROM `personnels` ");
+            $Email = DB::select("SELECT personnels.EMAIL FROM `personnels` WHERE PERS_MAT_95 != '$idAdmin'");
 
             return view('conge.create', compact('Conge', 'NomPers', 'PrenomPers', 'NatureConge', 'Email'));
         } else {

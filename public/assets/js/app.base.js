@@ -183,7 +183,6 @@ function handle_ActiveMenu(){
 }
 
 
-
 function handle_PanelTools(){
 
     $panel_collapse = $('.panel .tools>.panel-collapse');

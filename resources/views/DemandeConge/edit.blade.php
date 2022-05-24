@@ -102,16 +102,16 @@
 
                                 <div class="form-actions fluid" >
                                     <button type="submit" style="padding-top:-30px; margin-left: 540px; padding: 5.6px 20px"
-                                        class="btn btn-success">update </button>
+                                        class="btn btn-success">Modifier </button>
                                 </div>
                             </div>
                         </form>
 
-                        <a class="btn btn-sm btn-danger" style="           margin-top: -53px;
+                        <a class="btn btn-sm btn-danger" style=" margin-top: -53px;
                         margin-left: 440px;
                         padding: 5.6px 27px;
                         font-size: 14px;
-                    }" href="{{ route('Demandeconges.index') }}">Back</a>
+                    }" @if(Auth::user()->role=="user") href="{{ route('Demandeconges.index') }}" @else href="{{ route('DemandeAdmin.index') }}" @endif >Retour</a>
 
                     </div> <!-- END: Panel Body -->
                 </div>

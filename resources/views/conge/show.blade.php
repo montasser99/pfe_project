@@ -61,12 +61,21 @@
                             placeholder="{{ $conge->CONG_TEL_98 }}">
                     </div>
 
+
                 </div>
                 <a  class="btn btn-sm btn-danger" style="    margin-top: -2%;
                 margin-left: 663px;
                 padding: 5.6px 30px;
-                font-size: 14px; " href="{{ route('conges.index')}}">retour</a>
+                font-size: 14px; "
+                @if(Auth::user()->personnel_id != $conge->CONG_NUMORD_93)
+                href="{{ route('conges.index')}}"
+                @else
+                href="{{ route('congeAdmin.index')}}"
+                @endif
+                >retour</a>
             </div>
+
+
         </div>
     </div>
 

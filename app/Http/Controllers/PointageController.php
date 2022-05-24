@@ -15,6 +15,12 @@ class PointageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
         /**Pour afficher tout les pointages (User) **/
@@ -26,8 +32,8 @@ class PointageController extends Controller
             return view('pointage.index', compact('userPOINT'));
         } else {
             /**Pour afficher tout les absences (Admin) **/
-
-            $pointages = H52MvtPointageBrut::get();
+            $idAdmin = Auth::user()->personnel_id;
+            $pointages = H52MvtPointageBrut::get()->whereNotIn('Matricule',$idAdmin);
 
             return view('pointage.index', compact('pointages'));
         }

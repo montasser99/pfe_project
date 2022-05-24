@@ -34,8 +34,8 @@ class AbsenceController extends Controller
             return view('absence.index', compact('userABS'));
         } else {
             /**Pour afficher tout les absences (Admin) **/
-
-            $absences = Absence::get();
+            $idAdmin = Auth::user()->personnel_id;
+            $absences = Absence::get()->whereNotIn('ABS_NUMORD_93',$idAdmin);
             //dd($absences[0]->personnels->PERS_NOM);
             return view('absence.index', compact('absences'));
         }
@@ -51,9 +51,10 @@ class AbsenceController extends Controller
         if (Auth::user()->role == 'admin') {
 
             $absence = new Absence();
-            $absenceFirstName = DB::select('SELECT DISTINCT personnels.PERS_NOM from personnels');
-            $absenceLastName = DB::select('SELECT DISTINCT personnels.PERS_PRENOM from personnels');
-            $ABSemail = DB::select('SELECT DISTINCT personnels.EMAIL from personnels');
+            $idAdmin = Auth::user()->personnel_id;
+            $absenceFirstName = DB::select("SELECT DISTINCT personnels.PERS_NOM from personnels  WHERE PERS_MAT_95 != '$idAdmin'");
+            $absenceLastName = DB::select("SELECT DISTINCT personnels.PERS_PRENOM from personnels  WHERE PERS_MAT_95 != '$idAdmin'");
+            $ABSemail = DB::select("SELECT personnels.EMAIL from personnels WHERE PERS_MAT_95 != '$idAdmin'  ");
             $absenceNature = DB::select('SELECT DISTINCT nat_abs.LIBELLE_ABS from nat_abs');
 
             //dd( $ABSemail);

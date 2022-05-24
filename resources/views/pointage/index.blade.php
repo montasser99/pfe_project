@@ -20,22 +20,10 @@
                         <thead>
                             <tr>
                                 <th>Matricule</th>
-                                <th>Jourcptpnt</th>
+                                <th>Nom Prenom</th>
+                                <th>Email</th>
                                 <th>Datetimepnt</th>
-                                <th>Originepnt</th>
-                                <th>Pntsourceid</th>
-                                <th>Validerpar</th>
-                                <th>Typejour</th>
-                                <th>Typeoperation</th>
-                                <th>Onpntannule</th>
-                                <th>Annulepar</th>
-                                <th>Pntcreerpar</th>
-                                <th>Datecreation</th>
-                                <th>Motifpntmanuelh511</th>
-                                <th>Etat</th>
-                                <th>Oncloture</th>
-                                <th>Datecloture</th>
-                                <th>Cloturepar</th>
+
                             </tr>
                         </thead>
                 <tbody>
@@ -44,22 +32,10 @@
                     @foreach ($pointages as $pointage)
                     <tr>
                         <td>{{ $pointage->Matricule         }}</td>
-                        <td>{{ $pointage->JourCptPnt        }}</td>
+                        <td>{{ $pointage->personnels->PERS_NOM.' '.$pointage->personnels->PERS_PRENOM }}</td>
+                        <td>{{ $pointage->personnels->EMAIL }}</td>
                         <td>{{ $pointage->DateTimePnt       }}</td>
-                        <td>{{ $pointage->OriginePnt        }}</td>
-                        <td>{{ $pointage->PntSourceID       }}</td>
-                        <td>{{ $pointage->ValiderPar        }}</td>
-                        <td>{{ $pointage->TypeJour          }}</td>
-                        <td>{{ $pointage->TypeOperation     }}</td>
-                        <td>{{ $pointage->OnPntAnnule       }}</td>
-                        <td>{{ $pointage->AnnulePar         }}</td>
-                        <td>{{ $pointage->PntCreerPar       }}</td>
-                        <td>{{ $pointage->DateCreation      }}</td>
-                        <td>{{ $pointage->MotifPntManuelH511 }}</td>
-                        <td>{{ $pointage->Etat              }}</td>
-                        <td>{{ $pointage->OnCloture         }}</td>
-                        <td>{{ $pointage->DateCloture       }}</td>
-                        <td>{{ $pointage->CloturePar        }}</td>
+
                     </tr>
                     @endforeach
                     @endif
@@ -69,24 +45,11 @@
                     @foreach ($userPOINT as $pointage)
                     <tr>
 
-                    <td>{{ $pointage->MvtPointageID     }}</td>
                     <td>{{ $pointage->Matricule         }}</td>
-                    <td>{{ $pointage->JourCptPnt        }}</td>
+                    <td>{{ $pointage->personnels->PERS_NOM.' '.$pointage->personnels->PERS_PRENOM }}</td>
+                    <td>{{ $pointage->personnels->EMAIL }}</td>
                     <td>{{ $pointage->DateTimePnt       }}</td>
-                    <td>{{ $pointage->OriginePnt        }}</td>
-                    <td>{{ $pointage->PntSourceID       }}</td>
-                    <td>{{ $pointage->ValiderPar        }}</td>
-                    <td>{{ $pointage->TypeJour          }}</td>
-                    <td>{{ $pointage->TypeOperation     }}</td>
-                    <td>{{ $pointage->OnPntAnnule       }}</td>
-                    <td>{{ $pointage->AnnulePar         }}</td>
-                    <td>{{ $pointage->PntCreerPar       }}</td>
-                    <td>{{ $pointage->DateCreation      }}</td>
-                    <td>{{ $pointage->MotifPntManuelH511 }}</td>
-                    <td>{{ $pointage->Etat              }}</td>
-                    <td>{{ $pointage->OnCloture         }}</td>
-                    <td>{{ $pointage->DateCloture       }}</td>
-                    <td>{{ $pointage->CloturePar        }}</td>
+
 
                     </tr>
                     @endforeach
