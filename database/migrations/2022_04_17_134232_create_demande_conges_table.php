@@ -27,7 +27,8 @@ return new class extends Migration
             $table->string('direction')->nullable();
             $table->BigInteger('personnel_id')->unsigned()->nullable();
             $table->string('file')->nullable();
-
+            $table->string('uuid')->nullable();
+            $table->string('pdfs')->nullable();
             /** Pour ajouter clé etrangere avec table personels **/
             $table->index('personnel_id');
             $table->foreign('personnel_id')->references('PERS_MAT_95')->on('personnels')->onUpdate('cascade')->onDelete('cascade');
@@ -45,3 +46,7 @@ return new class extends Migration
         Schema::dropIfExists('demande_conges');
     }
 };
+
+
+
+

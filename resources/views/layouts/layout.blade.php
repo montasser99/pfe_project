@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="utf-8">
@@ -80,15 +80,6 @@
 
             <div class="collapse navbar-collapse" id="headerNavbarCollapse">
 
-                <ul class="nav navbar-nav">
-
-                    <li class="hidden-xs">
-                        <a href="javascript:;" class="sidenav-size-toggle">
-                            <i class="ti-align-left"></i>
-                        </a>
-                    </li>
-
-                </ul>
 
                 <ul class="nav navbar-nav navbar-right">
                     <!-- code ajouter -->
@@ -146,10 +137,18 @@
                     @else
                         <li class="side-nav-header" style="margin-top: 20px;">Employer</li>
                     @endif
-                    <li class="{{ Request::segment(1)==='/' }}">
-                        <a href="{{ url('/') }}"><i class="sli-dashboard"></i> <span
+                    @if (Auth::user()->role=="admin")
+                    <li class="{{ Request::segment(1)==='AdminDashboard' ? 'active' : null }} ">
+                        <a href="{{ url('/AdminDashboard') }}"><i class="sli-dashboard"></i> <span
                                 class="nav-text">tableau de bord</span></a>
                     </li>
+                    @else
+                    <li class="{{ Request::segment(1)==='EmployerDashboard'  ? 'active' : null}}">
+                        <a href="{{ url('/EmployerDashboard') }}"><i class="sli-dashboard"></i> <span
+                                class="nav-text">tableau de bord</span></a>
+                    </li>
+                    @endif
+
                     <li class="{{ Request::segment(1) === 'profil' ? 'active' : null }}">
                         <a href="{{ url('/profil') }}">
                             <i class="  fs-user-4"></i>
@@ -176,7 +175,7 @@
                                 <li><a href="{{ url('/conges') }}"><i class="fs-list"></i> Liste de conges</a>
                                 </li>
                                 <li><a href="{{ url('/Demandeconges') }}"><i class="   fs-paperplane"></i> liste des
-                                        demandes</a></li>
+                                    demandes</a></li>
                             </ul>
                         </div>
                     </li>
@@ -244,9 +243,9 @@
 
 
     </div> <!-- END: wrapper -->
+    
 
-
-    <script type="text/javascript" src="{{ asset('assets/plugins/lib/jquery-2.2.4.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/plugins/lib/jquery-2.2.4.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('assets/plugins/lib/jquery-ui.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/plugins/bootstrap/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/plugins/lib/plugins.js') }}"></script>

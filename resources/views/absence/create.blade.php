@@ -134,6 +134,11 @@
                                     </span>
                                 </div>
 
+                                @if ($message = Session::get('existeAbs'))
+                                                        <span style="color: red">
+                                                                {{ $message }}
+                                                        </span>
+                                                      @endif
 
                                 <div class="form-actions fluid">
                                     <div class="col-md-12 text-right">
@@ -150,6 +155,8 @@
                             margin-left: 455px;
                              padding: 4.6px 18px;
                          font-size: 14px; " href="{{ route('absences.index') }}">retour</a>
+
+
                     </div> <!-- END: Panel Body -->
                 </div>
             </div>
@@ -157,3 +164,4 @@
     </div>
     <!--END: Content Wrap-->
 @endsection
+

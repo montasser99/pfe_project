@@ -30,11 +30,12 @@ class PersonnelController extends Controller
     {
         if (Auth::user()->role == 'admin') {
             //$personnels = Personnel::get();
+            $idAdmin = Auth::user()->personnel_id;
             $personnels = FacadesDB::table('personnels')
                 ->join('users', 'personnels.PERS_MAT_95', '=', 'users.personnel_id')
                 ->join('natureagents', 'personnels.PERS_NATURAGENT_93', '=', 'natureagents.NATAG_CODE_93')
                 ->join('type_fonctions', 'personnels.PERS_CODFONC_92', '=', 'type_fonctions.CODE_TYPE')
-                ->get();
+                ->where('personnels.PERS_MAT_95','<>',$idAdmin)->get();
 
 
             return view('personnel.index', compact('personnels'));

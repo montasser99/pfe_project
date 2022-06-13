@@ -16,7 +16,7 @@ class H52MvtPointageBrutFactory extends Factory
      */
     public function definition()
     {
-        return [
+       return [/*
             'Matricule' => $this->faker->numberBetween($min = 1, $max =10),
             'JourCptPnt' => $this->faker->dateTime($max = 'now', $timezone = null),
             'DateTimePnt' => $this->faker->dateTime($max = 'now', $timezone = null),
@@ -33,7 +33,7 @@ class H52MvtPointageBrutFactory extends Factory
             'Etat' => $this->faker->numberBetween($min = 1, $max = 100),
             'OnCloture' => $this->faker->numberBetween($min = 10, $max = 500),
             'DateCloture' => $this->faker->randomElement($array = array (101101,11010,01001,001001,11110,01011)) ,
-            'CloturePar' => $this->faker->text($maxNbChars = 9) ,
+            'CloturePar' => $this->faker->text($maxNbChars = 9) , */
         ];
     }
 }

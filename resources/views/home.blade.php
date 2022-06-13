@@ -1,266 +1,296 @@
 @extends('layouts.layout')
 @section('content')
+    <div class="page-header">
+        <h1>tableau de bord <small>Bon retour à <span class="text-primary">{{ Auth::user()->name }}</span></small></h1>
 
 
-            <div class="page-header">
-                <h1>tableau de bord <small>Bon retour à  <span class="text-primary">{{ Auth::user()->name }}</span></small></h1>
+        <ol class="breadcrumb">
+            <li><a href="">Home</a></li>
+            <li class="active">tableau de bord</li>
+        </ol>
+    </div>
+
+    <div class="container">
+        <div class="row"     style="margin-bottom: 40px;">
+            <div class="col-md-4">
+                <div class="card-counter primary">
+                    <i class="fa fa-venus-mars"></i>
+                    <span style="top: 120px;
+                        position: absolute;
+                        margin-left: 92px; -webkit-text-stroke: thin; font-size: 17px;"><i class="fa fa-male"
+                         style="font-size: 1.5em; opacity:1;margin-left: -41px;margin-top: 0px;position:absolute;"></i>Homme :
+                        {{ $MaxHomme[0]->MaxHomme }}</span>
+                    <span style="top: 160px;
+                        position: absolute;
+                        margin-left: 92px;  -webkit-text-stroke: thin; font-size: 17px;"><i class="fa fa-female"
+                         style="font-size: 1.5em; opacity:1;margin-left: -43px;margin-top: 0px;position:absolute;"></i>Femme :
+                        {{ $MaxFomme[0]->MaxFemme }}</span>
+                    <!--<span class="count-name" style="top: 170px;">sexe</span>-->
+
+                </div>
+            </div>
+
+            <div class="col-md-4" style="margin-left: 80px;">
+                <div class="card-counter blueFonce">
+                    <i class="fs-clock"></i>
+                    <span style="    top: 13px;
+                          position: absolute;
+                          margin-left: 102px;
+                          -webkit-text-stroke: thin;
+                          font-size: 16px;">dernier employé à se pointer ce matin :<br><span style="  font-style: italic;">
+                            {{ $NomPrenomEntreMatin ?? null}} {{ $dateEntreMatin ?? null }}</span></span>
+                    <span style="    top: 65px;
+                          position: absolute;
+                          margin-left: 102px;
+                          -webkit-text-stroke: thin;
+                          font-size: 16px;">premier employé pointait durant l'heure du déjeuner :<br><span
+                            style="  font-style: italic;">{{ $NomPrenomSortieMatin ?? null }} {{ $dateSorterMatin ?? null }}</span></span>
+                    <span style="    top: 120px;
+                          position: absolute;
+                          margin-left: 60px;
+                          -webkit-text-stroke: thin;
+                          font-size: 16px;">dernier employé est retourné au travail après le déjeuner :<br><span
+                            style="  font-style: italic;">{{ $NomPrenomEntrerMidi ?? null }} {{ $dateEntrerMidi ?? null }}</span></span>
+                    <span style="    top: 170px;
+                          position: absolute;
+                          margin-left: 60px;
+                          -webkit-text-stroke: thin;
+                          font-size: 16px;">premier employé pointait durant l'heure du sortie :<br> <span
+                            style="  font-style: italic;">{{ $NomPrenomSorterMidi ?? null }} {{ $dateSortirMidi ?? null }}</span></span>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card-counter danger">
+                    <i class=" fs-user-block"></i>
+
+                    <span style="top: 120px;
+                        position: absolute;
+                        margin-left: 92px;  -webkit-text-stroke: thin; font-size: 17px;"><i class="fa fa-user" style="font-size: 1.5em; opacity:1;margin-left: -41px;margin-top: 0px;position:absolute; color: green"></i>personne present :
+                        {{ $present }}</span>
+                    <span style="top: 160px;
+                        position: absolute;
+                        margin-left: 92px; -webkit-text-stroke: thin; font-size: 17px;"><i class="fa fa-user" style="font-size: 1.5em; opacity:1;margin-left: -41px;margin-top: 0px;position:absolute; color:red"></i> personne absent :
+                        {{ $NombreAbs }}</span>
 
 
-                <ol class="breadcrumb">
-                    <li><a href="">Home</a></li>
-                    <li class="active">tableau de bord</li>
-                </ol>
+                    <span class="count-name"></span>
+                </div>
             </div>
 
 
+        </div>
+        <div class="row" style=" margin-bottom: 100px;">
+            <div class="col-md-8">
 
-            <div class="content-wrap">  <!--START: Content Wrap-->
 
-                <div class="row">
-
-                    <div class="col-md-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fs-bars"></i> Live Feeds</h3>
-                                <div class="tools">
-                                    <a class="btn-link reload" href="javascript:;"><i class="ti-reload"></i></a>
-                                </div>
-                            </div>
-                            <div class="panel-body">
-
-                                <div class="col-md-8">
-                                    <div class="chartDashboard" id="chartLive"></div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="row">
-
-                                        <div class="col-sm-6 col-md-12 pt-md">
-                                            My Tasks <strong class="pull-right">12/20</strong>
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar" style="width: 60%;"></div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 col-md-12 pt-md">
-                                            Storage <strong class="pull-right">8/20 GB</strong>
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar progress-bar-success" style="width: 40%;"></div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 col-md-12 pt-md">
-                                            Bugs  <strong class="pull-right">90/100</strong>
-                                            <div class="progress progress-sm">
-                                                <div class="progress-bar progress-bar-danger" style="width: 90%;"></div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 col-md-12 pt-md">
-                                            User Testing <strong class="pull-right">7 Days</strong>
-                                            <div class="progress progress-sm progress-striped active">
-                                                <div class="progress-bar progress-bar-warning" style="width: 80%;"></div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
+            @include('charts.line', ['AVG_Entrer_Matin'=>$AVG_Entrer_Matin, 'AVG_Sortie_Matin'=>$AVG_Sortie_Matin, 'AVG_Entrer_Midi'=>$AVG_Entrer_Midi, 'AVG_Sortie_Midi'=>$AVG_Sortie_Midi]);
+        </div>
+        @if(isset($JoursFeries))
+        <div class="col-md-4">
+            <div class="panel panel-danger" style="box-shadow: 3px 5px 20px #221e1e; border-radius: 15px;">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Les jours feriés en attend..</h3>
                 </div>
+            <table class="table table-striped" style="height: 305px">
+                <thead style="
+                background-color: #363a5d;">
+                  <tr class="table-primary">
+                    <th style=" color:#FFFF; ">Description</th>
+                    <th style=" color:#FFFF; " >Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    @foreach ($JoursFeries as $jours )
+                    <tr>
+                      <td>{{$jours->description}}</td>
+                      <td>{{$jours->dateJoursFeries}}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            </div>
+        </div>
+        @endif
+        </div>
 
-                <div class="row">
-
-                    <div class="col-md-3 col-sm-6 col-xs-6 col-mob">
-                        <div class="panel">
-                            <div class="panel-body text-center">
-
-                                <h4>Visitors</h4>
-
-                                <input class="chart-knob"
-                                       data-angleArc=360
-                                       data-bgColor="rgba(255,72,89,0.1)"
-                                       data-fgColor="#FF4859"
-                                       data-thickness=".2"
-                                       value="90"
-                                       data-end="90"
-                                       data-width="100"
-                                       data-height="100"
-                                       data-readonly="true">
-
-                                <div class="db-details pt-md">
-                                    <ul class="list-unstyled text-left">
-                                        <li class="text-danger">
-                                            <i class="fa fa-square"></i> &nbsp;Today
-                                            <span class="pull-right">20%</span>
-                                        </li>
-                                        <li class="text-success">
-                                            <i class="fa fa-square"></i> &nbsp;Yesterday
-                                            <span class="pull-right">40%</span>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6 col-xs-6 col-mob">
-                        <div class="panel">
-                            <div class="panel-body text-center">
-
-                                <h4>Bar Chart</h4>
-
-                                <span class="sparkline-bar"
-                                      data-height="100"
-                                      data-barColor="#00C9E6"
-                                      data-lineColor="#32c8de"
-                                      data-barWidth="10">15,20,34,56,78,23,90,13,50,20,45</span>
-
-                                <div class="pt-md mb-sm text-lg">
-                                    <span> 140 <i class="fa fa-angle-double-up text-success"></i></span> &nbsp;
-                                    <span> 250 <i class="fa fa-angle-double-down text-danger"></i></span>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6 col-xs-6 col-mob">
-                        <div class="panel">
-                            <div class="panel-body text-center">
-                                <h4>Settings</h4>
-                                <ul class="text-left list-unstyled list-quick-setting-1">
-                                    <li><i class="fa fa-wifi"></i> &nbsp; Wifi <a href="#" class="btn btn-danger btn-xs">Off</a></li>
-                                    <li><i class="fa fa-envelope"></i> &nbsp; Email <a href="#" class="btn btn-success btn-xs">On</a></li>
-                                    <li><i class="fa fa-linux"></i> &nbsp; Linux <a href="#" class="btn btn-success btn-xs">On</a></li>
-                                    <li><i class="fa fa-book"></i> &nbsp; Book <a href="#" class="btn btn-danger btn-xs">Off</a></li>
-                                    <li><i class="fa fa-dropbox"></i> &nbsp; Dropbox <a href="#" class="btn btn-success btn-xs">On</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-3 col-sm-6 col-xs-6 col-mob">
-                        <div class="panel">
-                            <div class="panel-body text-center">
-
-                                <h4>Pie Chart</h4>
-
-                                <span class="sparkline-pie"
-                                      data-height="100"
-                                      data-width="120"
-                                      data-sliceColors="['#ed5441','#609cec', '#51d466', '#fcd419']">13,28,35,16</span>
-
-                                <div class="pt-md mb-sm text-lg">
-                                    <span> 140 <i class="fa fa-angle-double-up text-success"></i></span> &nbsp;
-                                    <span> 250 <i class="fa fa-angle-double-down text-danger"></i></span>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="row">
-
-                    <div class="col-md-4">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <div class="monthly" id="mycalendar"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="panel panel-primary">
-                            <div class="panel-body">
-                                <div id="browser-chart" style="height:370px;"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 socialAnalytics">
-
-                        <div class="col-md-6 col-sm-6 col-xs-6 ui-padd">
-                            <!-- UI social -->
-                            <div class="ui-social facebook">
-                                <!-- facebook -->
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <h5><a href="#">2345</a></h5>
-                                        <h6><a href="#">Likes</a></h6>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <h5><a href="#">2224</a></h5>
-                                        <h6><a href="#">Shares</a></h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-sm-6 col-xs-6 ui-padd">
-                            <div class="ui-social google-plus ">
-                                <!-- Google plus -->
-                                <a href="#"><i class="fa fa-google-plus"></i></a>
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <h5><a href="#">2345</a></h5>
-                                        <h6><a href="#">Photos</a></h6>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <h5><a href="#">1111</a></h5>
-                                        <h6><a href="#">Share</a></h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-sm-6 col-xs-6 ui-padd">
-                            <!-- Twitter -->
-                            <div class="ui-social twitter">
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <h5><a href="#">1144</a></h5>
-                                        <h6><a href="#">Tweets</a></h6>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <h5><a href="#">2211</a></h5>
-                                        <h6><a href="#">Followers</a></h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-sm-6 col-xs-6 ui-padd">
-                            <!-- Youtube -->
-                            <div class="ui-social youtube">
-                                <a href="#"><i class="fa fa-youtube"></i></a>
-                                <div class="row">
-                                    <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <h5><a href="#">2312</a></h5>
-                                        <h6><a href="#">Videos</a></h6>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-6">
-                                        <h5><a href="#">2478</a></h5>
-                                        <h6><a href="#">Likes</a></h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
+    </div>
 
 
-            </div>  <!--END: Content Wrap-->
 
 
-     @endsection
+    <style>
+        .card-counter {
+            box-shadow: 3px 5px 20px #221e1e;
+            margin: 1px;
+            padding: 20px 10px;
+            background-color: #fff;
+            height: 230px;
+            width: 280px;
+            border-radius: 15px;
+            transition: .3s linear all;
+        }
+
+        .card-counter:hover {
+            box-shadow: 4px 4px 20px #DADADA;
+            transition: .3s linear all;
+        }
+
+        .card-counter.primary {
+            background-color: #5D8BF4;
+            color: #FFF;
+        }
+
+        .card-counter.danger {
+            background-color: #2D31FA;
+            color: rgb(255, 255, 255);
+        }
+
+        .card-counter.blueFonce {
+            background-color: #061367;
+            color: #FFF;
+            width: 500px;
+            margin-left: -148px;
+        }
+
+
+        .card-counter i {
+            font-size: 5em;
+            opacity: 0.3;
+            position: absolute;
+            margin-left: 5px;
+            margin-top: -10px;
+        }
+
+        .card-counter .count-numbers {
+            position: absolute;
+            right: 35px;
+            top: 10px;
+            font-size: 13px;
+            display: block;
+        }
+
+        .card-counter .count-numbers2 {
+            position: absolute;
+            right: 35px;
+            top: 60px;
+            font-size: 11px;
+            display: block;
+        }
+
+        .card-counter .count-name {
+            position: absolute;
+            right: 35px;
+            top: 50px;
+            font-style: italic;
+            text-transform: capitalize;
+            opacity: 0.5;
+            display: block;
+            font-size: 18px;
+        }
+
+
+
+    </style>
+    <script>
+const events = [
+  {
+    summary: 'JS Conference',
+    start: {
+      date: Calendar.dayjs().format('DD/MM/YYYY'),
+    },
+    end: {
+      date: Calendar.dayjs().format('DD/MM/YYYY'),
+    },
+    color: {
+      background: '#cfe0fc',
+      foreground: '#0a47a9',
+    },
+  },
+  {
+    summary: 'Vue Meetup',
+    start: {
+      date: Calendar.dayjs().add(1, 'day').format('DD/MM/YYYY'),
+    },
+    end: {
+      date: Calendar.dayjs().add(5, 'day').format('DD/MM/YYYY'),
+    },
+    color: {
+      background: '#ebcdfe',
+      foreground: '#6e02b1',
+    },
+  },
+  {
+    summary: 'Angular Meetup',
+    description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
+    start: {
+      date: Calendar.dayjs().subtract(3, 'day').format('DD/MM/YYYY'),
+      dateTime: Calendar.dayjs().subtract(3, 'day').format('DD/MM/YYYY') + ' 10:00',
+    },
+    end: {
+      date: Calendar.dayjs().add(3, 'day').format('DD/MM/YYYY'),
+      dateTime: Calendar.dayjs().add(3, 'day').format('DD/MM/YYYY') + ' 14:00',
+    },
+    color: {
+      background: '#c7f5d9',
+      foreground: '#0b4121',
+    },
+  },
+  {
+    summary: 'React Meetup',
+    start: {
+      date: Calendar.dayjs().add(5, 'day').format('DD/MM/YYYY'),
+    },
+    end: {
+      date: Calendar.dayjs().add(8, 'day').format('DD/MM/YYYY'),
+    },
+    color: {
+      background: '#fdd8de',
+      foreground: '#790619',
+    },
+  },
+  {
+    summary: 'Meeting',
+    start: {
+      date: Calendar.dayjs().add(1, 'day').format('DD/MM/YYYY'),
+      dateTime: Calendar.dayjs().add(1, 'day').format('DD/MM/YYYY') + ' 8:00',
+    },
+    end: {
+      date: Calendar.dayjs().add(1, 'day').format('DD/MM/YYYY'),
+      dateTime: Calendar.dayjs().add(1, 'day').format('DD/MM/YYYY') + ' 12:00',
+    },
+    color: {
+      background: '#cfe0fc',
+      foreground: '#0a47a9',
+    },
+  },
+  {
+    summary: 'Call',
+    start: {
+      date: Calendar.dayjs().add(2, 'day').format('DD/MM/YYYY'),
+      dateTime: Calendar.dayjs().add(2, 'day').format('DD/MM/YYYY') + ' 11:00',
+    },
+    end: {
+      date: Calendar.dayjs().add(2, 'day').format('DD/MM/YYYY'),
+      dateTime: Calendar.dayjs().add(2, 'day').format('DD/MM/YYYY') + ' 14:00',
+    },
+    color: {
+      background: '#292929',
+      foreground: '#f5f5f5',
+    },
+  }
+];
+
+const calendarElement = document.getElementById('calendar');
+const calendarInstance = Calendar.getInstance(calendarElement);
+calendarInstance.addEvents(events);
+    </script>
+@endsection
+
+
+
+
+
+
+
+

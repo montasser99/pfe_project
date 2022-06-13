@@ -9,7 +9,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Personnel Table</h3>
+                    <h3 class="panel-title">Table du personnel</h3>
                                  <div class="tools">
                         <a class="btn-link collapses panel-collapse" href="javascript:;"></a>
                         <a class="btn-link reload" href="javascript:;"><i class="ti-reload"></i></a>

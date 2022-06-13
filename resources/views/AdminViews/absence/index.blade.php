@@ -9,8 +9,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Absence Table</h3>
-                        <div class="tools">
+                        <h3 class="panel-title">Table absence de <strong style="color: blue">{{Auth::user()->name ?? null}}</strong> </h3>                       
                             <a class="btn-link collapses panel-collapse" href="javascript:;"></a>
                             <a class="btn-link reload" href="javascript:;"><i class="ti-reload"></i></a>
                         </div>
@@ -20,7 +19,6 @@
                         <table class="table table-striped table-dataTable">
                             <thead>
                                 <tr>
-                                    <th>Nom et prenom</th>
                                     <th>Nature d'absence </th>
                                     <th>Date Debut </th>
                                     <th>période début </th>
@@ -34,7 +32,6 @@
                             @if (Auth::user()->role == 'admin')
                             @foreach ($AdminABS as $absence)
                                 <tr>
-                                    <td>{{ $absence->personnels->PERS_NOM . ' ' . $absence->personnels->PERS_PRENOM ?? 'None' }}
                                     </td>
                                     <td>{{ $absence->natAbs->LIBELLE_ABS ?? 'None' }}</td>
                                     <td>{{ $absence->ABS_DATE_DEB }}</td>

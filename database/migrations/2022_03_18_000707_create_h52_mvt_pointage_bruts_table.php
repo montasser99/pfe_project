@@ -17,22 +17,10 @@ return new class extends Migration
 
             $table->bigIncrements("MvtPointageID");
             $table->BigInteger("Matricule")->unsigned()->nullable();
-            $table->date("JourCptPnt")->nullable();
-            $table->date("DateTimePnt")->nullable();
-            $table->tinyInteger("OriginePnt")->nullable();
-            $table->string("PntSourceID",15)->nullable();
-            $table->string("ValiderPar",10)->nullable();
-            $table->string("TypeJour",3)->nullable();
-            $table->tinyInteger("TypeOperation")->nullable();
-            $table->binary("OnPntAnnule")->nullable();
-            $table->integer("AnnulePar")->nullable();
-            $table->string("PntCreerPar",10)->nullable();
-            $table->date("DateCreation")->nullable();
-            $table->tinyInteger("MotifPntManuelH511")->nullable();
-            $table->tinyInteger("Etat")->nullable();
-            $table->integer("OnCloture")->nullable();
-            $table->binary("DateCloture")->nullable();
-            $table->string("CloturePar",10)->nullable();
+            $table->dateTime("pointageEntMatin")->nullable();
+            $table->dateTime("pointageSorMatin")->nullable();
+            $table->dateTime("pointageEntMidi")->nullable();
+            $table->dateTime("pointageSorMidi")->nullable();
 
             /** Pour ajouter clé étrangere avec table personnels **/
             $table->index('Matricule');

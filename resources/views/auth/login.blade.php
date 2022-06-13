@@ -35,7 +35,7 @@
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color:red">{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
@@ -48,7 +48,7 @@
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong style="color:red">{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
@@ -60,7 +60,7 @@
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
+                                        {{ "Se rappeler de moi" }}
                                     </label>
                                 </div>
                             </div>
@@ -69,21 +69,17 @@
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-secondary" >
-                                    {{ __('Login') }}
+                                    {{ __('Se connecter') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
+                                        {{ __('Mot de passe oublié ?') }}
                                     </a>
                                 @endif
                             </div>
                         </div>
-                        <div class="row mb-0">
-                        <div  class="col-md-12 offset-md-4">
-                            If you don't have an account <a href="{{ route('register') }}">Register</a> here.
-                        </div>
-                    </div>
+
                     </form>
                 </div>
             </div>

@@ -7,7 +7,11 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
+                        @if(Auth::user()->role=="user")
+                        <h3 class="panel-title">Liste des conge de <strong style="color: blue">{{Auth::user()->name ?? null}}</strong> </h3>
+                        @else
                         <h3 class="panel-title">Liste des conges</h3>
+                        @endif
                         <div class="tools">
                             <a class="btn-link collapses panel-collapse" href="javascript:;"></a>
                             <a class="btn-link reload" href="javascript:;"><i class="ti-reload"></i></a>
@@ -66,6 +70,7 @@
                         <table class="table table-striped table-dataTable">
                             <thead>
                                 <tr>
+                                    @if (Auth::user()->role == 'admin')
                                     <th> Nom </th>
                                     <th> Nature De Conge</th>
                                     <th> Date debut </th>
@@ -75,6 +80,17 @@
                                     <th>       </th>
                                     <th>       </th>
 
+                                    @else
+
+                                    <th> Nature De Conge</th>
+                                    <th> Date debut </th>
+                                    <th> Date fin </th>
+                                    <th> Adresse </th>
+                                    <th> phone </th>
+                                    <th>       </th>
+                                    <th>       </th>
+
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -105,7 +121,6 @@
                                 @else
                                     @foreach ($userConge as $userC)
                                         <tr>
-                                            <td>{{ $userC->personnels->PERS_NOM . ' ' . $userC->personnels->PERS_PRENOM ?? 'None' }}</td>
                                             <td>{{ $userC->nature_conges->NOM ?? 'None' }} </td>
                                             <td>{{ $userC->CONG_DATE_DEB }}  </td>
                                             <td>{{ $userC->CONG_DATE_FIN }}  </td>

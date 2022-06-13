@@ -155,9 +155,15 @@
                                     </span>
                                 </div>
                             </div>
-                            @if(session()->has('erreur'))
+                           @if(session()->has('erreur'))
                             <span style="color: red">
                                 {{ session()->get('erreur') }}
+                            </span>
+                            @endif
+
+                            @if ($message = Session::get('existeCong'))
+                            <span style="color: red">
+                                    {{ $message }}
                             </span>
                             @endif
                             <div class="form-actions fluid" >

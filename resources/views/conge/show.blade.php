@@ -67,12 +67,18 @@
                 margin-left: 663px;
                 padding: 5.6px 30px;
                 font-size: 14px; "
-                @if(Auth::user()->personnel_id != $conge->CONG_NUMORD_93)
+                @if(Auth::user()->role=="admin")
+                    @if((Auth::user()->personnel_id != $conge->CONG_NUMORD_93))
                 href="{{ route('conges.index')}}"
-                @else
+                 @else
                 href="{{ route('congeAdmin.index')}}"
-                @endif
+                    @endif
+               @endif
+               @if (Auth::user()->role=='user')
+               href="{{ route('conges.index')}}"
+               @endif
                 >retour</a>
+
             </div>
 
 

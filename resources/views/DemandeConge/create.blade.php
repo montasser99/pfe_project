@@ -172,7 +172,7 @@
             <div class="col-md-6">
 
                 <img src="{{ asset('public\Image\DemandeConge.jpg') }}" alt="demande conge exemple" width="600px"
-                    height=650px>
+                    height=760px>
 
             </div>
 

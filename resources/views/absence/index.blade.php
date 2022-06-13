@@ -9,7 +9,11 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Absence Table</h3>
+                        @if(Auth::user()->role=="user")
+                        <h3 class="panel-title">Table absence de <strong style="color: blue">{{Auth::user()->name ?? null}}</strong> </h3>
+                        @else
+                        <h3 class="panel-title">Table absence</h3>
+                        @endif
                         <div class="tools">
                             <a class="btn-link collapses panel-collapse" href="javascript:;"></a>
                             <a class="btn-link reload" href="javascript:;"><i class="ti-reload"></i></a>
@@ -31,6 +35,9 @@
                         <table class="table table-striped table-dataTable">
                             <thead>
                                 <tr>
+
+
+                                    @if (Auth::user()->role == 'admin')
                                     <th>Nom et prenom</th>
                                     <th>Nature d'absence </th>
                                     <th>Date Debut </th>
@@ -39,12 +46,17 @@
                                     <th>période fin </th>
                                     <th>Nombre de jour</th>
                                     <th>absence cumulé</th>
-
-                                    @if (Auth::user()->role == 'admin')
                                         <th></th>
                                         <th></th>
                                         <th></th>
                                     @else
+                                    <th>Nature d'absence </th>
+                                    <th>Date Debut </th>
+                                    <th>période début </th>
+                                    <th>Date Fin </th>
+                                    <th>période fin </th>
+                                    <th>Nombre de jour</th>
+                                    <th>absence cumulé</th>
                                         <th></th>
                                     @endif
                                 </tr>
@@ -102,8 +114,7 @@
                                 @if (Auth::user()->role == 'user')
                                     @foreach ($userABS as $absence)
                                         <tr>
-                                            <td>{{ $absence->personnels->PERS_NOM . ' ' . $absence->personnels->PERS_PRENOM ?? 'None' }}
-                                            </td>
+
                                             <td>{{ $absence->natAbs->LIBELLE_ABS ?? 'None' }}</td>
                                             <td>{{ $absence->ABS_DATE_DEB }}</td>
 

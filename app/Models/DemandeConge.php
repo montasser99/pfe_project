@@ -22,5 +22,6 @@ class DemandeConge extends Model
     public function users(){
         return $this->belongsTo(User::class,'personnel_id','personnel_id');
     }
+    
 
 }

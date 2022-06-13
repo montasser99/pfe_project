@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Absence;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -79,7 +80,8 @@ class AbsenceController extends Controller
             $Prenom = $request->PERS_PRENOM;
             $Email = $request->EMAIL;
             $Personnel_cle = DB::select("SELECT personnels.PERS_MAT_95 FROM personnels WHERE personnels.PERS_NOM='$Nom'
-        AND personnels.PERS_PRENOM='$Prenom' AND personnels.EMAIL='$Email' ");
+            AND personnels.PERS_PRENOM='$Prenom' AND personnels.EMAIL='$Email' ");
+
             // dd($Personnel_cle);
             if ($Personnel_cle == false) {
                 $erreur = false;
@@ -152,6 +154,20 @@ class AbsenceController extends Controller
 
             $personnel_absence = $Personnel_cle[0]->PERS_MAT_95;
             //dd($personnel_absence);
+
+            /**pour tester si le personne est absent ou non**/
+            $absence=absence::where('ABS_NUMORD_93',$personnel_absence)->get();
+            $s=0;
+            $Nowtime = Carbon::now()->format('Y-m-d');
+            foreach($absence as $abs){
+                if($abs->ABS_DATE_FIN >$Nowtime )
+                $s=$s+1;
+
+            }
+            if($s>0){
+                return redirect()->back()->with('existeAbs','Cette personne est déjà absente'); }
+                //dd($s);
+
 
             //solution pour absence cumulé
             $OLD_absence_cumule = DB::select("SELECT absences.ABS_CUMULE_9 FROM `absences` WHERE ABS_NUMORD_93='$personnel_absence' ORDER BY ABS_CUMULE_9 DESC");

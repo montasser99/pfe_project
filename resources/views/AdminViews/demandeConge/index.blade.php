@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Liste des demandes</h3>
+                        <h3 class="panel-title">Liste des demandes de <strong style="color: blue">{{Auth::user()->name ?? null}}</strong> </h3>
                         <div class="tools">
                             <a class="btn-link collapses panel-collapse" href="javascript:;"></a>
                             <a class="btn-link reload" href="javascript:;"><i class="ti-reload"></i></a>
@@ -29,12 +29,10 @@
                     <table class="table table-striped table-dataTable">
                         <thead>
                             <tr>
-                                <th> Nom </th>
                                 <th> Date debut </th>
                                 <th> Date fin </th>
                                 <th> Nature De Conge</th>
                                 <th> Adresse </th>
-                                <th> solde </th>
                                 <th> statu </th>
                                           <th></th>
                                         <th></th>
@@ -45,12 +43,10 @@
                                 <tbody>
                                     @foreach ($DemandeConge as $Demande)
                                     <tr>
-                                        <td>{{ $Demande->name }}</td>
                                         <td>{{ $Demande->date_deb }}</td>
                                         <td>{{ $Demande->date_fin }}</td>
                                         <td>{{ $Demande->NatureDeConge }}</td>
                                         <td>{{ $Demande->adresse_conge }}</td>
-                                        <td>{{ Auth::user()->solde }}</td>
                                         @if ($Demande->statu == 'en cours..')
                                             <td style="color: blue ;  ">{{ $Demande->statu }}</td>
                                         @else

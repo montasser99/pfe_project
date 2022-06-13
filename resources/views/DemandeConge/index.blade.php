@@ -33,7 +33,6 @@
                                     <th> Date fin </th>
                                     <th> Nature De Conge</th>
                                     <th> Adresse </th>
-                                    <th> solde </th>
                                     <th> statu </th>
 
                                     @if (Auth::user()->role == 'admin')
@@ -41,7 +40,6 @@
                                         <th></th>
                                         <th></th>
                                     @else
-                                        <th></th>
                                         <th></th>
                                         <th></th>
                                         <th></th>
@@ -60,7 +58,6 @@
                                             <td>{{ $Demande->date_fin }}</td>
                                             <td>{{ $Demande->NatureDeConge }}</td>
                                             <td>{{ $Demande->adresse_conge }}</td>
-                                            <td>{{$Demande->users->solde}}</td>
 
                                             @if ($Demande->statu == 'en cours..')
                                                 <td style="color: blue ;  ">{{ $Demande->statu }}</td>
@@ -92,7 +89,7 @@
                                             <td>{{ $Demande->date_fin }}</td>
                                             <td>{{ $Demande->NatureDeConge }}</td>
                                             <td>{{ $Demande->adresse_conge }}</td>
-                                            <td>{{ Auth::user()->solde }}</td>
+
                                             @if ($Demande->statu == 'en cours..')
                                                 <td style="color: blue ;  ">{{ $Demande->statu }}</td>
                                             @else
@@ -100,8 +97,12 @@
                                             @endif
                                             <td><a class="btn btn-sm btn-info"
                                                     href="{{ asset('storage/demandes/' . $Demande->file) }}"
-                                                    target="_blank"><i class="fa fa-fw fa-eye"></i> Ouvrir PDF</a>
+                                                    target="_blank"><i class="fa fa-fw fa-eye"></i> pdf créé </a>
                                             </td>
+                                            <td><a class="btn btn-sm btn-warning"
+                                                href="http://127.0.0.1:8000/5914fb69-ee9c-406d-ab33-5bab15fb67dd/pdfs/24d89cd6-d003-42b0-a369-eba33b619c42"
+                                                target="_blank"><i class="fa fa-fw fa-eye"></i> Ngsign pdf </a>
+                                        </td>
                                             <td><a class="btn btn-sm btn-primary "
                                                     href="{{ route('Demandeconges.show', $Demande->id) }}"><i
                                                         class="fa fa-fw fa-eye"></i> Afficher</a>

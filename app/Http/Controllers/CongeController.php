@@ -169,7 +169,17 @@ class CongeController extends Controller
             $PERS_MAT_95 = $ID_personnel[0]->PERS_MAT_95;
             //dd($PERS_MAT_95);
 
+            /**pour tester si le personne est absent ou non**/
+            $conge=conge::where('CONG_NUMORD_93',$PERS_MAT_95)->get();
+            $s=0;
+            $Nowtime = Carbon::now()->format('Y-m-d');
+            foreach($conge as $cong){
+                if($cong->CONG_DATE_FIN >$Nowtime )
+                $s=$s+1;
 
+            }
+            if($s>0){
+                return redirect()->back()->with('existeCong','Cette personne est déjà en congé'); }
 
             /** pour ajouter les clé etrangere avec table nature conge  **/
             $nature = $request->NatureConge;

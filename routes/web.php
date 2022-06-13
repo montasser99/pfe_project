@@ -14,6 +14,7 @@ use App\Http\Controllers\AdminControllers\AbsenceAdminController;
 use App\Http\Controllers\AdminControllers\PointageAdminController;
 use App\Http\Controllers\AdminControllers\CongeAdminController;
 use App\Http\Controllers\AdminControllers\DemandeCongeAdminController;
+use App\Http\Controllers\NGsignController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,9 +68,18 @@ Route::get('/demande', function (){
     })->middleware('auth');
 
 /**routes pour les controller auth routes**/
-Auth::routes();
+Auth::routes(['register'=>false]);
 
 /**Route de controller Home de login**/
 //**name('home'); => c'est le Rdirect::HOME in controller Auth et '/' pour return dirctement aux template
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/AdminDashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/EmployerDashboard', [App\Http\Controllers\EmployerController::class, 'index'])->name('home');
+
+/**Ngsign routes**/
+Route::get('/GetNgsign',[NGsignController::class,'Get_transaction']); // get transaction from token NGSIGN
+Route::get('/{uid}/pdfs/{pdf}',[NGsignController::class,'Get_pdf']); // get pdf from token NGSIGN
+
+Route::get('/', function () {
+    return redirect('login');
+});

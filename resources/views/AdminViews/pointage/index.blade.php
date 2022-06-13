@@ -9,7 +9,9 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">pointage table admin </h3>
+                        <h3 class="panel-title">Table pointage de <strong style="color: blue">{{Auth::user()->name ?? null}}</strong> </h3>
+                        <br>
+                        <h3 class="panel-title"> Matricule : <strong style="color: blue">{{Auth::user()->personnel_id ?? null}}</strong> </h3>
                         <div class="tools">
                             <a class="btn-link collapses panel-collapse" href="javascript:;"></a>
                             <a class="btn-link reload" href="javascript:;"><i class="ti-reload"></i></a>
@@ -20,10 +22,11 @@
                         <table class="table table-striped table-dataTable ">
                             <thead>
                                 <tr>
-                                    <th>Matricule</th>
-                                    <th>Nom Prenom</th>
                                     <th>Email</th>
-                                    <th>Datetimepnt</th>
+                                    <th>date entre matin</th>
+                                    <th>date sortie matin</th>
+                                    <th>date entrer midi</th>
+                                    <th>date sortie midi</th>
 
                                 </tr>
                             </thead>
@@ -31,10 +34,11 @@
                                 @if (Auth::user()->role == 'admin')
                                     @foreach ($AdminPOINT as $pointage)
                                         <tr>
-                                            <td>{{ $pointage->Matricule }}</td>
-                                            <td>{{ $pointage->personnels->PERS_NOM . ' ' . $pointage->personnels->PERS_PRENOM }}</td>
                                             <td>{{ $pointage->personnels->EMAIL }}</td>
-                                            <td>{{ $pointage->DateTimePnt }}</td>
+                                            <td>{{ $pointage->pointageEntMatin }}</td>
+                                            <td>{{ $pointage->pointageSorMatin }}</td>
+                                            <td>{{ $pointage->pointageEntMidi }}</td>
+                                            <td>{{ $pointage->pointageSorMidi }}</td>
                                         </tr>
                                     @endforeach
                                 @endif

@@ -1,4 +1,3 @@
-@if(Route::is('congeAdmin.index'))
 @extends('layouts.layout')
 @section('content')
     <div class="content-wrap">
@@ -8,7 +7,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Liste des conges</h3>
+                        <h3 class="panel-title">Liste des conges de <strong style="color: blue">{{Auth::user()->name ?? null}}</strong> </h3>
                         <div class="tools">
                             <a class="btn-link collapses panel-collapse" href="javascript:;"></a>
                             <a class="btn-link reload" href="javascript:;"><i class="ti-reload"></i></a>
@@ -31,7 +30,7 @@
                             right: 340px;
                             top: 17px;  border: none;  background-color: #7a2048; box-shadow: 5px 2px 20px black;  color: white;">Annuel <br>
                             {{$Annuel[0]->CCONG_SOLDE_9}} jours</button>
-                        
+
                     @endif
 
                     @if(!$Exceptionnel->isEmpty())
@@ -55,7 +54,6 @@
                         <table class="table table-striped table-dataTable">
                             <thead>
                                 <tr>
-                                    <th> Nom </th>
                                     <th> Nature De Conge</th>
                                     <th> Date debut </th>
                                     <th> Date fin </th>
@@ -70,7 +68,6 @@
 
                                 @foreach ($AdminConge as $AdminC)
                                 <tr>
-                                    <td>{{ $AdminC->personnels->PERS_NOM .' '. $AdminC->personnels->PERS_PRENOM ?? 'None' }}</td>
                                     <td>{{ $AdminC->nature_conges->NOM ?? 'None' }} </td>
                                     <td>{{ $AdminC->CONG_DATE_DEB }}  </td>
                                     <td>{{ $AdminC->CONG_DATE_FIN }}  </td>
@@ -90,14 +87,29 @@
 </div> <!--END: Content Wrap-->
 
 
+<link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.min.css">
+<script type="text/javascript" src="/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="assets/plugins/lib/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="assets/plugins/lib/jquery-ui.min.js"></script>
 
 
 
-
-
-
-
-
+<script>
+    jQuery(document).ready(function() {
+        DataTableBasic.init();
+    });
+</script>
+@if ($message = Session::get('success'))
+<script>
+Swal.fire({
+position: 'center',
+icon: 'success',
+title: "{{ session()->get('success') }}",
+showConfirmButton: false,
+timer: 2500
+})
+</script>
+@endif
 
 @endsection
-@endif
+
