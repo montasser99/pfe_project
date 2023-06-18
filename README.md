@@ -1,3 +1,14 @@
+## some picture of the admin side
+![Capture](https://github.com/montasser99/pfe_project/assets/87189051/19d7bf85-d00f-4daa-a180-fd7334ba5435)
+![Capture JPGrrr](https://github.com/montasser99/pfe_project/assets/87189051/67f4dc77-0c64-44c2-bf78-a563b1001b0a)
+![ffff](https://github.com/montasser99/pfe_project/assets/87189051/27b2fd12-2a9d-4994-bea2-2ef18406e203)
+![Workflow Demande Conge Etap - Google Chrome 10_06_2022 10_57_14 PM](https://github.com/montasser99/pfe_project/assets/87189051/bc7fd4d4-4390-4c9d-9b5d-d01797c4cbfb)
+
+
+
+
+
+
 ## Installation
 
 First clone this repository, install the dependencies, and setup your .env file:
