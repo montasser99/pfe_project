@@ -1,13 +1,18 @@
 ## some picture of the admin side
-![Capture](https://github.com/montasser99/pfe_project/assets/87189051/19d7bf85-d00f-4daa-a180-fd7334ba5435)
-![Capture JPGrrr](https://github.com/montasser99/pfe_project/assets/87189051/67f4dc77-0c64-44c2-bf78-a563b1001b0a)
-![ffff](https://github.com/montasser99/pfe_project/assets/87189051/27b2fd12-2a9d-4994-bea2-2ef18406e203)
-![Workflow Demande Conge Etap - Google Chrome 10_06_2022 10_57_14 PM](https://github.com/montasser99/pfe_project/assets/87189051/bc7fd4d4-4390-4c9d-9b5d-d01797c4cbfb)
+<p align="center">
+  <img src="https://github.com/montasser99/pfe_project/assets/87189051/19d7bf85-d00f-4daa-a180-fd7334ba5435" width="200" />
+  <img src="https://github.com/montasser99/pfe_project/assets/87189051/67f4dc77-0c64-44c2-bf78-a563b1001b0a" width="200" />
+  <img src="https://github.com/montasser99/pfe_project/assets/87189051/27b2fd12-2a9d-4994-bea2-2ef18406e203" width="200" />
+  <img src="https://github.com/montasser99/pfe_project/assets/87189051/bc7fd4d4-4390-4c9d-9b5d-d01797c4cbfb" width="200" />
+</p>
 
-
-
-
-
+## some picture of the Client side
+<p align="center">
+  <img src="https://github.com/montasser99/pfe_project/assets/87189051/f97954b9-7b0e-4983-ae57-153d90e578c0" width="200" />
+  <img src="https://github.com/montasser99/pfe_project/assets/87189051/7fe48505-787e-4691-8e81-a9bc0837e63a" width="200" />
+  <img src="https://github.com/montasser99/pfe_project/assets/87189051/fb3749d7-7413-407f-a38d-3af7d707aa59" width="200" />
+  <img src="https://github.com/montasser99/pfe_project/assets/87189051/cf26e99b-a034-4039-9d43-d1e75ea5ba6e" width="200" />
+</p>
 
 ## Installation
 
